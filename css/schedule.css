@@ -1,0 +1,188 @@
+@charset "utf-8";
+/* CSS Document */
+h1,
+.h1,
+h1 small,
+.h1 small,
+h1 .small,
+.h1 .small,
+p
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: 0000cd;
+}
+
+p {
+	font-size:2em;
+}
+
+.title_schedule {
+  float: left;
+}
+
+tbody{
+	width:1000px;
+	height:100px;
+	text-align:center;
+	vertical-align:middle;
+	display:block;
+}
+
+.table {
+  clear: both;
+  float: left;
+}
+
+.date_list .title_schedule{
+  border-left: double 15px #000;
+  font-size:2.2em;
+  margin-top:30px;
+  padding-left:15px;
+}
+
+.date_list table{
+  background-color: #333;
+  width: 1000px;
+}
+
+.date_list td{
+  width: 120px;
+  height: 80px;
+  background-color: gray;
+  border: solid 1px #000000;
+  margin-left: 20px;
+  margin-top:10px;
+  display: block;
+  text-align: center;
+}
+
+.date_list .date{
+  font-size: 2em;
+  font-weight: bold;
+  color:#E4E4E4;
+  margin-top: 10px;
+}
+
+.date_list .date_campain{
+	font-size:1.2em;
+	color:#FFFFFF;
+}
+
+#wrapper .movie_title {
+	border-bottom:dashed 1px #FFFFFF;
+}
+
+#wrapper .movie_title p{
+	margin-top:5px;
+	margin-left:20px;
+	font-size:1.5em;
+	color:#fff;
+}
+
+#wrapper .movie_title .title{
+	font-size:2em;
+	color:#fff;
+}
+
+
+#wrapper .schedule .movie_info{
+	width: 150px;
+	height:30px;
+	background-color:#A80002;
+	color:#E9E9E9;
+	text-align:center;
+	margin-top:10px;
+
+}
+
+#wrapper .schedule{
+	width:1000px;
+	height:220px;
+	background-color:#333;
+	margin-bottom:30px;
+}
+
+#wrapper .schedule_list .movie_date{
+	color:#BB0508;
+	font-size:3.5em;
+	font-weight:bold;
+}
+
+#wrapper .schedule .movie_info a{
+	display:block;
+	font-size:0.75em;
+	padding-top:5px;
+	text-decoration:none;
+	color:#ffffff;
+
+}
+
+#wrapper .schedule ul{
+	display:block;
+	width:120px;
+	height:100px;
+	background-color:#8B8B8B;
+	margin-right:15px;
+	margin-left:10px;
+}
+
+#wrapper .schedule li{
+	font-size:1.5em;
+	color:#FFFFFF;
+}
+
+#wrapper .schedule .movie_info{
+	margin-left: 20px;
+}
+
+#wrapper .schedule .movie_type{
+	width:50px;
+	height:25px;
+	color:#555555;
+	font-size:1.5em;
+	border-radius:15px;
+	background-color:#F1F1F1;
+	text-align:center;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+#wrapper .schedule .movie_type .type{
+	display:block;
+	margin-top:5px
+}
+
+#wrapper .schedule .day_schedule{
+	margin-top: 15px;
+	margin-left: 10px;
+}
+
+#wrapper .schedule .day_schedule .info{
+	border: solid 1px #fff;
+}
+
+#wrapper .schedule .day_schedule .info .start_time{
+
+	font-size:1.5em;
+	color:#B10002;
+}
+
+#wrapper .schedule .day_schedule .info .time{
+	margin-top:5px;
+	margin-left:5px;
+}
+
+#wrapper .schedule .day_schedule .info .price_like{
+	margin-left:5px;
+	margin-top:5px;
+}
+
+#wrapper .schedule .day_schedule .info .sheet_emp{
+	margin-left:5px;
+	margin-top:5px;
+}

@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+/* body */
+body {
+	background-color: #eee;
+	width:100%;
+	height:auto;
+	color: #333;
+	font-size: 0.9em;
+	font-family: Helvetica,"游ゴシック","Yu Gothic",sans-serif;
+}
+
+/* header */
+header {
+	float: left;
+	width: 100%;
+	height: 40px;
+	background-color: #000030;
+}
+
+header h1 {
+	float: left;
+	margin-left: 170px;
+	margin-top: 12px;
+}
+
+header p {
+	color: #fff;
+	background-color: #ddd;
+	padding: 1px;
+}
+
+header a {
+	background-color: #ccc;
+	padding: 2px;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-decoration: none;
+}
+
+/* 検索 */
+#seach {
+	float: right;
+	margin-right: 170px;
+	margin-top: 10px;
+}
+
+#seach p {
+	float: left;
+}
+
+/* メインコンテンツ */
+#wrapper {
+	height: auto;
+	width:1024px;
+	margin:0 auto;
+}
+
+/* footer */
+footer {
+	float: left;
+	width: 100%;
+	background-color: #000030;
+}
+
+footer p {
+	text-align: right;
+	margin-right: 170px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: #fff;
+}
+
+/*
+tama
+*/
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+#wrapper {
+	width: 1024px;
+	margin: 0 auto;
+	background: #EEE;
+	padding: 40px 0 24px;
+	overflow: hidden;
+}
+
+ul ,
+li {
+	list-style: none;
+}
