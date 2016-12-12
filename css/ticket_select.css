@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/************************
+* 座席
+**********************/	
+.ticket_select {
+	width: 692px;
+	height: auto;
+	border: 1px solid #888;
+	clear: both;
+	background: white;
+	padding: 0 24px 24px;
+}
+
+.ticket_select h2 {
+	text-align: center;
+	padding: 32px 0 16px;
+	font-size: 1.3em;
+	color: #306090;
+}
+.ticket_select p {
+	text-align: center;
+}
+
+.ticket_select p img {
+	width: 80%;
+	height: auto;
+}
+
+
+.ticket_select table {
+	width: 100%;
+	border: 1px solid #AAA;
+	margin-bottom: 24px;
+
+}
+
+.ticket_select table tr:nth-child(1) {
+	height: 48px;
+	line-height: 48px;
+	background: #F5F5F5;
+	font-weight: normal;
+	border: 1px solid #AAA;
+	color: #444;
+}
+
+.ticket_select table tr:not(:nth-child(1)) {
+	border-bottom: 1px dotted #AAA;
+}
+
+
+.ticket_select table tr:not(:nth-child(1)) td:nth-child(1) {
+	width: 140px;
+	padding: 20px;
+}
+
+.ticket_select table tr:not(:nth-child(1)) td:nth-child(2) {
+	width: 60px;
+	padding: 0 10px;
+}
+.ticket_select table tr:not(:nth-child(1)) td:nth-child(3) {
+	width: 60px;
+	padding: 0 10px;
+}
+.ticket_select table tr:not(:nth-child(1)) td:nth-child(4) {
+	padding: 0 20px;
+	font-size: 0.9em;
+	color: red;
+}
+
+.ticket_select table tr:not(:nth-child(even)) td {
+	background: #F0F0F0;
+}
+
+
+.ticket_select h3 {
+	padding: 24px 0 16px;
+	border-top: 1px solid #888;
+	font-size: 1em;
+}
+
+.ticket_select p {
+	text-align: left;
+	line-height: 1.6em;
+	font-size: 0.9em;
+}
+
+
+/******
+* ▶︎りすと
+******/
+
+.status_select tr:nth-child(3) th ,
+.status_select tr:nth-child(3) td {
+	padding: 12px 8px;
+	border-top: 1px solid #888;
+	border-bottom: 1px solid #888;
+}

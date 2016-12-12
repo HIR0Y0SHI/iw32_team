@@ -1,0 +1,331 @@
+
+#wrapper .content ,
+.confirmation {
+	width: 1024px;
+}
+
+.purchase_details {
+	overflow: hidden;
+}
+
+
+/************************
+* ご購入内容
+**********************/	 
+
+.content .purchase_details {
+	background: white;
+	overflow: hidden;
+}
+
+.content .purchase_details h2 {
+	font-size: 1.3em;
+	line-height: 40px;
+	background: #4E4E4E;
+	padding: 8px 24px 8px;
+	font-weight: normal;
+	color: white;
+	overflow: hidden;
+}
+
+.content .purchase_details h2 input {
+	float: right;
+	border: 1px solid #AAA;
+	height: 32px;
+	margin-top: 4px;
+	padding: 0 8px;
+	border-radius: 4px;
+	font-size: 0.7em;
+	transition: 0.2s;
+	color: #306090;
+	background: white;
+}
+.content .purchase_details h2 input:hover {
+	transition: 0.2s;
+	color: #B50738;
+	cursor: pointer;
+}
+
+
+
+.content .purchase_details p {
+	padding: 24px;
+	font-weight: bold;
+	font-size: 1.2em;
+	line-height: 1.3em;
+}
+
+.content .purchase_details p:nth-of-type(1) {
+	padding: 32px 24px 16px;
+}
+
+.content .purchase_details p:last-child {
+	padding: 16px 24px 32px;
+}
+
+
+.content .purchase_details p::before {
+	display: block;
+	font-weight: normal;
+	padding-bottom: 4px;
+	color: #555;
+}
+
+
+
+/*****************************
+* タイトル
+*****************************/
+
+/* 映画タイトル */
+.content .purchase_details:nth-of-type(1) p:nth-of-type(1)::before {
+	content: "作品";
+}
+/* 日時 */
+.content .purchase_details:nth-of-type(1) p:nth-of-type(2)::before {
+	content: "日時";
+}
+/* スクリーン */
+.content .purchase_details:nth-of-type(1) p:nth-of-type(3)::before {
+	content: "スクリーン";
+}
+/* 座席 */
+.content .purchase_details:nth-of-type(1) p:nth-of-type(4)::before {
+	content: "座席";
+}
+/* チケット券種 */
+.content .purchase_details:nth-of-type(1) p:nth-of-type(5)::before {
+	content: "チケット券種 - 枚数";
+}
+/* 合計 */
+.content .purchase_details:nth-of-type(1) p:nth-of-type(6)::before {
+	content: "合計";
+}
+
+
+
+/* 氏名 */
+.content .purchase_details:nth-of-type(2) p:nth-of-type(1)::before {
+	content: "お名前";
+}
+/* 電話 */
+.content .purchase_details:nth-of-type(2) p:nth-of-type(2)::before {
+	content: "お電話番号";
+}
+/* メール */
+.content .purchase_details:nth-of-type(2) p:nth-of-type(3)::before {
+	content: "メールアドレス";
+}
+
+
+
+/* カード番号 */
+.content .purchase_details:nth-of-type(3) p:nth-of-type(1)::before {
+	content: "カード名義";
+}
+/* 名義 */
+.content .purchase_details:nth-of-type(3) p:nth-of-type(2)::before {
+	content: "名義";
+}
+/* ご利用金額 */
+.content .purchase_details:nth-of-type(3) p:nth-of-type(3)::before {
+	content: "ご利用金額";
+}
+/* カード有効機嫌 */
+.content .purchase_details:nth-of-type(3) p:nth-of-type(4)::before {
+	content: "カード有効期限";
+}
+
+
+
+/************************
+* 注意事項
+**********************/	 
+
+.important_points {
+	padding: 24px;
+	margin-top: 40px;
+	background: white;
+}
+
+.important_points .toggle {
+	border: 1px solid #AAA;
+	border-radius: 4px;
+	padding: 24px;
+}
+
+.important_points .toggle h2 {
+	font-size: 1.2em;
+	font-weight: normal;
+}
+.important_points .toggle h2 span {
+	color: #B50738;
+	padding-left: 16px;
+	font-size: 0.9em;
+	font-weight: bold;
+}
+
+.important_points .toggle li {
+	padding: 4px 0;
+	font-size: 0.9em;
+}
+
+.important_points .toggle li::before {
+	content: "・";
+}
+
+
+.contract {
+	padding: 24px;
+	border-top: 2px solid #EEE;
+	background: white;
+}
+
+.contract h2 {
+	font-size: 1.2em;
+}
+
+.contract p {
+	line-height: 1.3em;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 24px 0;
+}
+
+.contract p:last-child {
+	border: none;
+	padding-bottom: 0;
+}
+
+.confirmation .agreement {
+	width: 740px;
+	margin: 0 auto 40px;
+	padding: 8px 0;
+	background: white;
+	text-align: center;
+}
+
+.agreement input[type=checkbox] {
+	display: none;
+}
+
+.checkbox:hover::after {
+  border-color: #306090;
+}
+
+.checkbox {
+	font-size: 1.2em;
+	width: 740px;
+	box-sizing: border-box;
+	-webkit-transition: background-color 0.2s linear;
+	transition: background-color 0.2s linear;
+	position: relative;
+	display: inline-block;
+	padding: 16px 12px 16px 42px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.checkbox::after {
+	-webkit-transition: border-color 0.2s linear;
+	transition: border-color 0.2s linear;
+	position: absolute;
+	top: 50%;
+	left: 250px;
+	display: block;
+	margin-top: -14px;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #306090;
+	border-radius: 6px;
+	content: '';
+}
+
+.checkbox:before {
+	-webkit-transition: opacity 0.2s linear;
+	transition: opacity 0.2s linear;
+	position: absolute;
+	top: 50%;
+	left: 257px;
+	display: block;
+	margin-top: -12px;
+	width: 7px;
+	height: 12px;
+	border-right: 3px solid #306090;
+	border-bottom: 3px solid #306090;
+	content: '';
+ 	opacity: 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+input[type=checkbox]:checked + .checkbox:before {
+  opacity: 1;
+}
+
+
+
+
+
+/** 購入を確定 **/
+
+.termsofservice {
+	width: 100%;
+	padding: 0 16px 24px;
+}
+
+.select_step p:nth-child(1) {
+	width: 100%;
+    border-bottom: none;
+}
+
+
+/****
+　注意書き
+****/
+.confirmation .info {
+	width: 740px;
+	overflow: hidden;
+	padding: 24px 0 40px;
+}
+.confirmation .info h2 {
+	padding: 8px 0;
+	font-size: 1.2em;	
+}
+
+.confirmation .info p:not(:nth-of-type(3)) {
+	font-size: 1em;
+	color: #666;
+	line-height: 1.5em;
+	float: left;
+	padding-bottom: 16px;
+}
+.confirmation .info p:not(:nth-of-type(3))::before {
+	content: "※";
+	height: 24px;
+	float: left;
+	display: block;
+}
+
+.confirmation .info h3 {
+	font-size: 1.1em;
+	padding: 8px 0;
+	clear: left;
+}
+
+.confirmation .info p:nth-of-type(3) {
+	line-height: 1.4em;
+}
+
+/* norton */
+
+.confirmation .norton h2 {
+	padding-bottom: 16px;
+}
+.confirmation .norton {
+	width: 1024px;
+}
+.confirmation .norton p {
+	font-size: 0.9em;
+	line-height: 1.5em;
+}

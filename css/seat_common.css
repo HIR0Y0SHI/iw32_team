@@ -1,0 +1,341 @@
+@charset "UTF-8";
+
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+#wrapper {
+	width: 1024px;
+	margin: 0 auto;
+	background: #EEE;
+	padding: 40px 0 24px;
+	overflow: hidden;
+}
+
+ul ,
+li {
+	list-style: none;
+}
+
+
+
+/************************
+* パンくず？リスト
+**********************/
+.bread_list {
+	padding: 16px 0;
+	width: 1024px;
+	height: 62px;
+	border-bottom: 1px  dashed #CCC;
+}
+
+.bread_list ul {
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.bread_list li {
+	width: 184px;
+	height: 30px;
+	padding: 16px 0px 16px 16px;	
+	float: left;
+	font-size: 1em;
+	color: #B4B4B4;
+	line-height: 0.7em;
+}
+
+.bread_list li:last-child {
+	width: 158px;
+}
+
+/*矢印*/
+.bread_list li:not(:last-child):before {
+	width: 31px;
+	height: 22px;
+	padding-top: 8px;
+	text-align: center;
+	display: block;
+	float: right;
+	content: url(../img/icon/ico_next.png);
+	
+}
+
+.bread_list span {
+	display: block;
+	font-weight: bold;
+}
+
+/*現在ページ*/
+.bread_list .current {
+	color: #B50738;
+	font-weight: bold;
+}
+
+
+
+/************************
+* 注意書き
+**********************/
+
+#wrapper  .title {
+	padding: 40px 0 16px;
+	display: block;
+	font-size: 1.8em;
+	font-weight: normal;
+	clear: both;
+	background-image: url(../img/title_bar.png);
+	background-position: bottom center;
+	background-repeat: no-repeat;
+	margin-bottom: 24px;
+}
+
+#wrapper  .description {
+	font-size: 1em;
+	padding: 0px 0 8px;
+}
+
+
+
+
+
+/************************
+* ▶︎コンテンツ　座席
+**********************/	
+.seat_select {
+	width: 692px;
+	height: auto;
+	border: 1px solid #888;
+	clear: both;
+	background: white;
+	padding: 0 24px 24px;
+}
+
+.seat_select h2 {
+	text-align: center;
+	padding: 32px 0 16px;
+	font-size: 1.3em;
+	color: #306090;
+}
+.seat_select p {
+	text-align: center;
+}
+
+
+.seat_select p img {
+	width: 80%;
+	height: auto;
+}
+
+
+#wrapper .content {
+	width: 740px;
+	height: 100%;
+	float: left;
+	padding-right: 24px;
+}
+
+
+
+.status_select {
+	border: 1px solid #888;
+	width: 258px;
+	float: right;
+}
+
+.status_select table {
+	width: 100%;
+	overflow: hidden;
+	background: white;
+}
+	
+.status_select h1 {
+	font-size: 1.2em;
+	padding: 16px 16px;
+	text-align: center;
+	border-bottom: 1px solid #888;
+	background: #888;
+	color: white;
+}
+	
+
+.status_select h1 span {
+	font-size: 0.9em;
+	font-weight: normal;
+	padding: 0 16px;
+	color: #CCC;
+}
+	
+.status_select th {
+	width: 83px;
+	padding: 16px 8px 16px;
+	font-size: 0.9em;
+	text-align: left;
+	border-right: 1px solid #888;
+	background: #DFDFDF;
+	vertical-align: middle;
+}
+
+
+.status_select td {
+	padding: 16px 8px;
+	font-size: 0.9em;
+	vertical-align: middle;
+}
+
+/******
+* ▶︎りすと
+******/
+
+.status_select tr:not(:nth-child(1)) th ,
+.status_select tr:not(:nth-child(1)) td {
+	padding: 12px 8px;
+	border-top: 1px solid #888;
+	border-bottom: 1px solid #888;
+}
+
+.status_select tr:last-child th ,
+.status_select tr:last-child td {
+	border-bottom: none;
+}
+
+
+
+
+
+
+/************************
+* 次へ　戻る　ぼたん
+**********************/	
+.confirmation {
+	width: 100%;
+	padding: 24px 0;
+	overflow: hidden;
+	clear: both;
+}
+
+/* 利用規約 */
+
+.termsofservice {
+	width: 708px;
+	padding: 0 16px 24px;
+}
+
+.termsofservice h2 {
+	padding: 8px 0;
+}
+
+.termsofservice .text {
+	width: 680px;
+	border: 1px solid #888;
+	padding: 16px;
+	height: 100px;
+	overflow: auto;
+	font-size: 0.9em;
+	line-height: 1.5;
+	word-wrap: break-word;
+	background: white;
+    white-space: pre-wrap;
+}
+
+.select_step p {
+	width: 740px;
+	text-align: center;
+}
+
+.select_step p {
+	margin: 16px 0;
+}
+
+
+.select_step input {
+	width: 480px;
+	padding: 16px 8px;
+	border: 1px solid #AAA;
+	border-radius: 4px;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: white;
+	transition: 0.5s;
+}
+
+.select_step p:nth-child(1) {
+	padding: 0 0 15px;
+	border-bottom: 1px solid #BBB;
+}
+
+.select_step p:nth-child(1) input {
+	background: #B50738;
+	border: 1px solid #B50738;
+}
+.select_step p:nth-child(2) input {
+	background: #fff;
+	color: #444;
+}
+.select_step p:nth-child(3) input {
+	background: #fff;
+	color: #444;
+}
+
+.select_step p:nth-child(1) input:hover {
+	transition: 0.2s;
+	color: #B50738;
+	border: 1px solid #B50738;
+	background: white;
+	cursor: pointer;
+}
+
+
+.select_step p:nth-child(2) input:hover {
+	cursor: pointer;
+	color: white;
+	border: 1px solid #444;
+	background: #444;
+	transition: 0.2s;
+}
+
+
+
+.select_step p:nth-child(3) input:hover {
+	cursor: pointer;
+	color: white;
+	border: 1px solid #444;
+	background: #444;
+	transition: 0.2s;
+}
+
+
+
+
+/************************
+* エラー
+**********************/	 
+#wrapper .error {
+	width: 692px;
+	height: auto;
+	clear: both;
+	padding: 24px 24px 24px 24px;
+	background: #FFCDD2;
+	margin: 0px 0 24px;
+	color: #B50738;
+	float: left;
+}
+
+#wrapper .error h2 {
+	font-size: 1.2em;
+	line-height: 1.2em;
+}
+
+#wrapper .error ul {
+	padding: 8px 16px 0;
+}
+
+#wrapper .error ul li {
+	font-size: 1.1em;
+	line-height: 1.1em;
+	padding: 8px 0 0;
+}
+#wrapper .error ul li::before {
+	content: "・";
+}

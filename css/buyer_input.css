@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+
+/******
+* コンテンツ
+******/
+
+.content .inputitem h2 {
+	font-size: 1.3em;
+	background: #4E4E4E;
+	padding: 20px 24px 16px;
+	font-weight: normal;
+	color: white;
+	margin: 40px 0;
+	overflow: hidden;
+}
+
+.content .name h2 {
+	margin: 0 0 24px;
+}
+
+.content h2::after {
+	content: "（必須項目）";
+	font-size: 0.7em;
+	font-weight: normal;
+}
+
+.content input {
+	border: 1px solid #AAA;
+	border-radius: 4px;
+	width: 706px;
+	padding: 12px 16px;
+	font-size: 1.2em;
+}
+
+.content input[type="text"][disabled]{
+    background: #DDD;
+}
+
+
+
+.content p::before {
+	padding: 16px 0 8px;
+	display: block;
+	margin-top: 16px;
+	font-size: 1.1em;
+}
+
+/* name  */
+
+.content .name p:nth-of-type(1)::before {
+	content: "姓（漢字）";
+}
+.content .name p:nth-of-type(2)::before {
+	content: "名（漢字）";
+}
+.content .name p:nth-of-type(3)::before {
+	content: "セイ（カナ）";
+}
+.content .name p:nth-of-type(4)::before {
+	content: "メイ（カナ）";
+}
+
+/* tel */
+.content .tel p::after ,
+.content .mail p::after ,
+.content .creditcard p::after ,
+.content .creditcard ul:before {
+	padding: 8px 0 16px;
+	display: block;
+	margin-top: 16px;
+	font-size: 1.1em;
+}
+
+.content .tel p:nth-of-type(1)::after {
+	content: "別の電話番号で登録される場合は下記にご入力ください。";
+}
+.content .tel p:nth-of-type(2)::before {
+	content: "半角数字（ハイフンなし）";
+}
+
+
+.content .mail p:nth-of-type(1)::after {
+	content: "別のメールアドレスで登録される場合は下記にご入力ください。";
+}
+.content .mail p:nth-of-type(2)::before {
+	content: "半角英数字";
+}
+.content .mail p:nth-of-type(3)::after {
+	content: "確認の為、再入力してください。";
+}
+
+
+/* cc */
+.content .creditcard p:nth-of-type(1)::after {
+	content: "別のクレジットカードで登録される場合は下記にご入力ください。";
+}
+.content .creditcard p:nth-of-type(2)::before {
+	content: "クレジットカード番号（ハイフンなし）";
+}
+
+.content .creditcard p:nth-of-type(3)::after {
+	content: "カード名義人";
+}
+
+.content .creditcard p:nth-of-type(5)::before {
+	content: "セキュリティコード";
+}
+.content .creditcard p:nth-of-type(5)::after {
+	content: "カード裏面署名欄に記載されている数字の下3桁です。\A一部カードは表面に4桁で表示されています。";
+	padding-top: 0;
+	white-space: pre;
+	line-height: 1.2em;
+}
+
+.content .creditcard ul {
+	width: 100%;
+	overflow: hidden;
+}
+.content .creditcard ul:before {
+	content: "有効期限";
+	padding-bottom: 8px;
+}
+
+
+.content .creditcard ul li {
+	float: left;
+	padding-right: 16px;
+}
+
+/***************/
+
+
+select{
+    outline:none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    background: none transparent;
+    vertical-align: middle;
+    font-size: inherit;
+    color: inherit;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+select option{
+  background-color: #fff;
+  color: #333;
+}
+select::-ms-expand {
+  display: none;
+}
+select:-moz-focusring { 
+  color: transparent; 
+  text-shadow: 0 0 0 #828c9a;
+}
+
+
+
+.content .creditcard ul li select {
+	border: 1px solid #AAA;
+	border-radius: 4px;
+	width: 100px;
+	padding: 8px 16px;
+	font-size: 1.1em;
+	background: white;
+	background-image: url(../img/icon/select_btn.png);
+	background-position: 72px center;
+	background-repeat: no-repeat;
+}
+
+
+
+
+/****
+　注意書き
+****/
+.confirmation .info {
+	width: 740px;
+	overflow: hidden;
+	padding: 24px 0 40px;
+}
+.confirmation .info h2 {
+	padding: 8px 0;
+	font-size: 1.2em;	
+}
+
+.confirmation .info p:not(:nth-of-type(3)) {
+	font-size: 1em;
+	color: #666;
+	line-height: 1.5em;
+	float: left;
+	padding-bottom: 16px;
+}
+.confirmation .info p:not(:nth-of-type(3))::before {
+	content: "※";
+	height: 24px;
+	float: left;
+	display: block;
+}
+
+.confirmation .info h3 {
+	font-size: 1.1em;
+	padding: 8px 0;
+	clear: left;
+}
+
+.confirmation .info p:nth-of-type(3) {
+	line-height: 1.4em;
+}
+
+/* norton */
+
+.confirmation .norton h2 {
+	padding-bottom: 16px;
+}
+.confirmation .norton {
+	width: 740px;
+}
+.confirmation .norton p {
+	font-size: 0.9em;
+	line-height: 1.5em;
+}
