@@ -1,6 +1,6 @@
 <?php
 /**
- * 座席表示。
+ * 座席表示処理。
  * 
  * @author TAMA
  * @version 1.0
