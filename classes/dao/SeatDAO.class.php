@@ -103,7 +103,8 @@ class SeatDAO {
 	 * @return boolean 登録が完了したかどうかを表す値。
 	 */
 	public function insertSeat(Seat $seat) {
-		$sqlInsert = "INSERT INTO t_seat (schedual_id, seat_positon, reservation_id, customer_partition_id, movie_category_id) VALUES (:schedual_id, :seat_positon, :reservation_id, :customer_partition_id, :movie_category_id)";
+		$sqlInsert = "INSERT INTO t_seat (schedual_id, seat_positon, reservation_id, customer_partition_id, movie_category_id)"
+				. " VALUES (:schedual_id, :seat_positon, :reservation_id, :customer_partition_id, :movie_category_id)";
 		$stmt = $this->db->prepare($sqlInsert);
 		$stmt->bindValue(":schedual_id", $seat->getDeptno(), PDO::PARAM_INT);
 		$stmt->bindValue(":seat_positon", $seat->getDname(), PDO::PARAM_STR);

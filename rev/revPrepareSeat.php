@@ -1,7 +1,12 @@
 <?php
 /**
+<<<<<<< HEAD
  * 座席表示。
  *
+=======
+ * 座席表示処理。
+ * 
+>>>>>>> e7de6ee52812f52badf781cc828e63b200b58e78
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/13
