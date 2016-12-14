@@ -7,6 +7,8 @@
  * Created: 2016/12/14
  */
 
+ @session_start();
+
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/libs/Smarty.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/Conf.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/Functions.php');
@@ -24,7 +26,7 @@ if (loginCheck()) {
 	$member_id = $_SESSION['member_id'];
 
 	cleanSession();
-	
+
 	$_SESSION['last_name'] = $userName;
 	$_SESSION['member_id'] = $member_id;
 	$smarty->assign("loginName",$_SESSION['last_name']);
