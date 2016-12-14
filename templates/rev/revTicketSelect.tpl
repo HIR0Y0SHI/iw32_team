@@ -2,7 +2,7 @@
 <!--
 {**
  * チケット券種選択のテンプレート。
- * 
+ *
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/12
@@ -11,10 +11,12 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
+
 	<link href="/IW32_Team_Project/css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
 	<link href="/IW32_Team_Project/css/common.css" rel="stylesheet" type="text/css">
 	<link href="/IW32_Team_Project/css/seat_common.css" rel="stylesheet" type="text/css">
 	<link href="/IW32_Team_Project/css/ticket_select.css" rel="stylesheet" type="text/css">
+
 	<title>HALシネマ | チケット選択</title>
 </head>
 <body>
@@ -30,7 +32,7 @@
 
 	<!-- ここからメインコンテンツ -->
 	<section id="wrapper">
-		
+
 		<div class="bread_list">
 			<ul>
 				<li class="current"><span>STEP.1</span><br/>座席・チケット選択</li>
@@ -39,10 +41,10 @@
 				<li><span>STEP.4</span><br/>完了</li>
 			</ul>
 		</div>
-		
+
 		<h2 class="title">チケットの種類をお選びください。</h2>
 		<p class="description">座席数分の枚数を選択し、次へ進んでください。</p>
-			
+
 		<div class="content">
 	
 		{if isset($flashMsg)}
@@ -75,7 +77,7 @@
 									<option value="3">3</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
-									<option value="6">6</option>								
+									<option value="6">6</option>
 								</select>枚
 							</td>
 							<td></td>
@@ -91,7 +93,7 @@
 									<option value="3">3</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
-									<option value="6">6</option>	
+									<option value="6">6</option>
 								</select>枚
 							</td>
 							<td>ご入場の際に学生証をご提示下さい。</td>
@@ -107,7 +109,7 @@
 									<option value="3">3</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
-									<option value="6">6</option>								
+									<option value="6">6</option>
 								</select>枚
 							</td>
 							<td></td>
@@ -123,7 +125,7 @@
 									<option value="3">3</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
-									<option value="6">6</option>								
+									<option value="6">6</option>
 								</select>枚
 							</td>
 							<td></td>
@@ -139,7 +141,7 @@
 									<option value="3">3</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
-									<option value="6">6</option>								
+									<option value="6">6</option>
 								</select>枚
 							</td>
 							<td>入場の際は年齢確認のできるものをご提示願います。</td>
@@ -155,7 +157,7 @@
 									<option value="3">3</option>
 									<option value="4">4</option>
 									<option value="5">5</option>
-									<option value="6">6</option>								
+									<option value="6">6</option>
 								</select>枚
 							</td>
 							<td></td>
@@ -168,7 +170,7 @@
 				<p>※ 車椅子席をご希望の方は、お手数ですが通常のお席をご購入の上、劇場にご連絡下さい。</p>
 			</section>
 		</div>
-			
+
 		<div class="status_select">
 			<table>
 				<thead>
@@ -204,17 +206,17 @@
 					</tr>
 				</tbody>
 			</table>
-			
+
 		</div>
-		
-		<div class="confirmation">	
+
+		<div class="confirmation">
 			<div class="select_step">
 				<p><a href="buyer_input.html"><input type="button" name="next" value="次へ"></a></p>
 				<p><input type="button" name="back" value="席を選び直す"></p>
 				<p><input type="button" name="back" value="スケジュールを選び直す"></p>
 			</div>
 		</div>
-		
+
 	</section>
 	<!-- メインコンテンツここまで -->
 

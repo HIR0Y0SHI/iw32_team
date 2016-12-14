@@ -1,10 +1,13 @@
 <?php
 /**
  * 座席表示処理。
- * 
+ *
+ *
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/13
+ * Updated by HIROYOSHI on 2016/12/25
+ * 	- 既に予約されている座席（選択不可な席）の対応
  */
 
 @session_start();
@@ -46,9 +49,16 @@ try {
 	$reserved_seat_list = $seatDAO->findByPK($schedule_id);
 
 	$_SESSION["reserved_count"] = count($reserved_seat_list);
-			
+
 	$smarty->assign("seat_detail",$seat_detail);
 	$smarty->assign("reserved_seat_list",$reserved_seat_list);
+
+
+	$unavailable_seats = array_keys($reserved_seat_list);
+
+	$smarty->assign("seat_detail", $seat_detail);
+	$smarty->assign("reserved_seat_list", $reserved_seat_list);
+	$smarty->assign("unavailable_seats", json_encode($unavailable_seats));
 
 } catch (PDOException $ex) {
 	print_r($ex);
