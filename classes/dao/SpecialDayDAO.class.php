@@ -24,9 +24,9 @@ class SpecialDayDAO {
 	 * @param PDO $db DB接続オブジェクト
 	 */
 	public function __construct(PDO $db) {
-			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-			$this->db = $db;
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		$this->db = $db;
 	}
 	
 	

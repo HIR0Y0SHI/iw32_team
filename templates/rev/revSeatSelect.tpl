@@ -11,6 +11,7 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
+<<<<<<< HEAD
 	<link href="../css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
 	<link href="../css/common.css" rel="stylesheet" type="text/css">
 	<link href="../css/seat_common.css" rel="stylesheet" type="text/css">
@@ -32,6 +33,12 @@
 	<script src="../js/use-seat-chart.js"></script>
 
 
+=======
+	<link href="/IW32_Team_Project/css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/seat_common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/seat.css" rel="stylesheet" type="text/css">
+>>>>>>> 3105c35f3e6b53b95850b818170e210c55550a46
 	<title>HALシネマ | 座席選択</title>
 </head>
 <body>
