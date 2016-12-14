@@ -1,12 +1,7 @@
 <?php
 /**
-<<<<<<< HEAD
- * 座席表示。
- *
-=======
  * 座席表示処理。
  * 
->>>>>>> e7de6ee52812f52badf781cc828e63b200b58e78
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/13
@@ -54,10 +49,7 @@ try {
 
 	$smarty->assign("seat_detail",$seat_detail);
 	$smarty->assign("reserved_seat_list",$reserved_seat_list);
-<<<<<<< HEAD
-=======
 
->>>>>>> c195167a9d6656770e92a0f6b8a272d983126ef2
 } catch (PDOException $ex) {
 	print_r($ex);
 	$smarty->assign("errorMsg","接続障害が発生しました。再度お試しください。");

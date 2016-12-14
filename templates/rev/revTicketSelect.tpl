@@ -11,15 +11,15 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<link href="css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
-	<link href="css/common.css" rel="stylesheet" type="text/css">
-	<link href="css/seat_common.css" rel="stylesheet" type="text/css">
-	<link href="css/ticket_select.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/seat_common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/ticket_select.css" rel="stylesheet" type="text/css">
 	<title>HALシネマ | チケット選択</title>
 </head>
 <body>
 	<header>
-		<h1><img src="img/aaa.gif" width="105" height="20" alt="ロゴ"></h1>
+		<h1><img src="/IW32_Team_Project/img/aaa.gif" width="105" height="20" alt="ロゴ"></h1>
 		<div id="seach">
 			<input type="text" name="text">
 			<input type="submit">

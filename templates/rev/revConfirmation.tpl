@@ -11,15 +11,15 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<link href="css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
-	<link href="css/common.css" rel="stylesheet" type="text/css">
-	<link href="css/seat_common.css" rel="stylesheet" type="text/css">
-	<link href="css/buyer_confirmation.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/seat_common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/buyer_confirmation.css" rel="stylesheet" type="text/css">
 	<title>HALシネマ | 購入内容の確認</title>
 </head>
 <body>
 	<header>
-		<h1><img src="img/aaa.gif" width="105" height="20" alt="ロゴ"></h1>
+		<h1><img src="/IW32_Team_Project/img/aaa.gif" width="105" height="20" alt="ロゴ"></h1>
 		<div id="seach">
 			<input type="text" name="text">
 			<input type="submit">
@@ -102,7 +102,7 @@
 				<p><input type="button" name="next" value="購入を確定する"></p>
 			</div>
 			<div class="norton">
-				<h2><img src="img/norton_logo.gif" alt=""></h2>
+				<h2><img src="/IW32_Team_Project/img/norton_logo.gif" alt=""></h2>
 				<p>入力した内容はセキュリティソフトウェア（SSL）により保護されております。</p>
 				<p>お客様の情報は全て暗号化され、インターネットで情報が送信される際に読み取られることはありません。</p>
 				<p>For your privacy, our service is protected by SSL coding system. </p>

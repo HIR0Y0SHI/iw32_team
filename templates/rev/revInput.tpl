@@ -11,10 +11,10 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<link href="css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
-	<link href="css/common.css" rel="stylesheet" type="text/css">
-	<link href="css/seat_common.css" rel="stylesheet" type="text/css">
-	<link href="css/buyer_input.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/seat_common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/buyer_input.css" rel="stylesheet" type="text/css">
 	<title>HALシネマ | ご購入者情報の入力</title>
 </head>
 <body>
