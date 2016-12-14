@@ -2,7 +2,7 @@
 <!--
 {**
  * 座席選択のテンプレート。
- * 
+ *
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/12
@@ -15,9 +15,27 @@
 	<link href="../css/common.css" rel="stylesheet" type="text/css">
 	<link href="../css/seat_common.css" rel="stylesheet" type="text/css">
 	<link href="../css/seat.css" rel="stylesheet" type="text/css">
+
+	<!-- jQuery -->
+	<script src="../js/jquery-1.11.3.min.js"></script>
+
+	<!-- 座席選択ライブラリ系 -->
+	<link href="../css/jquery.seat-charts.css" rel="stylesheet" type="text/css">
+	<link href="../css/seat_charts_style.css" rel="stylesheet" type="text/css">
+  <script src="../js/jquery.seat-charts.min.js"></script>
+
+	<script type="text/javascript">
+		var unavailable_seats = {$unavailable_seats};
+		console.log(unavailable_seats);
+	</script>
+
+	<script src="../js/use-seat-chart.js"></script>
+
+
 	<title>HALシネマ | 座席選択</title>
 </head>
 <body>
+
 	<header>
 		<h1><img src="../img/aaa.gif" width="105" height="20" alt="ロゴ"></h1>
 		<div id="seach">
@@ -29,7 +47,7 @@
 
 	<!-- ここからメインコンテンツ -->
 	<section id="wrapper">
-		
+
 		<div class="bread_list">
 			<ul>
 				<li class="current" ><span>STEP.1</span><br/>座席・チケット選択</li>
@@ -38,8 +56,8 @@
 				<li><span>STEP.4</span><br/>完了</li>
 			</ul>
 		</div>
-		
-		
+
+
 			<!--予約番号取得-->
 			{foreach from=$reserved_seat_list item="reserved" name="reserved_seat_list_loop"}
 				{$reserved->getSeatPositon()}
@@ -47,11 +65,18 @@
 				予約番号ないよ。
 			{/foreach}
 
+			<!-- 値チェックテスト -->
+			<!-- {foreach from=$unavailable_seats item="unavailable" name="unavailable_seats_loop"}
+				{$unavailable}
+			{foreachelse}
+				予約番号ないよ。
+			{/foreach} -->
+
 
 		<h2 class="title">座席を選択してください。</h2>
 		<p class="description">ご希望の座席を選択してください。選択中の座席を解除する場合は、もう一度座席をクリックしてください。</p>
 		<p class="description">座席選択後に次のSTEPにて購入方法をお選びください。</p>
-		
+
 		<form action="/IW32_Team_Project/rev/revSeatSelect.php"  method="post">
 		<div class="content">
 			{if isset($flashMsg)}
@@ -71,9 +96,27 @@
 			</div>
 			<section class="seat_select">
 				<h2>HALシネマ スクリーン{$seat_detail->getScreenId()}</h2>
-				<p><img src="../img/screen.png" alt=""></p>
+				<!-- スクリーン選択画面　サンプル画像 -->
+				<!-- <p><img src="../img/screen.png" alt=""></p> -->
 
-				
+				<div id="seat-map">
+	        <div class="front-indicator">Front</div>
+
+	      </div>
+	      <div class="booking-details">
+	        <h2>Booking Details</h2>
+
+	        <h3> Selected Seats (<span id="counter">0</span>):</h3>
+	        <ul id="selected-seats"></ul>
+
+	        Total: <b>$<span id="total">0</span></b>
+
+	        <button class="checkout-button">Checkout &raquo;</button>
+
+	        <div id="legend"></div>
+	      </div>
+
+
 			</section>
 			<div class="status_buy">
 				<ul>
@@ -83,7 +126,7 @@
 				</ul>
 			</div>
 		</div>
-			
+
 		<div class="status_select">
 			<table>
 				<thead>
@@ -105,9 +148,9 @@
 				</tbody>
 			</table>
 		</div>
-		
+
 		<div class="confirmation">
-			
+
 			<div class="termsofservice">
 				<h2>利用規約</h2>
 <div class="text">ＨＡＬシネマ株式会社（以下「当社」といいます）は、インターネットチケット販売（以下「本サービス」といいます）をご利用いただくに当たって"インターネットチケット販売利用規約"（以下「本規約」といいます）を以下の通りに定めます。本規約に同意の上本サービスをご利用ください。
@@ -142,13 +185,13 @@
 
 ４．決済について
 （1）本サービスにおいて提供する決済方法について以下のように規定します。
-　 
+　
 国内発行、かつ、当社指定のクレジットカード、及びその他当社の指定する決済方法をお持ちのお客様にご利用いただけます。
-　 
+　
 クレジットカード、またはその他当社の指定する決済方法の与信手続き完了をもって販売契約の成立とします。なお、お申込みの際の虚偽入力、誤入力もしくは入力漏れ、または各クレジットカード発行会社、またはその他当社の指定する決済会社の規約等に準じない等の何らかの理由でお客様の選択された決済方法による決済ができない場合には、チケット購入は無効となります。お取り扱いできなかった場合のお問い合わせ等はクレジットカード発行会社、またはその他当社の指定する決済会社に直接お問い合わせください。
-　 
+　
 本サービスは成年者を対象としております。未成年者が本サービスをご利用される場合、必ず保護者同意の上ご利用ください。未成年者が本サービスをご利用された場合、全ての事項において保護者の同意を得たものとみなします。
-　 
+　
 クレジットカード、及びその他当社の指定する決済方法のご利用におけるトラブルについて当社は一切責任を負いません。
 
 ５．禁止行為
@@ -178,7 +221,7 @@ j．その他、当社が不適切と判断する行為
 　
 a．禁止行為によって購入し、または禁止行為によって処分し、もしくは処分することを試みたチケットについては無効とし、劇場等への入場を認めません。また、既に当該チケットによって劇場等に入場している場合には、退場させることがあります。これらの場合、当社は当該チケットの代金を一切返金しないものとします。
 　
-b．当社から直接購入する以外の方法により購入したチケットに関するトラブルについては、当社は一切責任を負わないものとします。 
+b．当社から直接購入する以外の方法により購入したチケットに関するトラブルについては、当社は一切責任を負わないものとします。
 　
 c．その他インターネット利用の一般的なマナー、モラルおよび技術を遵守していただきます。当社が不適切と判断する行為を行うお客様には、本サービスのご利用をお断りする場合があります。
 
@@ -186,20 +229,20 @@ c．その他インターネット利用の一般的なマナー、モラルお�
 （1）当社は個人情報保護法に基づき個人情報を厳重に管理し、送信の際に暗号化処理等を行うなど、機密保持のために充分なセキュリティー体制を敷いています。ただし、通信回線やコンピューター等の障害によるデータの消失等の防止については保証いたしません。
 （2）当社はお客様の個人情報を利用して、電子メールその他の手段によりチケットの購入・販売等に関する通知等をお客様に発信することができるものとします。
 （3）お客様は当社に対し、お申込の際に入力した個人情報を下記各利用目的の範囲内で利用することに同意するものとします。
-　 
+　
 電子メールその他の手段によりサービスに関する推奨・告知を行うため
-　 
+　
 アンケート調査ならびに景品等の送付を行うため
-　 
+　
 当社のサービスの改善または新たなサービスの開発を行うため
-　 
+　
 上記の他、当社の営業に関する業務を実施するため
 （4）当社はお客様がお申込みの際に入力した個人情報を、以下の項目に該当する場合または正当な理由のある場合を除き、第三者に対して開示しないものとします。
-　 
+　
 お客様が個人情報の開示について同意している場合
-　 
+　
 法令に基づき、行政官庁または司法機関等により開示を求められた場合
-　 
+　
 その他、業務委託等本サービスの運営上必要な場合
 
 ７．システムに関する項目
@@ -210,11 +253,11 @@ c．その他インターネット利用の一般的なマナー、モラルお�
 ８．本サービスの内容変更・中止・中断について
 （1）当社は本サービスの運営上、そのシステムや内容の変更が必要であると判断した場合、お客様に対し事前に通知することなく、本サービスの内容に変更を行うことがあります。
 （2）当社は以下の各号に該当する場合には、本サービスの運営を中止・中断することがあります。
-　 
+　
 本サービスのシステムの停止または緊急の保守・点検を行う場合
-　 
+　
 その他、当社が本サービスの運営上必要と判断した場合
-　 
+　
 天災地変・戦争・暴動・騒乱・労働争議・火災・停電・輸送手段の混乱その他当社の合理的支配を超える事由により本サービスを提供することができなくなった場合
 （3）当社は前項の規定に基づく本サービスの中止、中断、変更もしくは廃止、または本サービスの提供の遅滞、その他本サービスに関連して発生したお客様または第三者の損害について一切責任を負わないものとします。
 
@@ -233,7 +276,7 @@ c．その他インターネット利用の一般的なマナー、モラルお�
 ご購入に際しての確認事項
 
 インターネットチケット販売では割引券のご利用はできません。
-			
+
 他のお客様のご迷惑となりますので途中入場はご遠慮ください。
 
 遅れてご来場の場合は座席の変更もございます。
@@ -250,7 +293,7 @@ c．その他インターネット利用の一般的なマナー、モラルお�
 携帯電話のドメイン指定受信をご利用の場合は「i-net.ticket@haltheater.jp」をご指定ください。
 				</div>
 			</div>
-			
+
 			<div class="select_step">
 				<p><input type="submit" name="next" value="利用規約へ同意し次へ進む"></p>
 				<p><a href="#"><input type="button" name="back" value="スケジュールを選び直す"></a></p>

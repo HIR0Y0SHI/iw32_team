@@ -1,15 +1,11 @@
 <?php
 /**
-<<<<<<< HEAD
- * 座席表示。
- *
-=======
  * 座席表示処理。
- * 
->>>>>>> e7de6ee52812f52badf781cc828e63b200b58e78
+ *
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/13
+ * Updated by HIROYOSHI on 2016/12/25
  */
 
 @session_start();
@@ -52,8 +48,12 @@ try {
 
 	$_SESSION["reserved_count"] = count($reserved_seat_list);
 
-	$smarty->assign("seat_detail",$seat_detail);
-	$smarty->assign("reserved_seat_list",$reserved_seat_list);
+
+	$unavailable_seats = array_keys($reserved_seat_list);
+
+	$smarty->assign("seat_detail", $seat_detail);
+	$smarty->assign("reserved_seat_list", $reserved_seat_list);
+	$smarty->assign("unavailable_seats", json_encode($unavailable_seats));
 
 } catch (PDOException $ex) {
 	print_r($ex);
