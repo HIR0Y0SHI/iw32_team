@@ -7,6 +7,8 @@
  * Created: 2016/12/14
  */
 
+@session_start();
+
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/libs/Smarty.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/Conf.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/entity/Member.class.php');
@@ -14,7 +16,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/dao/MemberDAO
 
 $smarty = new Smarty();
 $smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates/");
-$smarty->setCompileDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates_c");	
+$smarty->setCompileDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates_c");
 
 $isRedirect = false;
 $tplPath = "login.tpl";
@@ -38,13 +40,14 @@ if(empty($validationMsgs)) {
 	try {
 		$db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
 		$memberDAO = new MemberDAO($db);
-		
+
 		$member = $memberDAO->findByLoginid($login_id);
 		if($member == null) {
 			$validationMsgs[] = "存在しないアカウントです。正しいIDを入力して下さい。";
-		}
-		else {
+		}	else {
 			$member_ps = $member->getPassword();
+
+
 			if($login_ps == $member_ps) {
 				$member_id = $member->getMemberId();
 				$last_name = $member->getLastName();
@@ -62,7 +65,7 @@ if(empty($validationMsgs)) {
 				$birthday = $member->getBirthday();
 				$entry_date = $member->getEntryDate();
 				$withdrawal_day = $member->getWithdrawalDay();
-				
+
 				$_SESSION["loginFlg"] = true;
 				$_SESSION["member_id"] = $member_id;
 				$_SESSION["last_name"] = $last_name;
@@ -80,20 +83,17 @@ if(empty($validationMsgs)) {
 				$_SESSION["birthday"] = $birthday;
 				$_SESSION["entry_date"] = $entry_date;
 				$_SESSION["withdrawal_day"] = $withdrawal_day;
-				
+
 				$isRedirect = true;
-			}
-			else {
+			}	else {
 				$validationMsgs[] = "パスワードが違います。正しいパスワードを入力して下さい。";
 			}
 		}
-	}
-	catch (PDOException $ex) {
+	}	catch (PDOException $ex) {
 		print_r($ex);
 		$smarty->assign("errorMsg","DB接続に失敗しました。");
 		$tplPath = "error.tpl";
-	}
-	finally {
+	}	finally {
 		$db = null;
 	}
 }
@@ -101,11 +101,10 @@ if(empty($validationMsgs)) {
 if($isRedirect) {
 	header("Location: /IW32_Team_Project/goTop.php");
 	exit;
-}
-else {
+} else {
 	if(!empty($validationMsgs)) {
 		$smarty->assign("validationMsgs",$validationMsgs);
-		$smarty->assign("login_id",$login_id);		
+		$smarty->assign("login_id",$login_id);
 	}
 	$smarty->display($tplPath);
 }

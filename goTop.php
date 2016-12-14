@@ -15,20 +15,22 @@ $smarty = new Smarty();
 $smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates/");
 $smarty->setCompileDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates_c");
 
-if(loginCheck()) {
+if (loginCheck()) {
 	$validationMsgs[] = "ログインしていないか、前回ログインしてから一定時間が経過しています。もう一度ログインし直してください。";
 	$smarty->assign("validationMsgs", $validationMsgs);
 	$tplPath = "login.tpl";
-}
-else {
+} else {
 	$userName = $_SESSION['last_name'];
 	$member_id = $_SESSION['member_id'];
+
 	cleanSession();
+	
 	$_SESSION['last_name'] = $userName;
-	$_SESSION['member_id'] = $member_id; 
+	$_SESSION['member_id'] = $member_id;
 	$smarty->assign("loginName",$_SESSION['last_name']);
 	$smarty->assign("member_id",$_SESSION['member_id']);
 	$tplPath = "top.tpl";
 }
+
 $smarty->display($tplPath);
 ?>
