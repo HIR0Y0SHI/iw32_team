@@ -91,10 +91,24 @@ IW32でのチーム制作
 ```php
 <?php
 /**
- * DB接続テスト
+ * 説明
  *
  * @author HIR0Y0SHI
  * @version 1.0
  * Created: 2016/12/11
  */
+```
+
+
+### メソッドコメントのテンプレート
+```php
+/**
+* 説明
+*
+* Created by HIROYOSHI on 2016/12/14
+*
+* @param string $arg 第一引数
+* @param integer $arg2 第二引数
+* @return array 戻り値の説明
+*/
 ```
