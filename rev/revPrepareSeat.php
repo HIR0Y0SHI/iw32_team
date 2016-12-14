@@ -1,15 +1,13 @@
 <?php
 /**
  * 座席表示処理。
-<<<<<<< HEAD
  *
-=======
- * 
->>>>>>> 3105c35f3e6b53b95850b818170e210c55550a46
+ *
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/13
  * Updated by HIROYOSHI on 2016/12/25
+ * 	- 既に予約されている座席（選択不可な席）の対応
  */
 
 @session_start();

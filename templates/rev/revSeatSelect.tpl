@@ -6,39 +6,35 @@
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/12
+ * Updated by HIR0Y0SHI on 2016/12/15
+ * 	- 既に予約されている座席（選択不可な席）の対応
  *}
 -->
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-<<<<<<< HEAD
-	<link href="../css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
-	<link href="../css/common.css" rel="stylesheet" type="text/css">
-	<link href="../css/seat_common.css" rel="stylesheet" type="text/css">
-	<link href="../css/seat.css" rel="stylesheet" type="text/css">
+
+	<link href="/IW32_Team_Project/css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/seat_common.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/seat.css" rel="stylesheet" type="text/css">
 
 	<!-- jQuery -->
 	<script src="../js/jquery-1.11.3.min.js"></script>
 
 	<!-- 座席選択ライブラリ系 -->
-	<link href="../css/jquery.seat-charts.css" rel="stylesheet" type="text/css">
-	<link href="../css/seat_charts_style.css" rel="stylesheet" type="text/css">
-  <script src="../js/jquery.seat-charts.min.js"></script>
+	<link href="/IW32_Team_Project/css/jquery.seat-charts.css" rel="stylesheet" type="text/css">
+	<link href="/IW32_Team_Project/css/seat_charts_style.css" rel="stylesheet" type="text/css">
+  <script src="/IW32_Team_Project/js/jquery.seat-charts.min.js"></script>
 
 	<script type="text/javascript">
+		// 予約済みの席を取得
 		var unavailable_seats = {$unavailable_seats};
 		console.log(unavailable_seats);
 	</script>
 
-	<script src="../js/use-seat-chart.js"></script>
+	<script src="/IW32_Team_Project/js/use-seat-chart.js"></script>
 
-
-=======
-	<link href="/IW32_Team_Project/css/html5reset-1.6.1.css" rel="stylesheet" type="text/css">
-	<link href="/IW32_Team_Project/css/common.css" rel="stylesheet" type="text/css">
-	<link href="/IW32_Team_Project/css/seat_common.css" rel="stylesheet" type="text/css">
-	<link href="/IW32_Team_Project/css/seat.css" rel="stylesheet" type="text/css">
->>>>>>> 3105c35f3e6b53b95850b818170e210c55550a46
 	<title>HALシネマ | 座席選択</title>
 </head>
 <body>

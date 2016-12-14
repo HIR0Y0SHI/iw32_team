@@ -98,11 +98,11 @@ if(empty($validationMsgs)) {
 	}
 }
 
-if($isRedirect) {
+if ($isRedirect) {
 	header("Location: /IW32_Team_Project/goTop.php");
 	exit;
 } else {
-	if(!empty($validationMsgs)) {
+	if (!empty($validationMsgs)) {
 		$smarty->assign("validationMsgs",$validationMsgs);
 		$smarty->assign("login_id",$login_id);
 	}
