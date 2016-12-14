@@ -36,15 +36,31 @@ class ReservationDAO {
 	 * @return boolean 登録が完了したかどうかを表す値。
 	 */
 	public function insertReservation(Reservation $reservation) {
-		$sqlInsert = "INSERT INTO t_reservation (reservation_id, member_id, date, schedule_id) VALUES (:reservation_id, :member_id, :date, :schedule_id)";
+		$sqlInsert = "INSERT INTO t_reservation (reservation_id, member_id, date, schedule_id)"
+				. " VALUES (:reservation_id, :member_id, :date, :schedule_id)";
 		$stmt = $this->db->prepare($sqlInsert);
 		$stmt->bindValue(":reservation_id", $reservation->getReservationId(), PDO::PARAM_NULL);
 		$stmt->bindValue(":member_id", $reservation->getMemberId(), PDO::PARAM_INT);
 		$stmt->bindValue(":date", $reservation->getDate(), PDO::PARAM_STR);
-		$stmt->bindValue(":schedule_id", $reservation->getSchedualId(), PDO::PARAM_INT);
+		$stmt->bindValue(":schedule_id", $reservation->getScheduleId(), PDO::PARAM_INT);
 		$result = $stmt->execute();
+		
 		return $result;
 	}
 	
+	/**
+	 * 一番最後に登録された予約情報を取得する。
+	 * 
+	 * @return Int $reservation_idの値。
+	 */
+	public function findByLatestReservationId() {
+		$sql = "SELECT * FROM t_reservation ORDER BY reservation_id DESC LIMIT 1";
+		$stmt = $this->db->prepare($sql);
+		$result = $stmt->execute();
+		if($result && $row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			$reservation_id = $row["reservation_id"];			
+		}
+		return $reservation_id;
+	}
 	
 }

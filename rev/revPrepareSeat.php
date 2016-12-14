@@ -22,6 +22,7 @@ $smarty->setCompileDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates_c
 
 $tplPath = "rev/revSeatSelect.tpl";
 
+/*ログインチェック*/
 if(isset($_SESSION["flashMsg"])) {
 	$flashMsg = $_SESSION["flashMsg"];
 	$smarty->assign("flashMsg", $flashMsg);
@@ -32,9 +33,8 @@ if(isset($_SESSION["flashMsg"])) {
 //テストデータ
 //$schedule_id = 8;
 $schedule_id = $_POST["schedule_id"];
+$_SESSION["schedule_id"] = $schedule_id;
 ////////////////////////////
-
-
 
 $seat_detail = new SeatDetail();
 $reserved_seat_list = array();
@@ -46,7 +46,7 @@ try {
 	$reserved_seat_list = $seatDAO->findByPK($schedule_id);
 
 	$_SESSION["reserved_count"] = count($reserved_seat_list);
-
+			
 	$smarty->assign("seat_detail",$seat_detail);
 	$smarty->assign("reserved_seat_list",$reserved_seat_list);
 

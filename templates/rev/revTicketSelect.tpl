@@ -45,15 +45,17 @@
 			
 		<div class="content">
 	
+		{if isset($flashMsg)}
 		<div class="error">
 			<h2>入力された内容を再度ご確認ください。</h2>
 			<ul>
-				<li>エラーチェックエラーチェック</li>
-				<li>エラーチェックエラーチェック</li>
+				<li>{$flashMsg}</li>
 			</ul>
 		</div>
+		{/if}
+		
 			<section class="ticket_select">
-				<h2>合計◯枚分選択してください。</h2>
+				<h2>合計{$seat_position_list|@count}枚分選択してください。</h2>
 				<table>
 					<tbody>
 						<tr>
@@ -175,19 +177,30 @@
 				<tbody>
 					<tr>
 						<th>作品名</th>
-						<td>ここに作品名がはいりますねぇ〜〜〜〜〜〜〜〜</td>
+						<td>{$seat_detail->getMovieName()}</td>
 					</tr>
 					<tr>
 						<th>スクリーン</th>
-						<td>3</td>
+						<td>{$seat_detail->getScreenId()}</td>
 					</tr>
 					<tr>
 						<th>日時</th>
-						<td>2016年12月12日（？）<br>19:30〜20:30</td>
+						<td>{$seat_detail->getScreeningDay()}<br>{$seat_detail->getOpenTime()} 〜 {$seat_detail->getCloseTime()}</td>
 					</tr>
 					<tr>
 						<th>選択済み座席</th>
-						<td>A-99,B-99,C-99,<br/>D-99,C-99,D-99</td>
+						<td>
+							{foreach from=$seat_position_list item="seat_position" name="loop"}
+								{if $smarty.foreach.loop.index == 2}
+									{$seat_position}</br>
+								{elseif $smarty.foreach.loop.last}
+									{$seat_position}
+								{else}
+									{$seat_position},							
+								{/if}
+							{/foreach}
+						</td>
+						
 					</tr>
 				</tbody>
 			</table>

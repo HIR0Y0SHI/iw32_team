@@ -57,7 +57,12 @@ class SeatDAO {
 			$screening_day = date('Y年n月j日' , strtotime($doors_open_time)) . "（$week_name[$weekly]）";
 			$open_time = date('H:i' , strtotime($doors_open_time));
 			$close_time = date('H:i' , strtotime($closing_time));
+			
 
+			/*セッションに格納*/
+			$_SESSION["schedual_id"] = $schedual_id;
+			$_SESSION["movie_category_id"] = $movie_category_id;
+					
 			$seat_detail = new SeatDetail();
 			$seat_detail->setSchedualId($schedual_id);
 			$seat_detail->setScreeningDay($screening_day);
@@ -106,11 +111,11 @@ class SeatDAO {
 		$sqlInsert = "INSERT INTO t_seat (schedual_id, seat_positon, reservation_id, customer_partition_id, movie_category_id)"
 				. " VALUES (:schedual_id, :seat_positon, :reservation_id, :customer_partition_id, :movie_category_id)";
 		$stmt = $this->db->prepare($sqlInsert);
-		$stmt->bindValue(":schedual_id", $seat->getDeptno(), PDO::PARAM_INT);
-		$stmt->bindValue(":seat_positon", $seat->getDname(), PDO::PARAM_STR);
-		$stmt->bindValue(":reservation_id", $seat->getLoc(), PDO::PARAM_STR);
-		$stmt->bindValue(":customer_partition_id", $seat->getDeptno(), PDO::PARAM_INT);
-		$stmt->bindValue(":movie_category_id", $seat->getDname(), PDO::PARAM_STR);
+		$stmt->bindValue(":schedual_id", $seat->getSchedualId(), PDO::PARAM_INT);
+		$stmt->bindValue(":seat_positon", $seat->getSeatPositon(), PDO::PARAM_STR);
+		$stmt->bindValue(":reservation_id", $seat->getReservationId(), PDO::PARAM_INT);
+		$stmt->bindValue(":customer_partition_id", $seat->getCustomerPartitionId(), PDO::PARAM_STR);
+		$stmt->bindValue(":movie_category_id", $seat->getMovieCategoryId(), PDO::PARAM_INT);
 		$result = $stmt->execute();
 		return $result;
 	}
