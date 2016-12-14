@@ -47,14 +47,11 @@ try {
 
 	$smarty->assign("seat_detail",$seat_detail);
 	$smarty->assign("reserved_seat_list",$reserved_seat_list);
-
-}
-catch (PDOException $ex) {
+} catch (PDOException $ex) {
 	print_r($ex);
 	$smarty->assign("errorMsg","接続障害が発生しました。再度お試しください。");
 	$tplPath = "error.tpl";
-}
-finally {
+} finally {
 	$db = null;
 }
 

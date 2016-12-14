@@ -44,7 +44,7 @@ if(empty($validationMsgs)) {
 		$member = $memberDAO->findByLoginid($login_id);
 		if($member == null) {
 			$validationMsgs[] = "存在しないアカウントです。正しいIDを入力して下さい。";
-		}	else {
+		} else {
 			$member_ps = $member->getPassword();
 
 
@@ -85,15 +85,15 @@ if(empty($validationMsgs)) {
 				$_SESSION["withdrawal_day"] = $withdrawal_day;
 
 				$isRedirect = true;
-			}	else {
+			} else {
 				$validationMsgs[] = "パスワードが違います。正しいパスワードを入力して下さい。";
 			}
 		}
-	}	catch (PDOException $ex) {
+	} catch (PDOException $ex) {
 		print_r($ex);
 		$smarty->assign("errorMsg","DB接続に失敗しました。");
 		$tplPath = "error.tpl";
-	}	finally {
+	} finally {
 		$db = null;
 	}
 }
