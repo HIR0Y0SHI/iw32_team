@@ -373,7 +373,5 @@ class Member {
         $this->withdrawal_day = $withdrawal_day;
     }
 
-
-
 }
 ?>

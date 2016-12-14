@@ -16,7 +16,7 @@
 function loginCheck() {
 	$result = false;
 	
-	if(!isset($_SESSION["loginFlg"]) || $_SESSION["loginFlg"] == false || !isset($_SESSION["id"]) || !isset($_SESSION["name"]) || !isset($_SESSION["auth"])) {
+	if(!isset($_SESSION["loginFlg"]) || $_SESSION["loginFlg"] == false || !isset($_SESSION["member_id"])) {
 		$result = true;
 	}
 	
@@ -30,15 +30,11 @@ function loginCheck() {
  */
 function cleanSession() {
 	$loginFlg = $_SESSION["loginFlg"];
-	$id = $_SESSION["id"];
-	$name = $_SESSION["name"];
-	$auth = $_SESSION["auth"];
+	$member_id = $_SESSION["member_id"];
 	
 	session_unset();
 	
 	$_SESSION["loginFlg"] = $loginFlg;
-	$_SESSION["id"] = $id;
-	$_SESSION["name"] = $name;
-	$_SESSION["auth"] = $auth;
+	$_SESSION["member_id"] = $member_id;
 }
 ?>
