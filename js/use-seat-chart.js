@@ -18,15 +18,10 @@ $(document).ready(function() {
 
     // 座席種類とレイアウトの指定
     map: [
-      'ff_ff',
-      'ff_ff',
-      'ff_ff',
-      'ff_ff',
-      'ff___',
-      'ff_ff',
-      'ff_ff',
-      'ff_ff',
-      'fffff',
+      'fffff_fffff',
+      'fffff_fffff',
+      'fffff_fffff',
+      'fffff_fffff',
     ],
     seats: {
       f: {
@@ -164,11 +159,11 @@ function formSubmit() {
 
   var input = document.createElement('input');
   input.setAttribute('type', 'hidden');
-  input.setAttribute('name', 'test_name');
+  input.setAttribute('name', 'seat_position');
   input.setAttribute('value', JSON.stringify(selectedList));
 
   form.appendChild(input);
-  form.setAttribute('action', 'post_test.php');
+  form.setAttribute('action', 'revSeatSelect.php');
   form.setAttribute('method', 'post');
   form.submit();
 }

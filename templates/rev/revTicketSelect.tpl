@@ -35,10 +35,11 @@
 
 		<div class="bread_list">
 			<ul>
-				<li class="current"><span>STEP.1</span><br/>座席・チケット選択</li>
-				<li><span>STEP.2</span><br/>お支払い情報の入力</li>
-				<li><span>STEP.3</span><br/>購入内容の確認</li>
-				<li><span>STEP.4</span><br/>完了</li>
+				<li><span>STEP.1</span><br/>座席選択</li>
+				<li class="current"><span>STEP.2</span><br/>チケット選択</li>
+				<li><span>STEP.3</span><br/>お支払い情報の入力</li>
+				<li><span>STEP.4</span><br/>購入内容の確認</li>
+				<li><span>STEP.5</span><br/>完了</li>
 			</ul>
 		</div>
 
@@ -66,102 +67,21 @@
 							<th>枚数</th>
 							<th>注意</th>
 						</tr>
-						<tr>
-							<td>一般</td>
-							<td>￥1,800</td>
-							<td>
-								<select name="general">
-									<option value="">0</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-								</select>枚
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>大・高校生</td>
-							<td>￥1,500</td>
-							<td>
-								<select name="general">
-									<option value="">0</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-								</select>枚
-							</td>
-							<td>ご入場の際に学生証をご提示下さい。</td>
-						</tr>
-						<tr>
-							<td>中・小学生</td>
-							<td>￥1,000</td>
-							<td>
-								<select name="general">
-									<option value="">0</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-								</select>枚
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>幼児（3歳-6歳）</td>
-							<td>￥800</td>
-							<td>
-								<select name="general">
-									<option value="">0</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-								</select>枚
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>シニア（55歳以上）</td>
-							<td>￥1,100</td>
-							<td>
-								<select name="general">
-									<option value="">0</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-								</select>枚
-							</td>
-							<td>入場の際は年齢確認のできるものをご提示願います。</td>
-						</tr>
-						<tr>
-							<td>レディースデー</td>
-							<td>￥1,100</td>
-							<td>
-								<select name="general">
-									<option value="">0</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-									<option value="6">6</option>
-								</select>枚
-							</td>
-							<td></td>
-						</tr>
+						{foreach from=$ticket_price_list item="ticket_price" name="loop"}
+							<tr>
+								<td>{$ticket_price->getName()}</td>
+								<td>￥{$ticket_price->getPrice()}</td>
+								<td>
+									<select name="{$ticket_price->getCustomerPartitionId()}">
+										<option value="">0</option>
+										{foreach from=$seat_position_list item="seat_position" name="loop"}
+											<option value="{$smarty.foreach.loop.iteration}">{$smarty.foreach.loop.iteration}</option>
+										{/foreach}
+									</select>枚
+								</td>
+								<td></td>
+							</tr>
+						{/foreach}
 					</tbody>
 				</table>
 				<h3>&lt;&lt;ご注意&gt;&gt;</h3>

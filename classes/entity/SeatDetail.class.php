@@ -48,7 +48,8 @@ class SeatDetail {
      * 対象年齢
      */
     private $age;
-
+	
+	
     /**
      * @return mixed
      */
@@ -193,5 +194,31 @@ class SeatDetail {
     {
         $this->age = $age;
     }
+	
+	
+	/**************
+	 * 特別日の曜日を取得
+	 **************/
+	
+	/**
+	 * 上映曜日
+	 */
+	private $week;
+
+	/**
+     * @return mixed
+     */
+    public function getWeek() {
+        return $this->week;
+    }
+
+    /**
+     * @param mixed $week
+     */
+    public function setWeek($week) {
+        $this->week = $week;
+    }
+
+	
 }
 ?>

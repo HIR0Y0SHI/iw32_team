@@ -80,7 +80,6 @@
 		<p class="description">ご希望の座席を選択してください。選択中の座席を解除する場合は、もう一度座席をクリックしてください。</p>
 		<p class="description">座席選択後に次のSTEPにて購入方法をお選びください。</p>
 
-		<form action="/IW32_Team_Project/rev/revSeatSelect.php"  method="post">
 		<div class="content">
 			{if isset($flashMsg)}
 			<div class="error">
@@ -298,11 +297,10 @@ c．その他インターネット利用の一般的なマナー、モラルお�
 			</div>
 
 			<div class="select_step">
-				<p><input type="submit" name="next" value="利用規約へ同意し次へ進む"></p>
+				<p><input type="button" onclick="formSubmit()" name="next" value="利用規約へ同意し次へ進む"></p>
 				<p><a href="#"><input type="button" name="back" value="スケジュールを選び直す"></a></p>
 			</div>
 		</div>
-		</form>
 	</section>
 	<!-- メインコンテンツここまで -->
 

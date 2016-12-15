@@ -57,7 +57,6 @@ class SeatDAO {
 			$screening_day = date('Y年n月j日' , strtotime($doors_open_time)) . "（$week_name[$weekly]）";
 			$open_time = date('H:i' , strtotime($doors_open_time));
 			$close_time = date('H:i' , strtotime($closing_time));
-			
 
 			/*セッションに格納*/
 			$_SESSION["schedual_id"] = $schedual_id;
@@ -72,7 +71,11 @@ class SeatDAO {
 			$seat_detail->setNumberOfSeats($number_of_seats);
 			$seat_detail->setMovieName($movie_name);
 			$seat_detail->setMovieCategoryId($movie_category_id);
-			$seat_detail->setAge($age);			
+			
+			//上映曜日取得
+			$seat_detail->setWeek($weekly);
+			
+			$seat_detail->setAge($age);
 		}
 		return $seat_detail;
 	}
