@@ -47,9 +47,9 @@ if(empty($validationMsgs)) {
 		} else {
 			$member_ps = $member->getPassword();
 
-
 			if($login_ps == $member_ps) {
 				$member_id = $member->getMemberId();
+				$login_id = $member->getLoginId();
 				$last_name = $member->getLastName();
 				$first_name = $member->getFirstName();
 				$last_name_kana = $member->getLastNameKana();
@@ -99,6 +99,7 @@ if(empty($validationMsgs)) {
 }
 
 if ($isRedirect) {
+	$_SESSION["login_id"] = $login_id;
 	header("Location: /IW32_Team_Project/goTop.php");
 	exit;
 } else {

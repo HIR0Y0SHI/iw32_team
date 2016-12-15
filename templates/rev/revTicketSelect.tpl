@@ -45,7 +45,8 @@
 
 		<h2 class="title">チケットの種類をお選びください。</h2>
 		<p class="description">座席数分の枚数を選択し、次へ進んでください。</p>
-
+		
+		<form action="revTicketSelect.php" method="POST">
 		<div class="content">
 	
 		{if isset($flashMsg)}
@@ -90,7 +91,7 @@
 				<p>※ 車椅子席をご希望の方は、お手数ですが通常のお席をご購入の上、劇場にご連絡下さい。</p>
 			</section>
 		</div>
-
+					
 		<div class="status_select">
 			<table>
 				<thead>
@@ -131,11 +132,12 @@
 
 		<div class="confirmation">
 			<div class="select_step">
-				<p><a href="buyer_input.html"><input type="button" name="next" value="次へ"></a></p>
+				<p><input type="submit" name="next" value="次へ"></p>
 				<p><input type="button" name="back" value="席を選び直す"></p>
 				<p><input type="button" name="back" value="スケジュールを選び直す"></p>
 			</div>
 		</div>
+		</form>
 
 	</section>
 	<!-- メインコンテンツここまで -->

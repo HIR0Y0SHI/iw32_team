@@ -45,37 +45,37 @@
 			
 		<div class="content">
 			
-			<!--
+			{if isset($flashMsg)}
 			<div class="error">
 				<h2>入力された内容を再度ご確認ください。</h2>
 				<ul>
-					<li>エラーチェックエラーチェック</li>
-					<li>なんか間違っとるよ？ｗ</li>
+					<li>{$flashMsg}</li>
 				</ul>
 			</div>
-			-->
+			{/if}
 			
 			
 			<div class="inputitem">
+				
 				<section class="name">
 					<h2>お名前</h2>
-					<p><input type="text" name="" maxlength="10" value="" placeholder="例）山田"></p>
-					<p><input type="text" name="" maxlength="10" value="" placeholder="例）太郎"></p>
-					<p><input type="text" name="" maxlength="10" value="" placeholder="例）ヤマダ"></p>
-					<p><input type="text" name="" maxlength="10" value="" placeholder="例）タロウ"></p>
+					<p><input type="text" name="last_name" maxlength="10" value="{$member->getLastName()|default:""}" placeholder="例）山田"></p>
+					<p><input type="text" name="first_name" maxlength="10" value="{$member->getFirstName()|default:""}" placeholder="例）太郎"></p>
+					<p><input type="text" name="last_name_kana" maxlength="10" value="{$member->getFirstNameKana()|default:""}" placeholder="例）ヤマダ"></p>
+					<p><input type="text" name="first_name_kana" maxlength="10" value="{$member->getLastNameKana()|default:""}" placeholder="例）タロウ"></p>
 				</section>
 				<section class="tel">
 					<h2>電話番号</h2>
-					<p><input type="text" name="" maxlength="11" value="09012345678" disabled="disabled" ></p>
-					<p><input type="hidden" name="" maxlength="11" value="09012345678"></p>
-					<p><input type="tel" name="" maxlength="11" value="" placeholder="例）09000000000"></p>
+					<p><input type="text" name="" maxlength="11" value="{$member->getTel()|default:""}" disabled="disabled" ></p>
+					<p><input type="hidden" name="" maxlength="11" value="{$member->getTel()|default:""}"></p>
+					<p><input type="tel" name="" maxlength="11" value="{$member->getTel()|default:""}" placeholder="例）09000000000"></p>
 				</section>
 				<section class="mail">
 					<h2>メールアドレス</h2>
-					<p><input type="text" name="" maxlength="255" value="tamao@com.jp" disabled="disabled" ></p>
-					<p><input type="hidden" name="" maxlength="255" value=""></p>
-					<p><input type="text" name="" maxlength="255" value="" placeholder="例）hal@cinema.com.jp" ></p>
-					<p><input type="text" name="" maxlength="255" value="" placeholder="例）hal@cinema.com.jp" ></p>
+					<p><input type="text" name="" maxlength="255" value="{$member->getMail()|default:""}" disabled="disabled" ></p>
+					<p><input type="hidden" name="" maxlength="255" value="{$member->getMail()|default:""}"></p>
+					<p><input type="text" name="" maxlength="255" value="{$member->getMail()|default:""}" placeholder="例）hal@cinema.com.jp" ></p>
+					<p><input type="text" name="" maxlength="255" value="{$member->getMail()|default:""}" placeholder="例）hal@cinema.com.jp" ></p>
 				</section>
 				<section class="creditcard">
 					<h2>クレジットカード</h2>
@@ -133,19 +133,29 @@
 				<tbody>
 					<tr>
 						<th>作品名</th>
-						<td>君の名は。</td>
+						<td>{$seat_detail->getMovieName()}</td>
 					</tr>
 					<tr>
 						<th>スクリーン</th>
-						<td>3</td>
+						<td>{$seat_detail->getScreenId()}</td>
 					</tr>
 					<tr>
 						<th>日時</th>
-						<td>2016年8月26日<br>19:30〜20:30</td>
+						<td>{$seat_detail->getScreeningDay()}<br>{$seat_detail->getOpenTime()} 〜 {$seat_detail->getCloseTime()}</td>
 					</tr>
 					<tr>
 						<th>選択済み座席</th>
-						<td>A-99,B-99,C-99,<br/>D-99,C-99,D-99</td>
+						<td>
+							{foreach from=$seat_position_list item="seat_position" name="loop"}
+								{if $smarty.foreach.loop.index == 2}
+									{$seat_position}</br>
+								{elseif $smarty.foreach.loop.last}
+									{$seat_position}
+								{else}
+									{$seat_position},							
+								{/if}
+							{/foreach}
+						</td>
 					</tr>
 					<tr>
 						<th>券種・枚数</th>

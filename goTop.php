@@ -24,13 +24,17 @@ if (loginCheck()) {
 } else {
 	$userName = $_SESSION['last_name'];
 	$member_id = $_SESSION['member_id'];
+	$login_id = $_SESSION['login_id'];
 
 	cleanSession();
 
 	$_SESSION['last_name'] = $userName;
 	$_SESSION['member_id'] = $member_id;
+	$_SESSION['login_id'] = $login_id;
+
 	$smarty->assign("loginName",$_SESSION['last_name']);
 	$smarty->assign("member_id",$_SESSION['member_id']);
+	$smarty->assign("login_id",$_SESSION['login_id']);
 	$tplPath = "top.tpl";
 }
 

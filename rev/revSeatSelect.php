@@ -38,10 +38,14 @@ if (loginCheck()) {
 	$isRedirect = false;
 	$tplPath = "rev/revTicketSelect.tpl";
 
-	//メンバーID取得
-	$member_id = $_SESSION['member_id'];
 	//スケジュールIDの取得
 	$schedule_id = $_SESSION["schedule_id"];
+	$_SESSION["schedule_id"] = $schedule_id;
+	
+	//メンバーIDの取得
+	$login_id = $_SESSION["login_id"];
+	$_SESSION["login_id"] = $login_id;
+	
 	//ムービーカテゴリの取得
 	$movie_category_id = $_SESSION["movie_category_id"];
 
@@ -113,6 +117,8 @@ if (loginCheck()) {
 			} else {
 				$ticket_price_list = $priceDAO->findAll();
 			}
+			
+			$_SESSION["ticket_price_list"] = $ticket_price_list;
 			$smarty->assign("ticket_price_list", $ticket_price_list);
 
 
