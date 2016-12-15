@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016 年 12 月 15 日 13:08
+-- Generation Time: 2016 年 12 月 15 日 17:48
 -- サーバのバージョン： 5.6.26
 -- PHP Version: 5.6.12
 
@@ -203,7 +203,7 @@ INSERT INTO `m_movie` (`movie_id`, `movie_name`, `introduction`, `running_time`,
 CREATE TABLE IF NOT EXISTS `m_movie_category` (
   `movie_category_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_movie_category`
@@ -213,7 +213,8 @@ INSERT INTO `m_movie_category` (`movie_category_id`, `name`) VALUES
 (1, '通常映画'),
 (2, '3D映画'),
 (3, '４DX映画'),
-(4, 'IMAX');
+(4, 'IMAX'),
+(5, 'レイトショー');
 
 -- --------------------------------------------------------
 
@@ -284,21 +285,26 @@ CREATE TABLE IF NOT EXISTS `m_price` (
   `movie_category_id` int(11) NOT NULL,
   `customer_partition_id` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `price` int(11) NOT NULL
+  `price` int(11) NOT NULL,
+  `supplementation` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_price`
 --
 
-INSERT INTO `m_price` (`movie_category_id`, `customer_partition_id`, `name`, `price`) VALUES
-(1, 'child', '通常料金 / 幼児（３歳〜）', 1000),
-(1, 'college', '通常料金 / 大学生', 1500),
-(1, 'general', '通常料金 / 一般', 1800),
-(1, 'highschool', '通常料金 / 高校生', 1000),
-(1, 'junior', '通常料金 / 中・小学生', 1000),
-(1, 'senior', '通常料金 / シニア（６０歳以上）', 1000),
-(1, 'women', 'レディースデイ', 1500);
+INSERT INTO `m_price` (`movie_category_id`, `customer_partition_id`, `name`, `price`, `supplementation`) VALUES
+(1, 'child', '幼児（３歳〜）', 1000, ''),
+(1, 'college', '大学生', 1500, 'ご入場の際に学生証をご提示ください。'),
+(1, 'general', '一般', 1800, ''),
+(1, 'highschool', '高校生', 1000, 'ご入場の際に学生証をご提示ください。'),
+(1, 'junior', '中・小学生', 1000, ''),
+(1, 'senior', 'シニア（６０歳以上）', 1000, '入場の際は年齢確認のできるものをご提示お願います。'),
+(1, 'women', 'レディースデイ', 1500, '毎週木曜日は女性限定のレディースデー！'),
+(5, 'college', '大学生', 1500, 'ご入場の際に学生証をご提示ください。'),
+(5, 'general', '一般', 1800, ''),
+(5, 'senior', 'シニア', 1500, '入場の際は年齢確認のできるものをご提示お願います。'),
+(5, 'women', 'レディースデイ', 1500, '毎週木曜日は女性限定のレディースデー！');
 
 -- --------------------------------------------------------
 
@@ -659,7 +665,7 @@ ALTER TABLE `m_member`
 -- AUTO_INCREMENT for table `m_movie_category`
 --
 ALTER TABLE `m_movie_category`
-  MODIFY `movie_category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `movie_category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `m_movie_genre`
 --
