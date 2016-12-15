@@ -11,4 +11,6 @@ const DB_DNS = "mysql:host=localhost;dbname=IW32_Team;charset=utf8";
 const DB_USERNAME = "iw32";
 const DB_PASSWORD = "password";
 
+// ログインしているユーザー
+const MEMBER_ID = 1;
 ?>
