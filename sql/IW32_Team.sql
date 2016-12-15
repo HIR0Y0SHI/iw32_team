@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016 年 12 月 11 日 00:42
+-- Generation Time: 2016 年 12 月 15 日 13:08
 -- サーバのバージョン： 5.6.26
 -- PHP Version: 5.6.12
 
@@ -50,7 +50,7 @@ INSERT INTO `m_age_limit` (`age_limit_id`, `limit_level_name`, `age`) VALUES
 
 CREATE TABLE IF NOT EXISTS `m_creditcard` (
   `member_id` int(11) NOT NULL,
-  `card_no` int(11) NOT NULL
+  `card_no` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -58,9 +58,9 @@ CREATE TABLE IF NOT EXISTS `m_creditcard` (
 --
 
 INSERT INTO `m_creditcard` (`member_id`, `card_no`) VALUES
-(1, 2147483647),
-(2, 2147483647),
-(3, 2147483647);
+(1, '1234567890123456'),
+(2, '0987654321246897'),
+(3, '2147999988224836');
 
 -- --------------------------------------------------------
 
@@ -357,10 +357,10 @@ CREATE TABLE IF NOT EXISTS `m_screen` (
 --
 
 INSERT INTO `m_screen` (`screen_id`, `name`, `number_of_seats`) VALUES
-(1, 'スクリーン１', 100),
-(2, 'スクリーン２', 100),
-(3, 'スクリーン3', 100),
-(4, 'スクリーン4', 100);
+(1, 'スクリーン１', 40),
+(2, 'スクリーン２', 40),
+(3, 'スクリーン3', 40),
+(4, 'スクリーン4', 40);
 
 -- --------------------------------------------------------
 
@@ -436,14 +436,15 @@ CREATE TABLE IF NOT EXISTS `t_reservation` (
   `member_id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `schedule_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `t_reservation`
 --
 
 INSERT INTO `t_reservation` (`reservation_id`, `member_id`, `date`, `schedule_id`) VALUES
-(1, 1, '2016-12-10 15:33:17', 20);
+(1, 1, '2016-11-10 15:33:17', 20),
+(2, 2, '2016-12-13 06:38:20', 1);
 
 -- --------------------------------------------------------
 
@@ -464,8 +465,57 @@ CREATE TABLE IF NOT EXISTS `t_seat` (
 --
 
 INSERT INTO `t_seat` (`schedual_id`, `seat_positon`, `reservation_id`, `customer_partition_id`, `movie_category_id`) VALUES
-(20, '01_01', 1, 'general', 1),
-(20, '01_02', 1, 'general', 1);
+(1, '2_1', 2, 'highschool', 1),
+(1, '2_2', 2, 'highschool', 1),
+(20, '1_1', 1, 'general', 1),
+(20, '1_2', 1, 'general', 1);
+
+-- --------------------------------------------------------
+
+--
+-- ビュー用の代替構造 `v_schedual_detail`
+--
+CREATE TABLE IF NOT EXISTS `v_schedual_detail` (
+`スケジュールID` int(11)
+,`映画名` varchar(50)
+,`開場時間` datetime
+,`閉場時間` datetime
+,`上映言語` varchar(50)
+,`座席確保割合（％）` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- ビュー用の代替構造 `v_schedual_detail_2`
+--
+CREATE TABLE IF NOT EXISTS `v_schedual_detail_2` (
+`schedual_id` int(11)
+,`movie_id` varchar(6)
+,`movie_name` varchar(50)
+,`doors_open_time` datetime
+,`closing_time` datetime
+,`name` varchar(50)
+,`Name_exp_7` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- ビュー用の構造 `v_schedual_detail`
+--
+DROP TABLE IF EXISTS `v_schedual_detail`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `iw32_team`.`v_schedual_detail` AS select `iw32_team`.`m_schedual`.`schedual_id` AS `スケジュールID`,`iw32_team`.`m_movie`.`movie_name` AS `映画名`,`iw32_team`.`m_schedual`.`doors_open_time` AS `開場時間`,`iw32_team`.`m_schedual`.`closing_time` AS `閉場時間`,`iw32_team`.`m_language`.`name` AS `上映言語`,cast(((count(`iw32_team`.`t_seat`.`schedual_id`) / `iw32_team`.`m_screen`.`number_of_seats`) * 100) as signed) AS `座席確保割合（％）` from ((((`iw32_team`.`m_schedual` left join `iw32_team`.`m_movie` on((`iw32_team`.`m_schedual`.`movie_id` = `iw32_team`.`m_movie`.`movie_id`))) left join `iw32_team`.`m_language` on((`iw32_team`.`m_movie`.`language_id` = `iw32_team`.`m_language`.`language_id`))) left join `iw32_team`.`m_screen` on((`iw32_team`.`m_schedual`.`screen_id` = `iw32_team`.`m_screen`.`screen_id`))) left join `iw32_team`.`t_seat` on((`iw32_team`.`m_schedual`.`schedual_id` = `iw32_team`.`t_seat`.`schedual_id`))) group by `iw32_team`.`m_schedual`.`schedual_id`;
+
+-- --------------------------------------------------------
+
+--
+-- ビュー用の構造 `v_schedual_detail_2`
+--
+DROP TABLE IF EXISTS `v_schedual_detail_2`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `iw32_team`.`v_schedual_detail_2` AS select `iw32_team`.`m_schedual`.`schedual_id` AS `schedual_id`,`iw32_team`.`m_movie`.`movie_id` AS `movie_id`,`iw32_team`.`m_movie`.`movie_name` AS `movie_name`,`iw32_team`.`m_schedual`.`doors_open_time` AS `doors_open_time`,`iw32_team`.`m_schedual`.`closing_time` AS `closing_time`,`iw32_team`.`m_language`.`name` AS `name`,cast(((count(`iw32_team`.`t_seat`.`schedual_id`) / `iw32_team`.`m_screen`.`number_of_seats`) * 100) as signed) AS `Name_exp_7` from ((((`iw32_team`.`m_schedual` left join `iw32_team`.`m_movie` on((`iw32_team`.`m_schedual`.`movie_id` = `iw32_team`.`m_movie`.`movie_id`))) left join `iw32_team`.`m_language` on((`iw32_team`.`m_movie`.`language_id` = `iw32_team`.`m_language`.`language_id`))) left join `iw32_team`.`m_screen` on((`iw32_team`.`m_schedual`.`screen_id` = `iw32_team`.`m_screen`.`screen_id`))) left join `iw32_team`.`t_seat` on((`iw32_team`.`m_schedual`.`schedual_id` = `iw32_team`.`t_seat`.`schedual_id`))) group by `iw32_team`.`m_schedual`.`schedual_id`;
 
 --
 -- Indexes for dumped tables
@@ -639,7 +689,7 @@ ALTER TABLE `m_special_day`
 -- AUTO_INCREMENT for table `t_reservation`
 --
 ALTER TABLE `t_reservation`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- ダンプしたテーブルの制約
 --
