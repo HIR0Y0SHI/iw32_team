@@ -53,10 +53,11 @@
 
 		<div class="bread_list">
 			<ul>
-				<li class="current" ><span>STEP.1</span><br/>座席・チケット選択</li>
-				<li><span>STEP.2</span><br/>お支払い情報の入力</li>
-				<li><span>STEP.3</span><br/>購入内容の確認</li>
-				<li><span>STEP.4</span><br/>完了</li>
+				<li class="current"><span>STEP.1</span><br/>座席選択</li>
+				<li><span>STEP.2</span><br/>チケット選択</li>
+				<li><span>STEP.3</span><br/>お支払い情報の入力</li>
+				<li><span>STEP.4</span><br/>購入内容の確認</li>
+				<li><span>STEP.5</span><br/>完了</li>
 			</ul>
 		</div>
 
@@ -81,14 +82,18 @@
 		<p class="description">座席選択後に次のSTEPにて購入方法をお選びください。</p>
 
 		<div class="content">
-			{if isset($flashMsg)}
+			
+			{if isset($validationMsgs)}
 			<div class="error">
 				<h2>入力された内容を再度ご確認ください。</h2>
 				<ul>
-					<li>{$flashMsg}</li>
+					{foreach from=$validationMsgs item=msg name="validationMsgsLoop"}
+					<li>{$msg}</li>
+					{/foreach}
 				</ul>
 			</div>
 			{/if}
+
 
 			<div class="status">
 				<ul>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * 座席・予約処理。
  * 
@@ -41,14 +40,14 @@ if (loginCheck()) {
 	//スケジュールIDの取得
 	$schedule_id = $_SESSION["schedule_id"];
 	$_SESSION["schedule_id"] = $schedule_id;
+		
+	/************************************
+	 * ムービーカテゴリの取得
+	 *
+	 *  特別料金設定するときにいるのでいまはいりまてん
+	 */
+	//$movie_category_id = $_SESSION["movie_category_id"];
 	
-	//メンバーIDの取得
-	$login_id = $_SESSION["login_id"];
-	$_SESSION["login_id"] = $login_id;
-	
-	//ムービーカテゴリの取得
-	$movie_category_id = $_SESSION["movie_category_id"];
-
 	//現在時刻取得
 	$now = date("Y-m-d H:i:s");
 
@@ -80,6 +79,7 @@ if (loginCheck()) {
 
 			//映画情報取得
 			$seat_detail = $seatDAO->findFromMovieDetail($schedule_id);
+			$_SESSION["seat_detail"] = $seat_detail;
 			$smarty->assign("seat_detail", $seat_detail);
 
 			/*			 * ***************
@@ -163,6 +163,20 @@ if (loginCheck()) {
 		} finally {
 			$db = null;
 		}
+	}
+	
+	if(!empty($validationMsgs)) {
+		$smarty->assign("validationMsgs" , $validationMsgs);
+		
+
+
+		$db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
+//		$empDAO = new EmpDAO($db);
+//		$deptDAO = new DeptDAO($db);
+//		$empList = $empDAO->findAll();
+//		$deptList = $deptDAO->findAll();
+//		$smarty->assign("deptList",$deptList);
+//		$smarty->assign("empList",$empList);
 	}
 
 	$smarty->display($tplPath);

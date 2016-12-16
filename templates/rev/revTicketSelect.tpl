@@ -49,11 +49,13 @@
 		<form action="revTicketSelect.php" method="POST">
 		<div class="content">
 	
-		{if isset($flashMsg)}
+		{if isset($validationMsgs)}
 		<div class="error">
 			<h2>入力された内容を再度ご確認ください。</h2>
 			<ul>
-				<li>{$flashMsg}</li>
+				{foreach from=$validationMsgs item=msg name="validationMsgsLoop"}
+				<li>{$msg}</li>
+				{/foreach}
 			</ul>
 		</div>
 		{/if}

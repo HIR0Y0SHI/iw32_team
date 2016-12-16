@@ -33,10 +33,11 @@
 		
 		<div class="bread_list">
 			<ul>
-				<li><span>STEP.1</span><br/>座席・チケット選択</li>
-				<li><span>STEP.2</span><br/>お支払い情報の入力</li>
-				<li class="current"><span>STEP.3</span><br/>購入内容の確認</li>
-				<li><span>STEP.4</span><br/>完了</li>
+				<li><span>STEP.1</span><br/>座席選択</li>
+				<li><span>STEP.2</span><br/>チケット選択</li>
+				<li><span>STEP.3</span><br/>お支払い情報の入力</li>
+				<li class="current"><span>STEP.4</span><br/>購入内容の確認</li>
+				<li><span>STEP.5</span><br/>完了</li>
 			</ul>
 		</div>
 		
@@ -112,6 +113,7 @@
 	</section>
 	<!-- メインコンテンツここまで -->
 
+	
 	<footer>
 		<p><small>© Sorry it is not frank.Ink All Rights Reserved.</small></p>
 	</footer>
