@@ -161,19 +161,15 @@
 					</tr>
 					<tr>
 						<th>券種・枚数</th>
+						{foreach from=$ticket_select_list item="ticket_select" name="loop"}
 						<td>
-							一般：1,800円 × 1枚<br>
-							大・高：1,500円 × 1枚<br>
-							中・小：1,000円 × 1枚<br>
-							幼児：800円 × 1枚<br>
-							シニア：1,100円 × 1枚<br>
-							レディースデー：1,100円 × 1枚<br>
-							ナイトショー：1,300円 × 1枚<br>
+							{$ticket_select}<br>
 						</td>
+						{/foreach}
 					</tr>
 					<tr>
 						<th>チケット料金</th>
-						<td>99,999円</td>
+						<td>{$total_price|number_format}円</td>
 					</tr>
 				</tbody>
 			</table>

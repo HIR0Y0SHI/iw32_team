@@ -60,7 +60,7 @@ if (loginCheck()) {
 	$seat_position_list = array();
 	$seat_position_list = json_decode($_POST["seat_position"], true);
 
-	if ($seat_position_list === NULL) {
+	if ($seat_position_list == NULL) {
 		//選択された座席がない場合		
 		$validationMsgs[] = "座席を選択してください。";
 	}
@@ -82,7 +82,7 @@ if (loginCheck()) {
 			$_SESSION["seat_detail"] = $seat_detail;
 			$smarty->assign("seat_detail", $seat_detail);
 
-			/*			 * ***************
+			/* ***************
 			 * 特別日の判定
 			 * ************** */
 			$specialday = $specialdayDAO->findAll();
@@ -105,6 +105,7 @@ if (loginCheck()) {
 					//スケジュールIDからの映画上映日と特別日を判定
 					if ($i == $seat_detail->getWeek()) {
 						$ladiesdayflg = true;
+						$_SESSION["ladiesdayflg"] = $ladiesdayflg;
 					}
 				}
 			}
@@ -168,15 +169,23 @@ if (loginCheck()) {
 	if(!empty($validationMsgs)) {
 		$smarty->assign("validationMsgs" , $validationMsgs);
 		
-
-
 		$db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
-//		$empDAO = new EmpDAO($db);
-//		$deptDAO = new DeptDAO($db);
-//		$empList = $empDAO->findAll();
-//		$deptList = $deptDAO->findAll();
-//		$smarty->assign("deptList",$deptList);
-//		$smarty->assign("empList",$empList);
+		$seatDAO = new SeatDAO($db);
+
+		
+		$seat_detail = $seatDAO->findFromMovieDetail($schedule_id);
+		$reserved_seat_list = $seatDAO->findByPK($schedule_id);
+
+		$_SESSION["reserved_count"] = count($reserved_seat_list);
+
+		$unavailable_seats = array_keys($reserved_seat_list);
+		
+		$smarty->assign("seat_detail",$seat_detail);
+		$smarty->assign("reserved_seat_list",$reserved_seat_list);
+		$smarty->assign("unavailable_seats", json_encode($unavailable_seats));
+		$tplPath = "rev/revSeatSelect.tpl";
+	} else {
+		print ("i");
 	}
 
 	$smarty->display($tplPath);
