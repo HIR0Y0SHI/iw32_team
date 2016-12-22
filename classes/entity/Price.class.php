@@ -29,7 +29,13 @@ class Price {
 	 * 金額
 	 */
 	private $price;
+	/**
+	 * チケット説明
+	 */
+	private $supplementation;
 
+	
+	
     /**
      * @return mixed
      */
@@ -92,6 +98,20 @@ class Price {
     public function setPrice($price)
     {
         $this->price = $price;
+    }
+	
+	  /**
+     * @return mixed
+     */
+    public function getSupplementation() {
+        return $this->supplementation;
+    }
+
+    /**
+     * @param mixed $supplementation
+     */
+    public function setSupplementation($supplementation) {
+        $this->supplementation = $supplementation;
     }
 
 

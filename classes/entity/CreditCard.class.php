@@ -11,7 +11,7 @@
 /***
  * クレジットカードエンティティクラス
  */
-class Creditcard {
+class CreditCard {
 	/**
 	 * 顧客ID
 	 */

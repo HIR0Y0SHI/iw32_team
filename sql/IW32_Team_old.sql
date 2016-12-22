@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.0.2
+-- version 4.4.14
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2016 年 12 月 22 日 16:06
--- サーバのバージョン： 10.0.17-MariaDB
--- PHP Version: 5.6.14
+-- Generation Time: 2016 年 12 月 15 日 17:48
+-- サーバのバージョン： 5.6.26
+-- PHP Version: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,11 +26,11 @@ SET time_zone = "+00:00";
 -- テーブルの構造 `m_age_limit`
 --
 
-CREATE TABLE `m_age_limit` (
+CREATE TABLE IF NOT EXISTS `m_age_limit` (
   `age_limit_id` int(11) NOT NULL,
   `limit_level_name` varchar(10) NOT NULL,
   `age` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_age_limit`
@@ -48,7 +48,7 @@ INSERT INTO `m_age_limit` (`age_limit_id`, `limit_level_name`, `age`) VALUES
 -- テーブルの構造 `m_creditcard`
 --
 
-CREATE TABLE `m_creditcard` (
+CREATE TABLE IF NOT EXISTS `m_creditcard` (
   `member_id` int(11) NOT NULL,
   `card_no` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -68,7 +68,7 @@ INSERT INTO `m_creditcard` (`member_id`, `card_no`) VALUES
 -- テーブルの構造 `m_customer_partition`
 --
 
-CREATE TABLE `m_customer_partition` (
+CREATE TABLE IF NOT EXISTS `m_customer_partition` (
   `customer_partition_id` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -83,7 +83,6 @@ INSERT INTO `m_customer_partition` (`customer_partition_id`, `name`) VALUES
 ('general', '一般'),
 ('highschool', '高校生'),
 ('junior', '中学生・小学生'),
-('night', 'ナイトショー'),
 ('senior', 'シニア'),
 ('women', '女性');
 
@@ -93,10 +92,10 @@ INSERT INTO `m_customer_partition` (`customer_partition_id`, `name`) VALUES
 -- テーブルの構造 `m_director`
 --
 
-CREATE TABLE `m_director` (
+CREATE TABLE IF NOT EXISTS `m_director` (
   `director_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_director`
@@ -114,7 +113,7 @@ INSERT INTO `m_director` (`director_id`, `name`) VALUES
 -- テーブルの構造 `m_language`
 --
 
-CREATE TABLE `m_language` (
+CREATE TABLE IF NOT EXISTS `m_language` (
   `language_id` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -135,7 +134,7 @@ INSERT INTO `m_language` (`language_id`, `name`) VALUES
 -- テーブルの構造 `m_member`
 --
 
-CREATE TABLE `m_member` (
+CREATE TABLE IF NOT EXISTS `m_member` (
   `member_id` int(11) NOT NULL,
   `login_id` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL,
@@ -154,7 +153,7 @@ CREATE TABLE `m_member` (
   `birthday` varchar(8) NOT NULL,
   `entry_date` datetime NOT NULL,
   `withdrawal_day` datetime DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_member`
@@ -163,8 +162,7 @@ CREATE TABLE `m_member` (
 INSERT INTO `m_member` (`member_id`, `login_id`, `password`, `last_name`, `first_name`, `last_name_kana`, `first_name_kana`, `sex`, `postal_code`, `prefectures`, `city`, `address`, `apartment`, `tel`, `mail`, `birthday`, `entry_date`, `withdrawal_day`) VALUES
 (1, 'test01', 'password', '藤井', '弘春', 'フジイ', 'ヒロハル', '男', '0382201', '青森県', '西津軽郡', '深浦町沢辺8-4-4', 'パナハイツ沢辺 1006', '09027440843', 'urahorih@anet.ne.jp', '19910225', '2016-11-11 00:20:16', '2016-12-11 00:00:00'),
 (2, 'test02', 'password', '土田', '愛佳', 'ツチダ', 'アイカ', '女', '6200058', '京都府', '福知山市', '厚3-12-8', 'サンシャイン厚 11F', '09058659128', 'aikatoda@coara.or.jp', '19850319', '2016-10-13 00:20:16', '2016-12-11 00:00:00'),
-(3, 'test03', 'password', '北村', '朋絵', 'キタムラ', 'トモエ', '女', '1430013', '東京都', '大田区', '大森南5-12-4', NULL, '08006573953', 'eomot86@example.jp', '19861105', '2016-12-11 00:20:16', '2016-12-11 00:00:00'),
-(4, 'tama', 'tamao', '坂田', '珠紀', 'サカタ', 'タマキ', '女', '5560015', '大阪府', '大阪市', '北区梅田３−３−１', 'ハルオオサカ 193F', '09046481818', 'tamao@gmail.com', '19940811', '2016-12-21 00:00:00', '2016-12-21 00:00:00');
+(3, 'test03', 'password', '北村', '朋絵', 'キタムラ', 'トモエ', '女', '1430013', '東京都', '大田区', '大森南5-12-4', NULL, '08006573953', 'eomot86@example.jp', '19861105', '2016-12-11 00:20:16', '2016-12-11 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -172,7 +170,7 @@ INSERT INTO `m_member` (`member_id`, `login_id`, `password`, `last_name`, `first
 -- テーブルの構造 `m_movie`
 --
 
-CREATE TABLE `m_movie` (
+CREATE TABLE IF NOT EXISTS `m_movie` (
   `movie_id` varchar(6) NOT NULL,
   `movie_name` varchar(50) NOT NULL,
   `introduction` text,
@@ -202,10 +200,10 @@ INSERT INTO `m_movie` (`movie_id`, `movie_name`, `introduction`, `running_time`,
 -- テーブルの構造 `m_movie_category`
 --
 
-CREATE TABLE `m_movie_category` (
+CREATE TABLE IF NOT EXISTS `m_movie_category` (
   `movie_category_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_movie_category`
@@ -224,10 +222,10 @@ INSERT INTO `m_movie_category` (`movie_category_id`, `name`) VALUES
 -- テーブルの構造 `m_movie_genre`
 --
 
-CREATE TABLE `m_movie_genre` (
+CREATE TABLE IF NOT EXISTS `m_movie_genre` (
   `movie_genre_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_movie_genre`
@@ -247,10 +245,10 @@ INSERT INTO `m_movie_genre` (`movie_genre_id`, `name`) VALUES
 -- テーブルの構造 `m_performer`
 --
 
-CREATE TABLE `m_performer` (
+CREATE TABLE IF NOT EXISTS `m_performer` (
   `performer_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_performer`
@@ -283,7 +281,7 @@ INSERT INTO `m_performer` (`performer_id`, `name`) VALUES
 -- テーブルの構造 `m_price`
 --
 
-CREATE TABLE `m_price` (
+CREATE TABLE IF NOT EXISTS `m_price` (
   `movie_category_id` int(11) NOT NULL,
   `customer_partition_id` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -296,16 +294,17 @@ CREATE TABLE `m_price` (
 --
 
 INSERT INTO `m_price` (`movie_category_id`, `customer_partition_id`, `name`, `price`, `supplementation`) VALUES
-(1, 'child', '幼児（３歳〜）', 800, ''),
+(1, 'child', '幼児（３歳〜）', 1000, ''),
 (1, 'college', '大学生', 1500, 'ご入場の際に学生証をご提示ください。'),
 (1, 'general', '一般', 1800, ''),
-(1, 'highschool', '高校生', 1500, 'ご入場の際に学生証をご提示ください。'),
+(1, 'highschool', '高校生', 1000, 'ご入場の際に学生証をご提示ください。'),
 (1, 'junior', '中・小学生', 1000, ''),
-(1, 'senior', 'シニア（６０歳以上）', 1100, '入場の際は年齢確認のできるものをご提示お願います。'),
-(1, 'women', 'レディースデイ', 1100, '毎週木曜日は女性限定のレディースデー！'),
-(5, 'night', 'ナイトショー', 1300, '午後20時から上映の映画はナイトショー！'),
-(5, 'senior', 'シニア', 1100, '入場の際は年齢確認のできるものをご提示お願います。'),
-(5, 'women', 'レディースデイ', 1100, '毎週木曜日は女性限定のレディースデー！');
+(1, 'senior', 'シニア（６０歳以上）', 1000, '入場の際は年齢確認のできるものをご提示お願います。'),
+(1, 'women', 'レディースデイ', 1500, '毎週木曜日は女性限定のレディースデー！'),
+(5, 'college', '大学生', 1500, 'ご入場の際に学生証をご提示ください。'),
+(5, 'general', '一般', 1800, ''),
+(5, 'senior', 'シニア', 1500, '入場の際は年齢確認のできるものをご提示お願います。'),
+(5, 'women', 'レディースデイ', 1500, '毎週木曜日は女性限定のレディースデー！');
 
 -- --------------------------------------------------------
 
@@ -313,41 +312,39 @@ INSERT INTO `m_price` (`movie_category_id`, `customer_partition_id`, `name`, `pr
 -- テーブルの構造 `m_schedual`
 --
 
-CREATE TABLE `m_schedual` (
+CREATE TABLE IF NOT EXISTS `m_schedual` (
   `schedual_id` int(11) NOT NULL,
   `movie_id` varchar(6) NOT NULL,
   `doors_open_time` datetime NOT NULL,
   `closing_time` datetime NOT NULL,
-  `screen_id` int(11) NOT NULL,
-  `movie_category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `screen_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_schedual`
 --
 
-INSERT INTO `m_schedual` (`schedual_id`, `movie_id`, `doors_open_time`, `closing_time`, `screen_id`, `movie_category_id`) VALUES
-(1, '000001', '2016-12-13 12:20:00', '2016-12-13 14:45:00', 1, 1),
-(2, '000001', '2016-12-13 15:15:00', '2016-12-13 17:40:00', 1, 1),
-(3, '000001', '2016-12-13 18:15:00', '2016-12-13 20:40:00', 1, 1),
-(4, '000002', '2016-12-13 09:00:00', '2016-12-13 11:00:00', 2, 1),
-(5, '000002', '2016-12-13 11:30:00', '2016-12-13 13:30:00', 2, 1),
-(6, '000002', '2016-12-13 14:00:00', '2016-12-13 16:00:00', 2, 1),
-(7, '000002', '2016-12-13 16:30:00', '2016-12-13 18:30:00', 2, 1),
-(8, '000002', '2016-12-13 19:00:00', '2016-12-13 21:00:00', 2, 1),
-(9, '000002', '2016-12-13 21:30:00', '2016-12-13 23:30:00', 2, 5),
-(10, '000003', '2016-12-13 11:05:00', '2016-12-13 12:50:00', 3, 1),
-(11, '000003', '2016-12-13 13:15:00', '2016-12-13 15:00:00', 3, 1),
-(12, '000003', '2016-12-13 15:30:00', '2016-12-13 17:15:00', 3, 1),
-(13, '000003', '2016-12-13 17:45:00', '2016-12-13 19:30:00', 3, 1),
-(14, '000004', '2016-12-13 09:00:00', '2016-12-13 11:00:00', 4, 1),
-(15, '000004', '2016-12-13 11:30:00', '2016-12-13 13:30:00', 4, 1),
-(16, '000004', '2016-12-13 14:00:00', '2016-12-13 16:00:00', 4, 1),
-(17, '000004', '2016-12-13 16:30:00', '2016-12-13 18:30:00', 4, 1),
-(18, '000004', '2016-12-13 19:00:00', '2016-12-13 21:00:00', 4, 1),
-(19, '000004', '2016-12-13 21:30:00', '2016-12-13 23:30:00', 4, 5),
-(20, '000004', '2016-12-11 09:00:00', '2016-12-11 11:00:00', 4, 1),
-(21, '000002', '2016-12-22 21:10:00', '2016-12-22 23:15:00', 1, 5);
+INSERT INTO `m_schedual` (`schedual_id`, `movie_id`, `doors_open_time`, `closing_time`, `screen_id`) VALUES
+(1, '000001', '2016-12-13 12:20:00', '2016-12-13 14:45:00', 1),
+(2, '000001', '2016-12-13 15:15:00', '2016-12-13 17:40:00', 1),
+(3, '000001', '2016-12-13 18:15:00', '2016-12-13 20:40:00', 1),
+(4, '000002', '2016-12-13 09:00:00', '2016-12-13 11:00:00', 2),
+(5, '000002', '2016-12-13 11:30:00', '2016-12-13 13:30:00', 2),
+(6, '000002', '2016-12-13 14:00:00', '2016-12-13 16:00:00', 2),
+(7, '000002', '2016-12-13 16:30:00', '2016-12-13 18:30:00', 2),
+(8, '000002', '2016-12-13 19:00:00', '2016-12-13 21:00:00', 2),
+(9, '000002', '2016-12-13 21:30:00', '2016-12-13 23:30:00', 2),
+(10, '000003', '2016-12-13 11:05:00', '2016-12-13 12:50:00', 3),
+(11, '000003', '2016-12-13 13:15:00', '2016-12-13 15:00:00', 3),
+(12, '000003', '2016-12-13 15:30:00', '2016-12-13 17:15:00', 3),
+(13, '000003', '2016-12-13 17:45:00', '2016-12-13 19:30:00', 3),
+(14, '000004', '2016-12-13 09:00:00', '2016-12-13 11:00:00', 4),
+(15, '000004', '2016-12-13 11:30:00', '2016-12-13 13:30:00', 4),
+(16, '000004', '2016-12-13 14:00:00', '2016-12-13 16:00:00', 4),
+(17, '000004', '2016-12-13 16:30:00', '2016-12-13 18:30:00', 4),
+(18, '000004', '2016-12-13 19:00:00', '2016-12-13 21:00:00', 4),
+(19, '000004', '2016-12-13 21:30:00', '2016-12-13 23:30:00', 4),
+(20, '000004', '2016-12-11 09:00:00', '2016-12-11 11:00:00', 4);
 
 -- --------------------------------------------------------
 
@@ -355,11 +352,11 @@ INSERT INTO `m_schedual` (`schedual_id`, `movie_id`, `doors_open_time`, `closing
 -- テーブルの構造 `m_screen`
 --
 
-CREATE TABLE `m_screen` (
+CREATE TABLE IF NOT EXISTS `m_screen` (
   `screen_id` int(11) NOT NULL,
   `name` varchar(10) NOT NULL,
   `number_of_seats` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_screen`
@@ -377,7 +374,7 @@ INSERT INTO `m_screen` (`screen_id`, `name`, `number_of_seats`) VALUES
 -- テーブルの構造 `m_special_day`
 --
 
-CREATE TABLE `m_special_day` (
+CREATE TABLE IF NOT EXISTS `m_special_day` (
   `special_day_id` int(11) NOT NULL,
   `customer_partition_id` varchar(10) NOT NULL,
   `movie_category_id` int(11) NOT NULL,
@@ -389,7 +386,7 @@ CREATE TABLE `m_special_day` (
   `friday` tinyint(1) DEFAULT NULL,
   `saturday` tinyint(1) DEFAULT NULL,
   `sunday` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `m_special_day`
@@ -404,7 +401,7 @@ INSERT INTO `m_special_day` (`special_day_id`, `customer_partition_id`, `movie_c
 -- テーブルの構造 `t_performance`
 --
 
-CREATE TABLE `t_performance` (
+CREATE TABLE IF NOT EXISTS `t_performance` (
   `movie_id` varchar(6) NOT NULL,
   `performer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -414,25 +411,25 @@ CREATE TABLE `t_performance` (
 --
 
 INSERT INTO `t_performance` (`movie_id`, `performer_id`) VALUES
-('000001', 15),
-('000001', 16),
-('000001', 17),
-('000001', 18),
-('000001', 19),
-('000002', 13),
-('000002', 14),
+('000004', 1),
+('000004', 2),
+('000004', 3),
+('000004', 4),
+('000004', 5),
+('000004', 6),
 ('000003', 7),
 ('000003', 8),
 ('000003', 9),
 ('000003', 10),
 ('000003', 11),
 ('000003', 12),
-('000004', 1),
-('000004', 2),
-('000004', 3),
-('000004', 4),
-('000004', 5),
-('000004', 6);
+('000002', 13),
+('000002', 14),
+('000001', 15),
+('000001', 16),
+('000001', 17),
+('000001', 18),
+('000001', 19);
 
 -- --------------------------------------------------------
 
@@ -440,12 +437,12 @@ INSERT INTO `t_performance` (`movie_id`, `performer_id`) VALUES
 -- テーブルの構造 `t_reservation`
 --
 
-CREATE TABLE `t_reservation` (
+CREATE TABLE IF NOT EXISTS `t_reservation` (
   `reservation_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `schedule_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- テーブルのデータのダンプ `t_reservation`
@@ -453,14 +450,7 @@ CREATE TABLE `t_reservation` (
 
 INSERT INTO `t_reservation` (`reservation_id`, `member_id`, `date`, `schedule_id`) VALUES
 (1, 1, '2016-11-10 15:33:17', 20),
-(2, 2, '2016-12-13 06:38:20', 1),
-(3, 2, '2016-12-22 05:44:17', 21),
-(4, 2, '2016-12-22 05:45:21', 21),
-(5, 3, '2016-12-22 05:45:59', 21),
-(6, 2, '2016-12-22 05:47:30', 21),
-(7, 2, '2016-12-22 05:52:39', 21),
-(8, 2, '2016-12-22 06:05:38', 21),
-(9, 2, '2016-12-22 06:14:02', 21);
+(2, 2, '2016-12-13 06:38:20', 1);
 
 -- --------------------------------------------------------
 
@@ -468,7 +458,7 @@ INSERT INTO `t_reservation` (`reservation_id`, `member_id`, `date`, `schedule_id
 -- テーブルの構造 `t_seat`
 --
 
-CREATE TABLE `t_seat` (
+CREATE TABLE IF NOT EXISTS `t_seat` (
   `schedual_id` int(11) NOT NULL,
   `seat_positon` varchar(5) NOT NULL,
   `reservation_id` int(11) NOT NULL,
@@ -484,30 +474,14 @@ INSERT INTO `t_seat` (`schedual_id`, `seat_positon`, `reservation_id`, `customer
 (1, '2_1', 2, 'highschool', 1),
 (1, '2_2', 2, 'highschool', 1),
 (20, '1_1', 1, 'general', 1),
-(20, '1_2', 1, 'general', 1),
-(21, '1_1', 6, 'general', 1),
-(21, '1_10', 9, 'senior', 1),
-(21, '1_11', 9, 'women', 1),
-(21, '1_2', 6, 'college', 1),
-(21, '1_3', 6, 'women', 1),
-(21, '1_9', 9, 'general', 1),
-(21, '2_10', 7, 'women', 1),
-(21, '2_3', 3, 'women', 1),
-(21, '2_7', 7, 'general', 1),
-(21, '2_8', 7, 'college', 1),
-(21, '2_9', 7, 'women', 1),
-(21, '3_1', 8, 'general', 1),
-(21, '3_2', 8, 'women', 1),
-(21, '3_3', 8, 'women', 1),
-(21, '4_4', 5, 'college', 1),
-(21, '4_5', 5, 'women', 1);
+(20, '1_2', 1, 'general', 1);
 
 -- --------------------------------------------------------
 
 --
 -- ビュー用の代替構造 `v_schedual_detail`
 --
-CREATE TABLE `v_schedual_detail` (
+CREATE TABLE IF NOT EXISTS `v_schedual_detail` (
 `スケジュールID` int(11)
 ,`映画名` varchar(50)
 ,`開場時間` datetime
@@ -521,7 +495,7 @@ CREATE TABLE `v_schedual_detail` (
 --
 -- ビュー用の代替構造 `v_schedual_detail_2`
 --
-CREATE TABLE `v_schedual_detail_2` (
+CREATE TABLE IF NOT EXISTS `v_schedual_detail_2` (
 `schedual_id` int(11)
 ,`movie_id` varchar(6)
 ,`movie_name` varchar(50)
@@ -538,7 +512,7 @@ CREATE TABLE `v_schedual_detail_2` (
 --
 DROP TABLE IF EXISTS `v_schedual_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `iw32_team`.`v_schedual_detail`  AS  select `iw32_team`.`m_schedual`.`schedual_id` AS `スケジュールID`,`iw32_team`.`m_movie`.`movie_name` AS `映画名`,`iw32_team`.`m_schedual`.`doors_open_time` AS `開場時間`,`iw32_team`.`m_schedual`.`closing_time` AS `閉場時間`,`iw32_team`.`m_language`.`name` AS `上映言語`,cast(((count(`iw32_team`.`t_seat`.`schedual_id`) / `iw32_team`.`m_screen`.`number_of_seats`) * 100) as signed) AS `座席確保割合（％）` from ((((`iw32_team`.`m_schedual` left join `iw32_team`.`m_movie` on((`iw32_team`.`m_schedual`.`movie_id` = `iw32_team`.`m_movie`.`movie_id`))) left join `iw32_team`.`m_language` on((`iw32_team`.`m_movie`.`language_id` = `iw32_team`.`m_language`.`language_id`))) left join `iw32_team`.`m_screen` on((`iw32_team`.`m_schedual`.`screen_id` = `iw32_team`.`m_screen`.`screen_id`))) left join `iw32_team`.`t_seat` on((`iw32_team`.`m_schedual`.`schedual_id` = `iw32_team`.`t_seat`.`schedual_id`))) group by `iw32_team`.`m_schedual`.`schedual_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `iw32_team`.`v_schedual_detail` AS select `iw32_team`.`m_schedual`.`schedual_id` AS `スケジュールID`,`iw32_team`.`m_movie`.`movie_name` AS `映画名`,`iw32_team`.`m_schedual`.`doors_open_time` AS `開場時間`,`iw32_team`.`m_schedual`.`closing_time` AS `閉場時間`,`iw32_team`.`m_language`.`name` AS `上映言語`,cast(((count(`iw32_team`.`t_seat`.`schedual_id`) / `iw32_team`.`m_screen`.`number_of_seats`) * 100) as signed) AS `座席確保割合（％）` from ((((`iw32_team`.`m_schedual` left join `iw32_team`.`m_movie` on((`iw32_team`.`m_schedual`.`movie_id` = `iw32_team`.`m_movie`.`movie_id`))) left join `iw32_team`.`m_language` on((`iw32_team`.`m_movie`.`language_id` = `iw32_team`.`m_language`.`language_id`))) left join `iw32_team`.`m_screen` on((`iw32_team`.`m_schedual`.`screen_id` = `iw32_team`.`m_screen`.`screen_id`))) left join `iw32_team`.`t_seat` on((`iw32_team`.`m_schedual`.`schedual_id` = `iw32_team`.`t_seat`.`schedual_id`))) group by `iw32_team`.`m_schedual`.`schedual_id`;
 
 -- --------------------------------------------------------
 
@@ -547,7 +521,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `v_schedual_detail_2`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `iw32_team`.`v_schedual_detail_2`  AS  select `iw32_team`.`m_schedual`.`schedual_id` AS `schedual_id`,`iw32_team`.`m_movie`.`movie_id` AS `movie_id`,`iw32_team`.`m_movie`.`movie_name` AS `movie_name`,`iw32_team`.`m_schedual`.`doors_open_time` AS `doors_open_time`,`iw32_team`.`m_schedual`.`closing_time` AS `closing_time`,`iw32_team`.`m_language`.`name` AS `name`,cast(((count(`iw32_team`.`t_seat`.`schedual_id`) / `iw32_team`.`m_screen`.`number_of_seats`) * 100) as signed) AS `Name_exp_7` from ((((`iw32_team`.`m_schedual` left join `iw32_team`.`m_movie` on((`iw32_team`.`m_schedual`.`movie_id` = `iw32_team`.`m_movie`.`movie_id`))) left join `iw32_team`.`m_language` on((`iw32_team`.`m_movie`.`language_id` = `iw32_team`.`m_language`.`language_id`))) left join `iw32_team`.`m_screen` on((`iw32_team`.`m_schedual`.`screen_id` = `iw32_team`.`m_screen`.`screen_id`))) left join `iw32_team`.`t_seat` on((`iw32_team`.`m_schedual`.`schedual_id` = `iw32_team`.`t_seat`.`schedual_id`))) group by `iw32_team`.`m_schedual`.`schedual_id` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `iw32_team`.`v_schedual_detail_2` AS select `iw32_team`.`m_schedual`.`schedual_id` AS `schedual_id`,`iw32_team`.`m_movie`.`movie_id` AS `movie_id`,`iw32_team`.`m_movie`.`movie_name` AS `movie_name`,`iw32_team`.`m_schedual`.`doors_open_time` AS `doors_open_time`,`iw32_team`.`m_schedual`.`closing_time` AS `closing_time`,`iw32_team`.`m_language`.`name` AS `name`,cast(((count(`iw32_team`.`t_seat`.`schedual_id`) / `iw32_team`.`m_screen`.`number_of_seats`) * 100) as signed) AS `Name_exp_7` from ((((`iw32_team`.`m_schedual` left join `iw32_team`.`m_movie` on((`iw32_team`.`m_schedual`.`movie_id` = `iw32_team`.`m_movie`.`movie_id`))) left join `iw32_team`.`m_language` on((`iw32_team`.`m_movie`.`language_id` = `iw32_team`.`m_language`.`language_id`))) left join `iw32_team`.`m_screen` on((`iw32_team`.`m_schedual`.`screen_id` = `iw32_team`.`m_screen`.`screen_id`))) left join `iw32_team`.`t_seat` on((`iw32_team`.`m_schedual`.`schedual_id` = `iw32_team`.`t_seat`.`schedual_id`))) group by `iw32_team`.`m_schedual`.`schedual_id`;
 
 --
 -- Indexes for dumped tables
@@ -631,8 +605,7 @@ ALTER TABLE `m_price`
 ALTER TABLE `m_schedual`
   ADD PRIMARY KEY (`schedual_id`),
   ADD KEY `movie_id` (`movie_id`),
-  ADD KEY `screen_id` (`screen_id`),
-  ADD KEY `movie_category_id` (`movie_category_id`);
+  ADD KEY `screen_id` (`screen_id`);
 
 --
 -- Indexes for table `m_screen`
@@ -677,52 +650,52 @@ ALTER TABLE `t_seat`
 -- AUTO_INCREMENT for table `m_age_limit`
 --
 ALTER TABLE `m_age_limit`
-  MODIFY `age_limit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `age_limit_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `m_director`
 --
 ALTER TABLE `m_director`
-  MODIFY `director_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `director_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `m_member`
 --
 ALTER TABLE `m_member`
-  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `member_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `m_movie_category`
 --
 ALTER TABLE `m_movie_category`
-  MODIFY `movie_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `movie_category_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `m_movie_genre`
 --
 ALTER TABLE `m_movie_genre`
-  MODIFY `movie_genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `movie_genre_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `m_performer`
 --
 ALTER TABLE `m_performer`
-  MODIFY `performer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `performer_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `m_schedual`
 --
 ALTER TABLE `m_schedual`
-  MODIFY `schedual_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `schedual_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `m_screen`
 --
 ALTER TABLE `m_screen`
-  MODIFY `screen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `screen_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `m_special_day`
 --
 ALTER TABLE `m_special_day`
-  MODIFY `special_day_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `special_day_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `t_reservation`
 --
 ALTER TABLE `t_reservation`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- ダンプしたテーブルの制約
 --
@@ -761,7 +734,7 @@ ALTER TABLE `m_schedual`
 -- テーブルの制約 `m_special_day`
 --
 ALTER TABLE `m_special_day`
-  ADD CONSTRAINT `m_special_day_ibfk_1` FOREIGN KEY (`customer_partition_id`,`movie_category_id`) REFERENCES `m_price` (`customer_partition_id`, `movie_category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `m_special_day_ibfk_1` FOREIGN KEY (`customer_partition_id`, `movie_category_id`) REFERENCES `m_price` (`customer_partition_id`, `movie_category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- テーブルの制約 `t_performance`
@@ -780,7 +753,7 @@ ALTER TABLE `t_reservation`
 -- テーブルの制約 `t_seat`
 --
 ALTER TABLE `t_seat`
-  ADD CONSTRAINT `t_seat_ibfk_1` FOREIGN KEY (`customer_partition_id`,`movie_category_id`) REFERENCES `m_price` (`customer_partition_id`, `movie_category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `t_seat_ibfk_1` FOREIGN KEY (`customer_partition_id`, `movie_category_id`) REFERENCES `m_price` (`customer_partition_id`, `movie_category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `t_seat_ibfk_2` FOREIGN KEY (`schedual_id`) REFERENCES `m_schedual` (`schedual_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `t_seat_ibfk_3` FOREIGN KEY (`reservation_id`) REFERENCES `t_reservation` (`reservation_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 

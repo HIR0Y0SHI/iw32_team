@@ -35,7 +35,10 @@ class SeatDAO {
 	 * @return array 該当するSeatDetailオブジェクト。ただし、該当データがない場合はnull。
 	 */
 	public function findFromMovieDetail($schedual_id) {
-		$sql = "SELECT SD.schedual_id , SD.doors_open_time , SD.closing_time, SD.screen_id , SC.number_of_seats , M.movie_name , M.movie_category_id , AL.age FROM m_schedual SD INNER JOIN m_movie M ON SD.movie_id = M.movie_id INNER JOIN m_age_limit AL ON AL.age_limit_id = M.age_limit_id INNER JOIN m_screen SC ON SD.screen_id = SC.screen_id WHERE SD.schedual_id = :schedual_id";
+		$sql = "SELECT SD.schedual_id , SD.doors_open_time , SD.closing_time, SD.screen_id , SD.movie_category_id , SC.number_of_seats , M.movie_name , AL.age"
+				. " FROM m_schedual SD INNER JOIN m_movie M ON SD.movie_id = M.movie_id"
+				. " INNER JOIN m_age_limit AL ON AL.age_limit_id = M.age_limit_id"
+				. " INNER JOIN m_screen SC ON SD.screen_id = SC.screen_id WHERE SD.schedual_id = :schedual_id";
 		$stmt = $this->db->prepare($sql);
 		$stmt->bindValue(":schedual_id", $schedual_id , PDO::PARAM_INT);
 		$result = $stmt->execute();
