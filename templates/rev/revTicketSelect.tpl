@@ -39,7 +39,7 @@
 				<li class="current"><span>STEP.2</span><br/>チケット選択</li>
 				<li><span>STEP.3</span><br/>お支払い情報の入力</li>
 				<li><span>STEP.4</span><br/>購入内容の確認</li>
-				<li><span>STEP.5</span><br/>完了</li>
+				<li><span>STEP.5</span><br/>購入完了</li>
 			</ul>
 		</div>
 
@@ -82,7 +82,7 @@
 										{/foreach}
 									</select>枚
 								</td>
-								<td></td>
+								<td>{$ticket_price->getSupplementation()}</td>
 							</tr>
 						{/foreach}
 					</tbody>

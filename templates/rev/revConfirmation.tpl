@@ -37,7 +37,7 @@
 				<li><span>STEP.2</span><br/>チケット選択</li>
 				<li><span>STEP.3</span><br/>お支払い情報の入力</li>
 				<li class="current"><span>STEP.4</span><br/>購入内容の確認</li>
-				<li><span>STEP.5</span><br/>完了</li>
+				<li><span>STEP.5</span><br/>購入完了</li>
 			</ul>
 		</div>
 		
@@ -47,33 +47,42 @@
 		<div class="content">	
 			<section class="purchase_details">
 				<h2>ご購入内容<input type="button" value="変更"></h2>
-				<p>君の名は。</p>	
-				<p>2016年8月26日<br>19:30〜20:30</p>
-				<p>3</p>
-				<p>A-99,B-99,C-99,D-99,C-99,D-99</p>
+				<p>{$seat_detail->getMovieName()}</p>	
+				<p>{$seat_detail->getScreeningDay()}<br>{$seat_detail->getOpenTime()} 〜 {$seat_detail->getCloseTime()}</p>
+				<p>{$seat_detail->getScreenId()}</p>
 				<p>
-					一般：1,800円 × 1枚<br>
-					大・高：1,500円 × 1枚<br>
-					中・小：1,000円 × 1枚<br>
-					幼児：800円 × 1枚<br>
-					シニア：1,100円 × 1枚<br>
-					レディースデー：1,100円 × 1枚<br>
-					ナイトショー：1,300円 × 1枚<br>
+					{foreach from=$seat_position_list item="seat_position" name="loop"}
+						{if $smarty.foreach.loop.last}
+							{$seat_position}
+						{else}
+							{$seat_position},							
+						{/if}
+					{/foreach}
 				</p>
-				<p>99,999円</p>
+				<p>
+					{foreach from=$ticket_select_list item="ticket_select" name="loop"}
+						{$ticket_select}<br>
+					{/foreach}
+				</p>
+				<p>{$total_price|number_format}円</p>
 			</section>
 			<section class="purchase_details">
 				<h2>ご購入者情報<input type="button" value="変更"></h2>
-				<p>山田太郎</p>	
-				<p>090-0000-0000</p>
-				<p>hal_cinema@com.jp</p>
+				<p>{$input_date.last_name} {$input_date.first_name}</p>	
+				<p>{$input_date.tel|format_phone_number}</p>
+				<p>{$input_date.mail}</p>
 			</section>
 			<section class="purchase_details">
 				<h2>お支払い情報<input type="button" value="変更"></h2>
-				<p>**********0123**</p>	
-				<p>ヤマダ タロウ</p>
-				<p>99,999</p>
-				<p>2017 / 10</p>
+				{if isset($input_date.n_cc)}
+					<p class="cc_no">{$input_date.n_cc}</p>
+					<p class="cc_name">{$input_date.n_cc_name}</p>
+					<p class="cc_money">{$total_price|number_format}円</p>
+					<p class="cc_date">{$input_date.n_cc_year} / {$input_date.n_cc_month}</p>
+				{else}
+					<p class="cc_no">{$input_date.cc}</p>
+					<p class="cc_money">{$total_price|number_format}円</p>
+				{/if}
 			</section>
 			
 			<section class="important_points">
@@ -100,7 +109,9 @@
 				<label for="agree" class="checkbox">上記の利用規約に同意する</label>
 			</p>
 			<div class="select_step">
-				<p><input type="button" name="next" value="購入を確定する"></p>
+			<form action="revPurchaseComplete.php" method="POST">
+				<p><input type="submit" name="next" value="購入を確定する"></p>
+			</form>
 			</div>
 			<div class="norton">
 				<h2><img src="/IW32_Team_Project/img/norton_logo.gif" alt=""></h2>

@@ -29,6 +29,7 @@
 
 
 	<!-- ここからメインコンテンツ -->
+	<form action="revInputDateCheck.php" method="POST">
 	<section id="wrapper">
 		
 		<div class="bread_list">
@@ -37,7 +38,7 @@
 				<li><span>STEP.2</span><br/>チケット選択</li>
 				<li class="current"><span>STEP.3</span><br/>お支払い情報の入力</li>
 				<li><span>STEP.4</span><br/>購入内容の確認</li>
-				<li><span>STEP.5</span><br/>完了</li>
+				<li><span>STEP.5</span><br/>購入完了</li>
 			</ul>
 		</div>
 		
@@ -68,26 +69,28 @@
 				</section>
 				<section class="tel">
 					<h2>電話番号</h2>
-					<p><input type="text" name="" maxlength="11" value="{$member->getTel()|default:""}" disabled="disabled" ></p>
-					<p><input type="hidden" name="" maxlength="11" value="{$member->getTel()|default:""}"></p>
-					<p><input type="tel" name="" maxlength="11" value="{$member->getTel()|default:""}" placeholder="例）09000000000"></p>
+					<p><input type="text" name="tel" maxlength="11" value="{$member->getTel()|default:""}" disabled="disabled" ></p>
+					<p><input type="hidden" name="tel" maxlength="11" value="{$member->getTel()|default:""}"></p>
+					<p><input type="tel" name="n_tel" maxlength="11" value="" placeholder="例）09000000000"></p>
 				</section>
 				<section class="mail">
 					<h2>メールアドレス</h2>
-					<p><input type="text" name="" maxlength="255" value="{$member->getMail()|default:""}" disabled="disabled" ></p>
-					<p><input type="hidden" name="" maxlength="255" value="{$member->getMail()|default:""}"></p>
-					<p><input type="text" name="" maxlength="255" value="{$member->getMail()|default:""}" placeholder="例）hal@cinema.com.jp" ></p>
-					<p><input type="text" name="" maxlength="255" value="{$member->getMail()|default:""}" placeholder="例）hal@cinema.com.jp" ></p>
+					<p><input type="text" name="mail" maxlength="255" value="{$member->getMail()|default:""}" disabled="disabled" ></p>
+					<p><input type="hidden" name="mail" maxlength="255" value="{$member->getMail()|default:""}"></p>
+					<p><input type="text" name="n_mail" maxlength="255" value="" placeholder="例）hal@cinema.com.jp" ></p>
+					<p><input type="text" name="n_mail_check" maxlength="255" value="" placeholder="例）hal@cinema.com.jp" ></p>
 				</section>
 				<section class="creditcard">
 					<h2>クレジットカード</h2>
-					<p><input type="text" name="" maxlength="19" value="************6100" disabled="disabled" ></p>
-					<p><input type="hidden" name="" maxlength="19" value="************6100"></p>
-					<p><input tylie="text" name="" maxlength="16" value="" placeholder="例）0000"></p>
-					<p><input tylie="text" name="" maxlength="30" value="" placeholder="例）ヤマダ　タロウ"></p>
+					{if isset($ccno)}
+					<p><input type="text" name="cc" maxlength="19" value="{$ccno->getCardNo()}" disabled="disabled" ></p>
+					<p><input type="hidden" name="cc" maxlength="19" value="{$ccno->getCardNo()}"></p>
+					{/if}
+					<p><input tylie="text" name="n_cc" maxlength="16" value="" placeholder="例）0000"></p>
+					<p><input tylie="text" name="n_cc_name" maxlength="30" value="" placeholder="例）ヤマダ　タロウ"></p>
 					<ul>
 						<li>
-							<select name="cc_month">
+							<select name="n_cc_month">
 								<option value="">--</option>
 								<option value="1">01</option>
 								<option value="2">02</option>
@@ -104,7 +107,7 @@
 							</select>
 						月</li>
 						<li>
-							<select name="cc_year">
+							<select name="n_cc_year">
 								<option value="">--</option>
 								<option value="2016">2016</option>
 								<option value="2017">2017</option>
@@ -120,7 +123,7 @@
 							</select>&nbsp;年<br />
 						</li>
 					</ul>
-					<p><input type="text" name="" maxlength="3" value="" placeholder="例）000"></p>
+					<p><input type="text" name="n_cc_security_code" maxlength="3" value="" placeholder="例）000"></p>
 	
 					
 				</section>
@@ -161,11 +164,11 @@
 					</tr>
 					<tr>
 						<th>券種・枚数</th>
-						{foreach from=$ticket_select_list item="ticket_select" name="loop"}
 						<td>
+						{foreach from=$ticket_select_list item="ticket_select" name="loop"}
 							{$ticket_select}<br>
-						</td>
 						{/foreach}
+						</td>
 					</tr>
 					<tr>
 						<th>チケット料金</th>
@@ -178,10 +181,11 @@
 		
 		<div class="confirmation">	
 			<div class="select_step">
-				<p><input type="button" name="next" value="次へ"></p>
-				<p><input type="button" name="back" value="席を選び直す"></p>
-				<p><input type="button" name="back" value="スケジュールを選び直す"></p>
+				<p><input type="submit" name="next" value="次へ"></p>
+				<p><input type="submit" name="back" value="席を選び直す"></p>
+				<p><input type="submit" name="back" value="スケジュールを選び直す"></p>
 			</div>
+		
 			<div class="info">
 				<h2>【ご注意事項】</h2>
 				<p>インターネットでのチケット購入の際に、会員番号を入力しても鑑賞ポイント・マイルは登録できておりません。鑑賞ポイント・マイルはチケット受取時に登録していただきます。</p>
@@ -197,6 +201,7 @@
 		</div>
 		
 	</section>
+	</form>
 	<!-- メインコンテンツここまで -->
 
 	<footer>

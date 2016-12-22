@@ -1,3 +1,10 @@
+/**
+ * 映画予約をする際の、入力情報の確認画面に使用するCSS
+ * 
+ * @author TAMA
+ * @version 1.0
+ * Created: 2016/12/12
+ */
 
 #wrapper .content ,
 .confirmation {
@@ -120,19 +127,19 @@
 
 
 /* カード番号 */
-.content .purchase_details:nth-of-type(3) p:nth-of-type(1)::before {
-	content: "カード名義";
+.content .purchase_details:nth-of-type(3) .cc_no::before {
+	content: "カード番号";
 }
 /* 名義 */
-.content .purchase_details:nth-of-type(3) p:nth-of-type(2)::before {
-	content: "名義";
+.content .purchase_details:nth-of-type(3) .cc_name::before {
+	content: "カード名義";
 }
 /* ご利用金額 */
-.content .purchase_details:nth-of-type(3) p:nth-of-type(3)::before {
+.content .purchase_details:nth-of-type(3) .cc_money::before {
 	content: "ご利用金額";
 }
 /* カード有効機嫌 */
-.content .purchase_details:nth-of-type(3) p:nth-of-type(4)::before {
+.content .purchase_details:nth-of-type(3) .cc_date::before {
 	content: "カード有効期限";
 }
 

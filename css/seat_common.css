@@ -1,5 +1,11 @@
+/**
+ * 座席予約〜購入完了までの同一部分のCSS
+ * 
+ * @author TAMA
+ * @version 1.0
+ * Created: 2016/12/12
+ */
 @charset "UTF-8";
-
 
 a {
 	color: #333;

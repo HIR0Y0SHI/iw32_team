@@ -17,6 +17,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/PriceDA
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/SpecialDay.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/SpecialDayDAO.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/SeatDetail.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/CreditCard.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/CreditCardDAO.class.php');
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/Member.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/MemberDAO.class.php');
@@ -36,7 +38,6 @@ if (loginCheck()) {
 	$smarty->display($tplPath);
 } else {
 
-	$isRedirect = false;
 	$tplPath = "rev/revInput.tpl";
 	
 	//スケジュールIDの取得
@@ -57,52 +58,74 @@ if (loginCheck()) {
 	 **************/
 	
 	$ticket_select_list = array();
+	$ticket_select_kensyu = array();
 	$t_selection_number = 0;
 	$total_price = 0;
 	
 	//tplからチケット券種をもらう
 	if (!empty($_POST["general"])){
 		$general = $_POST["general"];
-		$ticket_select_list = ["general" => "一般：1,800円 × ".$general."枚"];
-		
+		$ticket_select_list[] = "一般：1,800円 × ".$general."枚";
+				
 		$t_selection_number = $t_selection_number + $general;
 		$total_price = $total_price + (1800 * $general);
+		for($i=0;$i<$general;$i++){
+			$ticket_select_kensyu[] = "general";
+		}
 	} if (!empty($_POST["college"])){
 		$college = $_POST["college"];
-		$ticket_select_list = ["college" => "大学生：1,500円 × ".$college."枚"];
-		$t_selection_number = $t_selection_number + $college;
+		$ticket_select_list[] = "大学生：1,500円 × ".$college."枚";
 		
+		$t_selection_number = $t_selection_number + $college;		
 		$total_price = $total_price + (1500 * $college);
+		for($i=0;$i<$college;$i++){
+			$ticket_select_kensyu[] = "college";
+		}
 	} if (!empty($_POST["child"])){
 		$child = $_POST["child"];
-		$ticket_select_list = ["child" => "幼児：1,000円 × ".$child."枚"];
-	
+		$ticket_select_list[] = "幼児：1,000円 × ".$child."枚";
+
 		$t_selection_number = $t_selection_number + $child;
 		$total_price = $total_price + (1000 * $child);
+		for($i=0;$i<$child;$i++){
+			$ticket_select_kensyu[] = "child";
+		}
 	} if (!empty($_POST["highschool"])){
 		$highschool = $_POST["highschool"];
-		$ticket_select_list = ["highschool" =>  "高校生：1,000円 × ".$highschool."枚"];
+		$ticket_select_list[] = "高校生：1,000円 × ".$highschool."枚";
 		
 		$t_selection_number = $t_selection_number + $highschool;
 		$total_price = $total_price + (1000 * $highschool);
+		for($i=0;$i<$highschool;$i++){
+			$ticket_select_kensyu[] = "highschool";
+		}
 	} if (!empty($_POST["junior"])){
 		$junior = $_POST["junior"];
-		$ticket_select_list = ["junior" => "中・小学生：1,000円 × ".$junior."枚"];
-
+		$ticket_select_list[] = ["junior" => "中・小学生：1,000円 × ".$junior."枚"];
+		
 		$t_selection_number = $t_selection_number + $junior;
 		$total_price = $total_price + (1000 * $junior);
+		for($i=0;$i<$junior;$i++){
+			$ticket_select_kensyu[] = "junior";
+		}
 	} if (!empty($_POST["senior"])){
 		$senior = $_POST["senior"];
-		$ticket_select_list = ["senior" => "シニア：1,000円 × ".$senior."枚"];
+		$ticket_select_list[] = "シニア：1,000円 × ".$senior."枚";
 
 		$t_selection_number = $t_selection_number + $senior;
 		$total_price = $total_price + (1000 * $senior);
+		for($i=0;$i<$senior;$i++){
+			$ticket_select_kensyu[] = "senior";
+		}
 	} if (!empty($_POST["women"])){
 		$women = $_POST["women"];
-		$ticket_select_list = ["women" => "レディースデー：1,500円 × ".$women."枚"];
+		$ticket_select_list[] = "レディースデー：1,500円 × ".$women."枚";
 	
 		$t_selection_number = $t_selection_number + $women;
 		$total_price = $total_price + (1500 * $women);
+		for($i=0;$i<$women;$i++){
+			$ticket_select_kensyu[] = "women";
+		}
 	}
 	
 	//選択した座席数と、券種の枚数が一致しているか。
@@ -113,6 +136,8 @@ if (loginCheck()) {
 	} else {
 		//一致した場合。
 		//print "一致";
+		
+		$_SESSION["ticket_select_kensyu"] = $ticket_select_kensyu;
 	}
 		
 	
@@ -121,6 +146,7 @@ if (loginCheck()) {
 			$db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
 			$memberDAO = new MemberDAO($db);
 			$seatDAO = new SeatDAO($db);
+			$creditcardDAO = new CreditCardDAO($db);
 			
 			//映画情報取得
 			$seat_detail = $seatDAO->findFromMovieDetail($schedule_id);
@@ -131,10 +157,23 @@ if (loginCheck()) {
 			$smarty->assign("member", $member);
 			
 			//予約座席情報
+			$_SESSION["ticket_select_list"] = $ticket_select_list;
 			$smarty->assign("ticket_select_list",$ticket_select_list);
 
 			//チケット価格
-			$smarty->assign("total_price" , $total_price);			
+			$_SESSION["total_price"] = $total_price;
+			$smarty->assign("total_price" , $total_price);
+			
+			
+			//クレジットカード番号を取得
+			$ccno = $creditcardDAO->findByCreditCardNo($_SESSION["member_id"]);
+//			if(is_null($ccno)) {
+//				print ("かーど未登録");
+//			} else {
+				$smarty->assign("ccno" , $ccno);
+//			}
+				
+
 			
 		} catch (PDOException $ex) {
 			print_r($ex);

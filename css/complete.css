@@ -1,0 +1,141 @@
+/**
+ * 購入完了時に使用するCSS
+ * 
+ * @author TAMA
+ * @version 1.0
+ * Created: 2016/12/12
+ */
+
+@charset "UTF-8";
+#wrapper .content ,
+.confirmation {
+	width: 1024px;
+}
+
+/*注意書き*/
+
+#wrapper  .description {
+	font-size: 1.1em;
+	padding: 0px 0 12px;
+}
+
+.important {
+	color: #B50738;
+	font-weight: bold;
+}
+
+
+/*購入詳細*/
+.content {
+	clear: both;
+	overflow: hidden;
+	background: white;
+}
+
+.content .purchase_details h2 {
+	font-size: 1.2em;
+	line-height: 32px;
+	background: #4E4E4E;
+	padding: 8px 24px 8px;
+	font-weight: normal;
+	color: white;
+	overflow: hidden;
+}
+
+.content .purchase_details p {
+	padding: 24px;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+.ticket_detail {
+	clear: both;
+	width: 100%;
+	margin-top: 300px;
+	overflow: hidden;
+	background: white;
+}
+
+.ticket_detail h2 {
+	font-size: 1.4em;
+	line-height: 52px;
+	padding: 0px 0 0 16px;
+	font-weight: normal;
+	border-left: 10px solid #B50738;
+	margin: 16px;
+}
+
+.ticket_detail p {
+	width: 300px;
+	padding: 16px;
+	float: left;
+}
+
+.ticket_detail p img {
+	width: 300px;
+}
+
+.ticket_detail p:nth-child(3) {
+	width: 660px;
+	font-size: 1.2em;
+	line-height: 22px;
+	letter-spacing: 1.5px;
+	font-weight: normal;
+}
+
+.ticket_detail p:nth-child(3) span {
+	transition: 0.2s;
+	color: #306090;
+}
+.ticket_detail p:nth-child(3) span:hover {
+	cursor: pointer;
+	transition: 0.5s;
+	color: #B50738;
+}
+
+
+
+
+
+/****
+　ボタン
+****/
+
+.select_step p:nth-child(1) input {
+	border: 1px solid #AAA;
+	background: #fff;
+	color: #444;
+}
+
+.select_step p:nth-child(1) input:hover {
+	color: white;
+	border: 1px solid #444;
+	background: #444;
+}
+
+.select_step p {
+	width: 1024px;
+	text-align: center;
+}
+
+.select_step p {
+	margin: 16px 0;
+}
+
+.select_step p:nth-child(1) {
+	padding: 24px 0 24px;
+	border-bottom: none;
+}
+
+/* norton */
+.confirmation .norton h2 {
+	padding-bottom: 16px;
+}
+.confirmation .norton {
+	width: 1024px;
+}
+.confirmation .norton p {
+	font-size: 0.9em;
+	line-height: 1.5em;
+}
+

@@ -34,7 +34,6 @@ if (loginCheck()) {
 	$smarty->display($tplPath);
 } else {
 
-	$isRedirect = false;
 	$tplPath = "rev/revTicketSelect.tpl";
 
 	//スケジュールIDの取得
@@ -47,9 +46,6 @@ if (loginCheck()) {
 	 *  特別料金設定するときにいるのでいまはいりまてん
 	 */
 	//$movie_category_id = $_SESSION["movie_category_id"];
-	
-	//現在時刻取得
-	$now = date("Y-m-d H:i:s");
 
 	//バリデーション配列定義
 	$validationMsgs = array();
@@ -109,54 +105,31 @@ if (loginCheck()) {
 					}
 				}
 			}
-
-
+			//レイトショーかの判定
+			$movie_category = $seat_detail->getMovieCategoryId();
+			
 			//チケット券種取得
-			//特別日 = true ,　特別日以外 false 
-			if(empty($ladiesdayflg)){
-				$ticket_price_list = $priceDAO->findAllNotSpecialDay();
-			} else {
-				$ticket_price_list = $priceDAO->findAll();
+			//特別日 = true ,　特別日以外 false
+			 
+			//レイトショー
+			if ($movie_category != 5) {
+				if(empty($ladiesdayflg)){
+					$ticket_price_list = $priceDAO->findAllNotSpecialDay();
+				} else {
+					$ticket_price_list = $priceDAO->findAll();
+				}
+			} else {//レイトショーじゃない
+				if(empty($ladiesdayflg)){
+					$ticket_price_list = $priceDAO->findLateshowNotSpecialDay();
+				} else {
+					$ticket_price_list = $priceDAO->findLateshow();
+				}
 			}
+			
+			
 			
 			$_SESSION["ticket_price_list"] = $ticket_price_list;
 			$smarty->assign("ticket_price_list", $ticket_price_list);
-
-
-			//$smarty->assign("specialday",$specialday);
-//			//予約番号を確保
-//			$reservation = new Reservation();
-//			$reservation->setReservationId(NULL);
-//			$reservation->setMemberId($member_id);
-//			$reservation->setDate($now);
-//			$reservation->setScheduleId($schedule_id);
-//
-//			$result = $reservationDAO->insertReservation($reservation);
-//			if ($result) {
-//				//確保した予約IDを取得する
-//				$reservation_id = $reservationDAO->findByLatestReservationId();
-//				
-//				//選択した座席をDBに格納する
-//				foreach ($seat_position_list as $key => $value) {
-//					$seat = new Seat();
-//					$seat->setSchedualId($schedule_id);
-//					$seat->setSeatPositon($seat_position_list[$key]);
-//					$seat->setReservationId($reservation_id);
-//					$seat->setCustomerPartitionId("general");//後で設定
-//					$seat->setMovieCategoryId($movie_category_id);
-//					$seatResult = $seatDAO->insertSeat($seat);
-//				}
-//
-//				$seat_detail = $seatDAO->findFromMovieDetail($schedule_id);
-//				$smarty->assign("seat_detail",$seat_detail);
-//
-//				if ($seatResult) {
-//					$isRedirect = true;
-//				}
-//			} else {
-//				$smarty->assign("errorMsg","座席選択に失敗しました。もう一度はじめからやり直してください。");
-//				$tplPath = "error.tpl";
-//			}
 		} catch (PDOException $ex) {
 			print_r($ex);
 			$smarty->assign("errorMsg", "接続障害が発生しました。再度お試しください。");
@@ -184,8 +157,6 @@ if (loginCheck()) {
 		$smarty->assign("reserved_seat_list",$reserved_seat_list);
 		$smarty->assign("unavailable_seats", json_encode($unavailable_seats));
 		$tplPath = "rev/revSeatSelect.tpl";
-	} else {
-		print ("i");
 	}
 
 	$smarty->display($tplPath);
