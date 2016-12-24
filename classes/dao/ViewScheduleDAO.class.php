@@ -69,6 +69,7 @@ class ViewScheduleDAO {
 
 
 
+
 	/**
 	 * Created by HIROYOSHI on 2016/12/24
 	 * 日付を受け取り、その日の上映スケジュールを返す
@@ -91,6 +92,7 @@ class ViewScheduleDAO {
 		// 結果を格納する
 		$all_schedules = array();
 
+		// MEMO: 絶対にMovie IDを格納
 		$save_movie_id = 0;
 
 
@@ -137,6 +139,8 @@ class ViewScheduleDAO {
 
 		return $all_schedules;
 	}
+
+
 
 
 

@@ -24,15 +24,10 @@ try {
     $db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
 
     $viewScheduleDAO = new ViewScheduleDAO($db);
-    $viewScheduleList = $viewScheduleDAO->findAll();
 
-    $scheduleList = $viewScheduleDAO->findAllSchedule();
-    $smarty->assign('viewScheduleList', $viewScheduleList);
-    $smarty->assign('scheduleList', $scheduleList);
+    $scheduleList = $viewScheduleDAO->findSchedule("2016", "12", "13");
+    $smarty->assign('daySchedules', $scheduleList);
 
-    $viewScheduleDAO->findSchedule("2016", "12", "13");
-    
-    print_r($viewScheduleList);
 } catch (PDOException $e) {
     print_r($e);
     $smarty->assign('errorMsg', 'DB接続に失敗しました。');

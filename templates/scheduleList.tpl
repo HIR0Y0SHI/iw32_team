@@ -79,19 +79,19 @@
 		<div class="schedule_list clearfix">
 			<p class="movie_date">12月13日</p>
 
-			{foreach from=$viewScheduleList item='movie_id' name='viewScheduleList'}
+			{foreach from=$daySchedules item='scheduleList' name='scheduleList'}
       <div class="schedule clearfix">
 				<div class="movie_title">
-					<p><span class="title">{$movie_id->getMovieName()}</span></p>
+					<p><span class="title">{$scheduleList['movie_name']}</span></p>
 				</div>
 
 				<p class="movie_info clearfix"><a href="#">作品情報を見る</a></p>
 
         <div class="day_schedule clearfix">
-					{foreach from=$scheduleList item='schedual_id' name='viewScheduleList'}
+					{foreach from=$scheduleList['schedules'] item='schedule' name='schedule'}
             <ul class="info pull-left">
-                <li class="time"><span class="start_time">{$schedual_id->getDoorsOpenTime()}</span>～{$schedual_id->getClosingTime()}</li>
-                <li class="sheet_emp">{$schedual_id->getName()}</li>
+                <li class="time"><span class="start_time">{$schedule->getDoorsOpenTime()}</span>～{$schedule->getClosingTime()}</li>
+                <li class="sheet_emp">{$schedule->getName()}</li>
             </ul>
 					{/foreach}
         </div>
