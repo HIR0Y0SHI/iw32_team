@@ -6,7 +6,11 @@
  * @version 1.0
  * Created: 2016/12/14
  * 作成者: 林 真秀
+ *
+ * Updated by HIR0Y0SHI on 2016/12/24
  */
+
+
 /*
  *
  */
@@ -22,9 +26,9 @@ class ViewScheduleDAO {
 	 * @param PDO $db DB接続オブジェクト
 	 */
 	public function __construct(PDO $db) {
-			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-			$this->db = $db;
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		$this->db = $db;
 	}
 
 
@@ -41,12 +45,12 @@ class ViewScheduleDAO {
 
 		while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$schedule_id = $row["schedual_id"];
-      $movie_id = $row["movie_id"];
-      $movie_name = $row["movie_name"];
-      $doors_open_time = $row["doors_open_time"];
-      $closing_time = $row["closing_time"];
-      $name = $row["name"];
-      $name_exp_7 = $row["Name_exp_7"];
+			$movie_id = $row["movie_id"];
+			$movie_name = $row["movie_name"];
+			$doors_open_time = $row["doors_open_time"];
+			$closing_time = $row["closing_time"];
+			$name = $row["name"];
+			$reservation_rate = $row["Name_exp_7"];
 
 
 			$viewschedule = new ViewSchedule();
@@ -56,27 +60,106 @@ class ViewScheduleDAO {
 			$viewschedule->setDoorsOpenTime($doors_open_time);
 			$viewschedule->setClosingTime(  $closing_time);
 			$viewschedule->setName($name);
-			$viewschedule->setNameExp7($name_exp_7);
+			$viewschedule->setReservationRate($reservation_rate);
 			$viewscheduleList[$movie_id] = $viewschedule;
 
 		}
 		return $viewscheduleList;
 	}
 
+
+
+	/**
+	 * Created by HIROYOSHI on 2016/12/24
+	 * 日付を受け取り、その日の上映スケジュールを返す
+	 *
+	 * @param  string $yyyy 年
+	 * @param  string $mm   月
+	 * @param  string $dd   日
+	 * @return array スケジュール情報
+	 */
+	public function findSchedule($yyyy, $mm, $dd) {
+		// SQLの生成
+		$sql = "SELECT * FROM v_schedual_detail_2 " .
+				"WHERE doors_open_time > '" . $yyyy . "-" . $mm . "-" . $dd . " 00:00:00' ".
+				"AND closing_time < '" . $yyyy . "-" . $mm . "-" . $dd . " 23:59:59'";
+
+		// 実行
+		$stmt = $this->db->prepare($sql);
+		$result = $stmt->execute();
+
+		// 結果を格納する
+		$all_schedules = array();
+
+		$save_movie_id = 0;
+
+
+		while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+			// データ取得
+			$schedule_id = $row["schedual_id"];
+			$movie_id = $row["movie_id"];
+			$movie_name = $row["movie_name"];
+			$doors_open_time = $row["doors_open_time"];
+			$closing_time = $row["closing_time"];
+			$name = $row["name"];
+			$reservation_rate = $row["Name_exp_7"];
+
+			// ViewScheduleオブジェクトの生成
+			$viewschedule = new ViewSchedule();
+			$viewschedule->setSchedualId($schedule_id);
+			$viewschedule->setMovieId($movie_id);
+			$viewschedule->setMovieName($movie_name);
+			$viewschedule->setDoorsOpenTime($doors_open_time);
+			$viewschedule->setClosingTime(  $closing_time);
+			$viewschedule->setName($name);
+			$viewschedule->setReservationRate($reservation_rate);
+
+			/**
+			 * 扱いやすく整形
+			 */
+			// 映画毎に配列を分ける
+			if ($save_movie_id != $movie_id) {
+				$all_schedules[$movie_id] = array(
+					'movie_id' => $movie_id,
+					'movie_name' => $movie_name,
+					'schedules' => array());
+			}
+
+			// 値をいい感じに格納
+			$all_schedules[$movie_id]['schedules'][] = $viewschedule;
+
+
+			// Movie IDの保存
+			// MEMO: 次の映画と今回の映画を区別するため
+			$save_movie_id = $movie_id;
+		}
+
+		return $all_schedules;
+	}
+
+
+
+	/**
+	 * 謎
+	 * Commented by HIR0Y0SHI on 2016/12/24
+	 * @return [type] [description]
+	 */
 	public function findAllSchedule() {
 
 		$sql = "SELECT * FROM `v_schedual_detail_2`　";
 		$stmt = $this->db->prepare($sql);
 		$result = $stmt->execute();
 		$scheduleList = array();
+
 		while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$schedule_id = $row["schedual_id"];
-      $movie_id = $row["movie_id"];
-      $movie_name = $row["movie_name"];
-      $doors_open_time = $row["doors_open_time"];
-      $closing_time = $row["closing_time"];
-      $name = $row["name"];
-      $name_exp_7 = $row["Name_exp_7"];
+			$movie_id = $row["movie_id"];
+			$movie_name = $row["movie_name"];
+			$doors_open_time = $row["doors_open_time"];
+			$closing_time = $row["closing_time"];
+			$name = $row["name"];
+			$reservation_rate = $row["Name_exp_7"];
 
 
 			$schedule = new ViewSchedule();
@@ -86,7 +169,7 @@ class ViewScheduleDAO {
 			$schedule->setDoorsOpenTime($doors_open_time);
 			$schedule->setClosingTime($closing_time);
 			$schedule->setName($name);
-			$schedule->setNameExp7($name_exp_7);
+			$schedule->setReservationRate($reservation_rate);
 			$scheduleList[$schedule_id] = $schedule;
 		}
 		return $scheduleList;
