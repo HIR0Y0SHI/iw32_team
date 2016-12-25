@@ -1,13 +1,16 @@
 @charset "utf-8";
-/* CSS Document */
+/*
+  CSS Document
+  Updated HIROY0SHI by 2016/12/25
+ */
+
 h1,
 .h1,
 h1 small,
 .h1 small,
 h1 .small,
 .h1 .small,
-p
-{
+p {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -25,7 +28,7 @@ p {
   float: left;
 }
 
-tbody{
+tbody {
 	width:1000px;
 	height:100px;
 	text-align:center;
@@ -71,6 +74,10 @@ tbody{
 .date_list .date_campain{
 	font-size:1.2em;
 	color:#FFFFFF;
+}
+
+#wrapper {
+	width: 1024px;
 }
 
 #wrapper .movie_title {
@@ -186,3 +193,6 @@ tbody{
 	margin-left:5px;
 	margin-top:5px;
 }
+
+
+

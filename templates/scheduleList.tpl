@@ -17,9 +17,9 @@
 	<title>映画予約サイト</title>
 </head>
 <body>
-	<script src="/IW32_Team-Project/js/jquery-1.11.3.min.js"></script>
+	<script src="/IW32_Team_Project/js/jquery-1.11.3.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="/IW32_Team-Project/js/bootstrap.js"></script>
+	<script src="/IW32_Team_Project/js/bootstrap.js"></script>
 	<header>
 		<h1><img src="/IW32_Team_Project/img/aaa.gif" width="105px" height="20px"alt="ロゴ"></h1>
 		<div id="seach">
@@ -27,6 +27,7 @@
 			<input type="submit">
 		</div><!--Rogin-->
 	</header>
+
 	<!-- ここからメインコンテンツ -->
 	<section id="wrapper">
 			<!-- 日付のリスト -->
