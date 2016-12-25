@@ -8,17 +8,23 @@
  * 作成者: 林 真秀
  *
  * Updated by HIR0Y0SHI on 2016/12/24
+ *  - findSchedule()の実装
+ * Updated by HIR0Y0SHI on 2016/12/25
+ *  - findSchedule()内で扱う開場・閉場時刻を表示用に整形
  */
 
 
 /*
- *
+ *　ViewScheduleのDAOクラス
  */
 class ViewScheduleDAO {
 	/**
 	 * @var PDO DB接続オブジェクト
 	 */
 	private $db;
+
+	// 日付フォーマット
+	const DATE_FORMAT = "H:i";
 
 	/**
 	 * コンストラクタ
@@ -107,6 +113,12 @@ class ViewScheduleDAO {
 			$name = $row["name"];
 			$reservation_rate = $row["Name_exp_7"];
 
+			// 日付を表示用に整形
+			$date = new DateTime($doors_open_time);
+			$doors_open_time = $date->format(self::DATE_FORMAT);
+			$date = new DateTime($closing_time);
+			$closing_time = $date->format(self::DATE_FORMAT);
+
 			// ViewScheduleオブジェクトの生成
 			$viewschedule = new ViewSchedule();
 			$viewschedule->setSchedualId($schedule_id);
@@ -130,6 +142,7 @@ class ViewScheduleDAO {
 
 			// 値をいい感じに格納
 			$all_schedules[$movie_id]['schedules'][] = $viewschedule;
+
 
 
 			// Movie IDの保存

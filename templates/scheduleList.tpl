@@ -1,5 +1,9 @@
 <!-- 12/22 -->
 <!-- 作成者:林 真秀 -->
+<!--
+  Updated by HIR0Y0SHI on 2016/12/24
+   - 当日スケジュールの値を表示
+ -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,7 +21,7 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="/IW32_Team-Project/js/bootstrap.js"></script>
 	<header>
-		<h1><img src="/IW32_Team-Project/img/aaa.gif" width="105px" height="20px"alt="ロゴ"></h1>
+		<h1><img src="/IW32_Team_Project/img/aaa.gif" width="105px" height="20px"alt="ロゴ"></h1>
 		<div id="seach">
 			<input type="text" name="text">
 			<input type="submit">
@@ -90,7 +94,7 @@
         <div class="day_schedule clearfix">
 					{foreach from=$scheduleList['schedules'] item='schedule' name='schedule'}
             <ul class="info pull-left">
-                <li class="time"><span class="start_time">{$schedule->getDoorsOpenTime()}</span>～{$schedule->getClosingTime()}</li>
+                <li class="time"><span class="start_time">{$schedule->getDoorsOpenTime()}</span> ～ {$schedule->getClosingTime()}</li>
                 <li class="sheet_emp">{$schedule->getName()}</li>
             </ul>
 					{/foreach}

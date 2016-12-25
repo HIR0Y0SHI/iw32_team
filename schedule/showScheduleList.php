@@ -6,6 +6,9 @@
 * @version 1.0
 * Created: 2016/12/14
 * 作成者: 林 真秀
+*
+*  Updated by HIR0Y0SHI on 2016/12/24
+*   - 当日スケジュールをtplに値を反映
 */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/libs/Smarty.class.php';
@@ -17,7 +20,6 @@ $smarty = new Smarty();
 $smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/templates/');
 $smarty->setCompileDir($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/templates_c/');
 $tplPath = 'scheduleList.tpl';
-
 
 
 try {
