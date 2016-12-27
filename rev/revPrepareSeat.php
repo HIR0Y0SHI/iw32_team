@@ -10,6 +10,8 @@
  * 	- 既に予約されている座席（選択不可な席）の対応
  * Updated by HIR0Y0SHI on 2016/12/27
  * 	- schedule_idの受け取りをPOSTからGETに変更
+ *  Updated by TAMA on 2016/12/27
+ * 	- 会員番号を既存の値に変更　→　ログインチェック削除
  */
 
 @session_start();
@@ -27,12 +29,6 @@ $smarty->setCompileDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates_c
 
 $tplPath = "rev/revSeatSelect.tpl";
 
-/*ログインチェック*/
-if(isset($_SESSION["flashMsg"])) {
-	$flashMsg = $_SESSION["flashMsg"];
-	$smarty->assign("flashMsg", $flashMsg);
-	unset($_SESSION["flashMsg"]);
-}
 
 ////////////////////////////
 //テストデータ

@@ -3,6 +3,9 @@
 // @author HIR0Y0SHI
 // @version 1.0
 // Created: 2016/12/15
+// 
+// Updated by TAMA on 2016/12/28
+// - レイアウトのため、top部分をtrue
 
 
 // 選択された座席を格納する連想配列
@@ -31,20 +34,17 @@ $(document).ready(function() {
       }
     },
     naming : {
-      top : false,
+      top : true,
+	  
+	  /*座席番号*/
       getLabel : function (character, row, column) {
         return firstSeatLabel++;
       },
+	  
     },
-    legend : {
-      node : $('#legend'),
+	
 
-      // 座席の種類(状態)の指定
-      items : [
-        [ 'f', 'available',   '予約可能座席' ],
-        [ 'f', 'unavailable', '予約不可座席']
-      ]
-    },
+    
     click: function () {
 
       // 選択されている座席数を格納

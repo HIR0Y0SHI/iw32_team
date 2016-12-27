@@ -1,68 +1,175 @@
-div.seatCharts-container {
-	/*min-width: 700px;*/
-}
-div.seatCharts-cell {
+/**
+ * 座席レイアウト
+ * 
+ * @author TAMA
+ * @version 1.0
+ * Created: 2016/12/28
+ */
+ 
 
-	height: 16px;
-	width: 16px;
-	margin: 3px;
+div.seatCharts-cell {
 	float: left;
 	text-align: center;
 	outline: none;
-	font-size: 13px;
-	line-height:16px;
-	color: blue;
-
+	font-size: 16px;
+	color: #182C4E;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	margin: 9px;
 }
+
 div.seatCharts-seat {
-	background-color: green;
-	color: white;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	cursor: default;
+	cursor: pointer;
 }
+
+
+.seatCharts-container {
+	border: 8px solid #000;
+	padding: 32px 0;
+	background: #616060;
+
+}
+
+.seatCharts-header  .seatCharts-cell {
+	border-radius: 50%;
+	line-height: 42px;
+	color: white;
+}
+
+.seatCharts-header .seatCharts-cell:nth-child(1) ,
+.seatCharts-header .seatCharts-cell:nth-child(7) {
+	background:  #616060;
+	color: #616060;
+	margin: 8px 0px;
+}
+
+
+.seatCharts-header .seatCharts-cell:nth-child(8)::after {
+	content: "　　6";
+}
+.seatCharts-header .seatCharts-cell:nth-child(8) {
+	display: block;
+	overflow: hidden;
+	text-indent: -42px;
+}
+.seatCharts-header .seatCharts-cell:nth-child(9)::after {
+	content: "　　7";
+}
+.seatCharts-header .seatCharts-cell:nth-child(9) {
+	display: block;
+	overflow: hidden;
+	text-indent: -41px;
+}
+.seatCharts-header .seatCharts-cell:nth-child(10)::after {
+	content: "　　8";
+}
+.seatCharts-header .seatCharts-cell:nth-child(10) {
+	display: block;
+	overflow: hidden;
+	text-indent: -42px;
+}
+.seatCharts-header .seatCharts-cell:nth-child(11)::after {
+	content: "　　9";
+}
+.seatCharts-header .seatCharts-cell:nth-child(11) {
+	display: block;
+	overflow: hidden;
+	text-indent: -50px;
+}
+
+
+.seatCharts-header .seatCharts-cell:nth-child(12)::after {
+	content: "　　10";
+}
+.seatCharts-header .seatCharts-cell:nth-child(12) {
+	display: block;
+	overflow: hidden;
+	text-indent: -50px;
+}
+
+
 div.seatCharts-seat:focus {
 	border: none;
 }
-/*
-.seatCharts-seat:focus {
-	outline: none;
-}
-*/
 
+/*席がないところ*/
 div.seatCharts-space {
-	background-color: white;
-}
-div.seatCharts-row {
-	height: 50px;
-}
-
-div.seatCharts-row:after {
-	clear: both;
+	background-color:  #616060;
+	color: white;
+	margin: 8px 0px;
 }
 
-div.seatCharts-seat.selected {
-	background-color: aqua;
-}
-
-div.seatCharts-seat.focused {
-	background-color: #6db131;
-}
-
-div.seatCharts-seat.available {
-	background-color: green;
-}
-
-div.seatCharts-seat.unavailable {
-	background-color: red;
-	cursor: not-allowed;
-}
-
-ul.seatCharts-legendList {
-	list-style: none;
-}
+/*ざせき　の　説明*/
 li.seatCharts-legendItem {
 	margin-top: 10px;
 	line-height: 2;
+}
+
+.booking-details {
+	display: none;
+}
+
+
+/*フロントの説明*/
+.front-indicator {
+	width: 80%;
+	margin: 0 auto;
+	padding: 8px 0;
+	margin-bottom: 40px;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	background: #AAA;
+}
+
+/*座席の列*/
+div.seatCharts-row {
+	width: 692px;
+	height: 100%;
+	overflow: hidden;
+}
+
+/*座席の色*/ 
+div.seatCharts-seat.available.first-class {
+	text-indent: -9999px;
+/* 選択されていない席 */
+	background-image: url(../img/icon/seat.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+/*マウスが上にある時*/
+div.seatCharts-seat.focused {
+	font-size: 12px;
+	line-height: 26px;
+	background-image: url(../img/icon/seat_selected.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: white;
+}
+/*選ばれた時*/
+div.seatCharts-seat.selected {
+	font-size: 12px;
+	line-height: 26px;
+	background-image: url(../img/icon/seat_selected.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	color: white;
+
+}
+/*すでに選ばれている時*/
+div.seatCharts-seat.unavailable {
+	font-size: 12px;
+	line-height: 30px;
+	background-image: url(../img/icon/seat_reserved.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	text-indent: -9999px;
+}
+
+div.seatCharts-seat.unavailable:hover {
+	cursor: default;
 }

@@ -4,6 +4,9 @@
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/12
+ *
+ * Updated by TAMA on 2016/12/28
+ * 	- 座席レイアウトのための多少変更
  */
 
 @charset "UTF-8";
@@ -74,28 +77,37 @@
 	height: 50px;
 	text-align: center;
 	font-size: 0.9em;
+	width: 226px;
+	padding-right: 20px;
+	background-size: auto;
+	background-repeat: no-repeat;
 }
 
 
 /* 空席 */
 .status_buy ul:nth-child(1) li:nth-child(1) {
-	width: 246px;
 	height: 40px;
 	border-right: 1px solid #888;
 	padding-top: 10px;
 	line-height: 1.2em;
+	background-image: url(../img/icon/seat@32.png);
+	background-position: 160px center;
 }
 /*選択された座席*/
 .status_buy ul:nth-child(1) li:nth-child(2) {
-	width: 246px;
 	border-right: 1px solid #888;
 	line-height: 50px;
+	background-image: url(../img/icon/seat_selected@32.png);
+	background-position: 170px center;
 }
+
 /*座席販売対象外*/
 .status_buy ul:nth-child(1) li:nth-child(3) {
-	width: 246px;
 	height: 40px;
 	padding-top: 10px;
 	line-height: 1.2em;
+	background-image: url(../img/icon/seat_reserved@32.png);
+	background-position: 160px center;
 }
+
 

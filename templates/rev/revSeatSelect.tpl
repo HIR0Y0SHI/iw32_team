@@ -24,8 +24,7 @@
 
 	<!-- 座席選択ライブラリ系 -->
 	<link href="/IW32_Team_Project/css/jquery.seat-charts.css" rel="stylesheet" type="text/css">
-	<link href="/IW32_Team_Project/css/seat_charts_style.css" rel="stylesheet" type="text/css">
-  <script src="/IW32_Team_Project/js/jquery.seat-charts.min.js"></script>
+	<script src="/IW32_Team_Project/js/jquery.seat-charts.min.js"></script>
 
 	<script type="text/javascript">
 		// 予約済みの席を取得

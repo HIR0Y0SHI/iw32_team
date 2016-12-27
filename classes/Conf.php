@@ -13,4 +13,5 @@ const DB_PASSWORD = "password";
 
 // ログインしているユーザー
 const MEMBER_ID = 1;
+const LOGIN_ID = "test01";
 ?>

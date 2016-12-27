@@ -5,6 +5,9 @@
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/21
+ * 
+ * Updated by TAMA on 2016/12/27
+ * 	- 会員番号を既存の値に変更　→　ログインチェック削除
  */
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/libs/Smarty.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/Conf.php');
@@ -30,231 +33,224 @@ $smarty = new Smarty();
 $smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT'] . "/IW32_Team_Project/templates/");
 $smarty->setCompileDir($_SERVER['DOCUMENT_ROOT'] . "/IW32_Team_Project/templates_c");
 
-/* ログインチェック */
-if (loginCheck()) {
-	$validationMsgs[] = "ログインしていないか、前回ログインしてから一定時間が経過しています。もう一度ログインし直してください。";
-	$smarty->assign("validationMsgs", $validationMsgs);
-	$tplPath = "login.tpl";
-	$smarty->display($tplPath);
+
+$tplPath = "rev/revConfirmation.tpl";
+
+//スケジュールIDの取得
+$schedule_id = $_SESSION["schedule_id"];
+
+//メンバーIDの取得
+$login_id = LOGIN_ID;
+
+//選択済み座席情報の取得
+$seat_position_list = $_SESSION["seat_position_list"];
+$smarty->assign("seat_position_list", $seat_position_list);
+
+$seat_detail = $_SESSION["seat_detail"];
+
+/***************
+ * 入力情報のバリデーションチェック
+ **************/
+
+$input_date = array();
+
+//名前
+if (!empty($_POST["last_name"])){
+	$input_date["last_name"] = $_POST["last_name"];	
 } else {
+	$validationMsgs[] = "姓（漢字）が入力されていません。";
+}
 
-	$tplPath = "rev/revConfirmation.tpl";
-	
-	//スケジュールIDの取得
-	$schedule_id = $_SESSION["schedule_id"];
-	
-	//メンバーIDの取得
-	$login_id = $_SESSION["login_id"];
-	
-	//選択済み座席情報の取得
-	$seat_position_list = $_SESSION["seat_position_list"];
-	$smarty->assign("seat_position_list", $seat_position_list);
-	
-	$seat_detail = $_SESSION["seat_detail"];
-	
-	/***************
-	 * 入力情報のバリデーションチェック
-	 **************/
-	
-	$input_date = array();
-	
-	//名前
-	if (!empty($_POST["last_name"])){
-		$input_date["last_name"] = $_POST["last_name"];	
+if (!empty($_POST["first_name"])){
+	$input_date["first_name"] = $_POST["first_name"];	
+} else {
+	$validationMsgs[] = "名（漢字）が入力されていません。";
+}
+
+if (!empty($_POST["last_name_kana"])){
+	$input_date["last_name_kana"] = $_POST["last_name_kana"];	
+} else {
+	$validationMsgs[] = "セイ（カナ）が入力されていません。";
+}
+
+if (!empty($_POST["first_name_kana"])){
+	$input_date["first_name_kana"] = $_POST["first_name_kana"];
+} else {
+	$validationMsgs[] = "メイ（カナ）が入力されていません。";
+}
+
+//tel
+if (empty($_POST["n_tel"])){
+	$tel = format_phone_number($_POST["tel"]);
+	$input_date["tel"] = $tel;
+} else {
+	if (!ctype_digit($_POST["n_tel"])){
+		$validationMsgs[] = "'電話番号'は半角数字で入力してください。";		
+	} else if (strlen($_POST["n_tel"] < 9)) {
+		$validationMsgs[] = "'電話番号'は10文字以上で入力してください。";
 	} else {
-		$validationMsgs[] = "姓（漢字）が入力されていません。";
-	}
-	
-	if (!empty($_POST["first_name"])){
-		$input_date["first_name"] = $_POST["first_name"];	
-	} else {
-		$validationMsgs[] = "名（漢字）が入力されていません。";
-	}
-	
-	if (!empty($_POST["last_name_kana"])){
-		$input_date["last_name_kana"] = $_POST["last_name_kana"];	
-	} else {
-		$validationMsgs[] = "セイ（カナ）が入力されていません。";
-	}
-	
-	if (!empty($_POST["first_name_kana"])){
-		$input_date["first_name_kana"] = $_POST["first_name_kana"];
-	} else {
-		$validationMsgs[] = "メイ（カナ）が入力されていません。";
-	}
-	
-	//tel
-	if (empty($_POST["n_tel"])){
-		$tel = format_phone_number($_POST["tel"]);
 		$input_date["tel"] = $tel;
-	} else {
-		if (!ctype_digit($_POST["n_tel"])){
-			$validationMsgs[] = "'電話番号'は半角数字で入力してください。";		
-		} else if (strlen($_POST["n_tel"] < 9)) {
-			$validationMsgs[] = "'電話番号'は10文字以上で入力してください。";
-		} else {
-			$input_date["tel"] = $tel;
-		}
 	}
-	
-	//mail
-	if (empty($_POST["n_mail"])){
-		$input_date["mail"] = $_POST["mail"];
-	} else {
-		if (empty($_POST["n_mail_check"])){
-			$validationMsgs[] = "確認用メールアドレスを入力してください。";		
-		} else if (!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST["n_mail"])) {
-			$validationMsgs[] = "正しい形式でメールアドレスを入力してください。";
-		} else if ($_POST["n_mail"] == $_POST["n_mail_check"]){
-			$input_date["mail"] = $_POST["n_mail"];
-		} else {
-			$validationMsgs[] = "入力されたメールアドレスと確認用メールアドレスが一致しません。";
-		}
-	}
-	
-	//cc
-	if (empty($_POST["n_cc"]) && empty($_POST["n_cc_name"]) && empty($_POST["n_cc_month"]) && empty($_POST["n_cc_year"]) && empty($_POST["n_cc_security_code"])){
-		$ccno = wordwrap($_POST["cc"], 4, "-", true);
-		$input_date["cc"] = $ccno;
-	} else {
-		$ccflg = true;
-		
-		if(!ctype_digit($_POST["n_cc"])) {
-			$validationMsgs[] = "クレジットカード番号は半角数字で入力してください。";		
-			$ccflg = false;
-		} else if (strlen($_POST["n_cc"]) != 16) {
-			$validationMsgs[] = "クレジットカード番号は必ず16桁で入力してください。";
-			$ccflg = false;
-		} else {
-			$new_ccno = wordwrap($_POST["n_cc"], 4, "-", true);
-		}
-		
-		if (empty($_POST["n_cc_name"])) {
-			$validationMsgs[] = "クレジットカード名義を入力してください。";		
-			$ccflg = false;
-		}
-		if (empty($_POST["n_cc_month"])) {
-			$validationMsgs[] = "有効期限（月）を選択してください。";
-			$ccflg = false;
-		}
-		if (empty($_POST["n_cc_year"])) {
-			$validationMsgs[] = "有効期限（年）を選択してください。";
-			$ccflg = false;		
-		}
-		if (empty($_POST["n_cc_security_code"])) {
-			$validationMsgs[] = "セキュリティコードを入力してください。";
-			$ccflg = false;
-		} else if (strlen($_POST["n_cc_security_code"]) != 3) {
-			$validationMsgs[] = "セキュリティコードは必ず3桁で入力してください。";
-			$ccflg = false;
-		}
-		
-		if ($ccflg) {
-			$input_date["n_cc"] = $new_ccno;
-			$input_date["n_cc_name"] = $_POST["n_cc_name"];
-			$input_date["n_cc_month"] = $_POST["n_cc_month"];
-			$input_date["n_cc_year"] = $_POST["n_cc_year"];
-			$input_date["n_cc_security_code"] = $_POST["n_cc_security_code"];
-		}
-	
-	}
-	
-	
-	
-	if (empty($validationMsgs)) {
-		try {
-			$db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
-			$memberDAO = new MemberDAO($db);
-			$seatDAO = new SeatDAO($db);
-			$creditcardDAO = new CreditCardDAO($db);
-			
-			//映画情報取得
-			$seat_detail = $seatDAO->findFromMovieDetail($schedule_id);
-			$smarty->assign("seat_detail", $seat_detail);
-			
-			//メンバー情報取得
-			$member = $memberDAO->findByLoginid($login_id);
-			$smarty->assign("member", $member);
-			
-			//予約座席情報
-			$ticket_select_list = $_SESSION["ticket_select_list"];
-			$smarty->assign("ticket_select_list",$ticket_select_list);
+}
 
-			//チケット価格
-			$total_price = $_SESSION["total_price"];
-			$smarty->assign("total_price" , $total_price);
-			
-			//クレジットカード番号を取得
-			$ccno = $creditcardDAO->findByCreditCardNo($_SESSION["member_id"]);
-//			if(is_null($ccno)) {
-//				print ("かーど未登録");
-//			} else {
-				$smarty->assign("ccno" , $ccno);
-//			}
-
-			$_SESSION["input_date"] = $input_date;
-			$smarty->assign("input_date",$input_date);
-		} catch (PDOException $ex) {
-			print_r($ex);
-			$smarty->assign("errorMsg", "接続障害が発生しました。再度お試しください。");
-			$tplPath = "error.tpl";
-		} finally {
-			$db = null;
-		}
+//mail
+if (empty($_POST["n_mail"])){
+	$input_date["mail"] = $_POST["mail"];
+} else {
+	if (empty($_POST["n_mail_check"])){
+		$validationMsgs[] = "確認用メールアドレスを入力してください。";		
+	} else if (!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST["n_mail"])) {
+		$validationMsgs[] = "正しい形式でメールアドレスを入力してください。";
+	} else if ($_POST["n_mail"] == $_POST["n_mail_check"]){
+		$input_date["mail"] = $_POST["n_mail"];
+	} else {
+		$validationMsgs[] = "入力されたメールアドレスと確認用メールアドレスが一致しません。";
 	}
-	
-	
-	if(!empty($validationMsgs)) {
-		$tplPath = "rev/revInput.tpl";
-		$smarty->assign("validationMsgs" , $validationMsgs);	
-		
+}
+
+//cc
+if (empty($_POST["n_cc"]) && empty($_POST["n_cc_name"]) && empty($_POST["n_cc_month"]) && empty($_POST["n_cc_year"]) && empty($_POST["n_cc_security_code"])){
+	$ccno = wordwrap($_POST["cc"], 4, "-", true);
+	$input_date["cc"] = $ccno;
+} else {
+	$ccflg = true;
+
+	if(!ctype_digit($_POST["n_cc"])) {
+		$validationMsgs[] = "クレジットカード番号は半角数字で入力してください。";		
+		$ccflg = false;
+	} else if (strlen($_POST["n_cc"]) != 16) {
+		$validationMsgs[] = "クレジットカード番号は必ず16桁で入力してください。";
+		$ccflg = false;
+	} else {
+		$new_ccno = wordwrap($_POST["n_cc"], 4, "-", true);
+	}
+
+	if (empty($_POST["n_cc_name"])) {
+		$validationMsgs[] = "クレジットカード名義を入力してください。";		
+		$ccflg = false;
+	}
+	if (empty($_POST["n_cc_month"])) {
+		$validationMsgs[] = "有効期限（月）を選択してください。";
+		$ccflg = false;
+	}
+	if (empty($_POST["n_cc_year"])) {
+		$validationMsgs[] = "有効期限（年）を選択してください。";
+		$ccflg = false;		
+	}
+	if (empty($_POST["n_cc_security_code"])) {
+		$validationMsgs[] = "セキュリティコードを入力してください。";
+		$ccflg = false;
+	} else if (strlen($_POST["n_cc_security_code"]) != 3) {
+		$validationMsgs[] = "セキュリティコードは必ず3桁で入力してください。";
+		$ccflg = false;
+	}
+
+	if ($ccflg) {
+		$input_date["n_cc"] = $new_ccno;
+		$input_date["n_cc_name"] = $_POST["n_cc_name"];
+		$input_date["n_cc_month"] = $_POST["n_cc_month"];
+		$input_date["n_cc_year"] = $_POST["n_cc_year"];
+		$input_date["n_cc_security_code"] = $_POST["n_cc_security_code"];
+	}
+
+}
+
+
+
+if (empty($validationMsgs)) {
+	try {
 		$db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
-		$seatDAO = new SeatDAO($db);
-		$priceDAO = new PriceDAO($db);
 		$memberDAO = new MemberDAO($db);
-		$specialdayDAO = new SpecialDayDAO($db);
+		$seatDAO = new SeatDAO($db);
 		$creditcardDAO = new CreditCardDAO($db);
 
 		//映画情報取得
 		$seat_detail = $seatDAO->findFromMovieDetail($schedule_id);
 		$smarty->assign("seat_detail", $seat_detail);
-		
+
 		//メンバー情報取得
 		$member = $memberDAO->findByLoginid($login_id);
 		$smarty->assign("member", $member);
-		
-		//チケット価格
-		$total_price = $_SESSION["total_price"];
-		$smarty->assign("total_price" , $total_price);
-	
+
 		//予約座席情報
 		$ticket_select_list = $_SESSION["ticket_select_list"];
 		$smarty->assign("ticket_select_list",$ticket_select_list);
-			
+
+		//チケット価格
+		$total_price = $_SESSION["total_price"];
+		$smarty->assign("total_price" , $total_price);
+
 		//クレジットカード番号を取得
-		$ccno = $creditcardDAO->findByCreditCardNo($_SESSION["member_id"]);
-		$smarty->assign("ccno" , $ccno);
+		$ccno = $creditcardDAO->findByCreditCardNo(MEMBER_ID);
+//			if(is_null($ccno)) {
+//				print ("かーど未登録");
+//			} else {
+			$smarty->assign("ccno" , $ccno);
+//			}
 
-		//チケット券種取得
-		//特別日 = true ,　特別日以外 false 
-		if(empty($_SESSION["ladiesdayflg"])){
-			$ticket_price_list = $priceDAO->findAllNotSpecialDay();
-		} else {
-			$ticket_price_list = $priceDAO->findAll();
-		}
-
-		$_SESSION["ticket_price_list"] = $ticket_price_list;
-		$smarty->assign("ticket_price_list", $ticket_price_list);
+		$_SESSION["input_date"] = $input_date;
+		$smarty->assign("input_date",$input_date);
+	} catch (PDOException $ex) {
+		print_r($ex);
+		$smarty->assign("errorMsg", "接続障害が発生しました。再度お試しください。");
+		$tplPath = "error.tpl";
+	} finally {
+		$db = null;
 	}
-	
-	//チケット価格取得
-	$ticket_price_list = $_SESSION["ticket_price_list"];
-	$smarty->assign("ticket_price_list", $ticket_price_list);
-	
-	//映画情報取得
-	$smarty->assign("seat_detail", $seat_detail);
-	$smarty->display($tplPath);
 }
+
+
+if(!empty($validationMsgs)) {
+	$tplPath = "rev/revInput.tpl";
+	$smarty->assign("validationMsgs" , $validationMsgs);	
+
+	$db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
+	$seatDAO = new SeatDAO($db);
+	$priceDAO = new PriceDAO($db);
+	$memberDAO = new MemberDAO($db);
+	$specialdayDAO = new SpecialDayDAO($db);
+	$creditcardDAO = new CreditCardDAO($db);
+
+	//映画情報取得
+	$seat_detail = $seatDAO->findFromMovieDetail($schedule_id);
+	$smarty->assign("seat_detail", $seat_detail);
+
+	//メンバー情報取得
+	$member = $memberDAO->findByLoginid($login_id);
+	$smarty->assign("member", $member);
+
+	//チケット価格
+	$total_price = $_SESSION["total_price"];
+	$smarty->assign("total_price" , $total_price);
+
+	//予約座席情報
+	$ticket_select_list = $_SESSION["ticket_select_list"];
+	$smarty->assign("ticket_select_list",$ticket_select_list);
+
+	//クレジットカード番号を取得
+	$ccno = $creditcardDAO->findByCreditCardNo($_SESSION["member_id"]);
+	$smarty->assign("ccno" , $ccno);
+
+	//チケット券種取得
+	//特別日 = true ,　特別日以外 false 
+	if(empty($_SESSION["ladiesdayflg"])){
+		$ticket_price_list = $priceDAO->findAllNotSpecialDay();
+	} else {
+		$ticket_price_list = $priceDAO->findAll();
+	}
+
+	$_SESSION["ticket_price_list"] = $ticket_price_list;
+	$smarty->assign("ticket_price_list", $ticket_price_list);
+}
+
+//チケット価格取得
+$ticket_price_list = $_SESSION["ticket_price_list"];
+$smarty->assign("ticket_price_list", $ticket_price_list);
+
+//映画情報取得
+$smarty->assign("seat_detail", $seat_detail);
+$smarty->display($tplPath);
+
 
 
 /*telの-入れのための関数*/
