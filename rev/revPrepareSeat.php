@@ -35,7 +35,7 @@ if(isset($_SESSION["flashMsg"])) {
 ////////////////////////////
 //テストデータ
 //$schedule_id = 8;
-$schedule_id = $_POST["schedule_id"];
+$schedule_id = $_GET["schedule_id"];
 $_SESSION["schedule_id"] = $schedule_id;
 ////////////////////////////
 

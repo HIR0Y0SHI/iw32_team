@@ -63,11 +63,11 @@
 
 
 			<!--予約番号取得-->
-			{foreach from=$reserved_seat_list item="reserved" name="reserved_seat_list_loop"}
+		<!-- 	{foreach from=$reserved_seat_list item="reserved" name="reserved_seat_list_loop"}
 				{$reserved->getSeatPositon()}
 			{foreachelse}
 				予約番号ないよ。
-			{/foreach}
+			{/foreach} -->
 
 			<!-- 値チェックテスト -->
 			<!-- {foreach from=$unavailable_seats item="unavailable" name="unavailable_seats_loop"}

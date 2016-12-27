@@ -94,10 +94,12 @@
 
         <div class="day_schedule clearfix">
 					{foreach from=$scheduleList['schedules'] item='schedule' name='schedule'}
+          <a href="/IW32_Team_Project/rev/revPrepareSeat.php?schedule_id={$schedule->getSchedualId()}">
             <ul class="info pull-left">
                 <li class="time"><span class="start_time">{$schedule->getDoorsOpenTime()}</span> ～ {$schedule->getClosingTime()}</li>
                 <li class="sheet_emp">{$schedule->getName()}</li>
             </ul>
+          </a>
 					{/foreach}
         </div>
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * 入力情報チェック
- * 
+ *
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/21
