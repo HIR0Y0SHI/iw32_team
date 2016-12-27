@@ -3,6 +3,9 @@
 <!--
   Updated by HIR0Y0SHI on 2016/12/24
    - 当日スケジュールの値を表示
+  Updated by HIR0Y0SHI on 2016/12/27
+   - revPrepareSeatへのリンクを追加
+   - GETでschedule_idを送信
  -->
 <!DOCTYPE html>
 <html lang="ja">

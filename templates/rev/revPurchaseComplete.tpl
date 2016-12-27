@@ -66,7 +66,7 @@
 			
 		<div class="confirmation">
 			<div class="select_step">
-				<p><input type="button" name="back" value="サイトトップへ戻る"></p>
+				<p><input type="button" name="back" value="サイトトップへ戻る" onClick="location.href='/IW32_Team_Project/schedule/showScheduleList.php'"></p>
 			</div>
 			<div class="norton">
 				<h2><img src="img/norton_logo.gif" alt=""></h2>

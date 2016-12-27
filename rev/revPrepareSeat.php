@@ -8,6 +8,8 @@
  * Created: 2016/12/13
  * Updated by HIROYOSHI on 2016/12/25
  * 	- 既に予約されている座席（選択不可な席）の対応
+ * Updated by HIR0Y0SHI on 2016/12/27
+ * 	- schedule_idの受け取りをPOSTからGETに変更
  */
 
 @session_start();
