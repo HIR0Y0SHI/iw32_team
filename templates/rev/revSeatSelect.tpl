@@ -302,7 +302,7 @@ c．その他インターネット利用の一般的なマナー、モラルお�
 
 			<div class="select_step">
 				<p><input type="button" onclick="formSubmit()" name="next" value="利用規約へ同意し次へ進む"></p>
-				<p><a href="#"><input type="button" name="back" value="スケジュールを選び直す"></a></p>
+				<p><a href="../schedule/showScheduleList.php"><input type="button" name="back" value="スケジュールを選び直す"></a></p>
 			</div>
 		</div>
 	</section>

@@ -15,6 +15,10 @@
 	<link href="/IW32_Team_Project/css/common.css" rel="stylesheet" type="text/css">
 	<link href="/IW32_Team_Project/css/seat_common.css" rel="stylesheet" type="text/css">
 	<link href="/IW32_Team_Project/css/buyer_confirmation.css" rel="stylesheet" type="text/css">
+	
+	<!-- jQuery -->
+	<script src="../js/jquery-1.11.3.min.js"></script>
+	
 	<title>HALシネマ | 購入内容の確認</title>
 </head>
 <body>
@@ -46,7 +50,7 @@
 		
 		<div class="content">	
 			<section class="purchase_details">
-				<h2>ご購入内容<input type="button" value="変更"></h2>
+				<h2>ご購入内容<a href="revSeatSelect.php"><input type="button" value="変更"></a></h2>
 				<p>{$seat_detail->getMovieName()}</p>	
 				<p>{$seat_detail->getScreeningDay()}<br>{$seat_detail->getOpenTime()} 〜 {$seat_detail->getCloseTime()}</p>
 				<p>{$seat_detail->getScreenId()}</p>
@@ -67,13 +71,13 @@
 				<p>{$total_price|number_format}円</p>
 			</section>
 			<section class="purchase_details">
-				<h2>ご購入者情報<input type="button" value="変更"></h2>
+				<h2>ご購入者情報<a href="revTicketSelect.php?return_status=true"><input type="button" value="変更"></a></h2>
 				<p>{$input_date.last_name} {$input_date.first_name}</p>	
 				<p>{$input_date.tel|format_phone_number}</p>
 				<p>{$input_date.mail}</p>
 			</section>
 			<section class="purchase_details">
-				<h2>お支払い情報<input type="button" value="変更"></h2>
+				<h2>お支払い情報<a href="revTicketSelect.php?return_status=true"><input type="button" value="変更"></a></h2>
 				{if isset($input_date.n_cc)}
 					<p class="cc_no">{$input_date.n_cc}</p>
 					<p class="cc_name">{$input_date.n_cc_name}</p>
@@ -104,21 +108,22 @@
 		</div>
 			
 		<div class="confirmation">
+			<form name="rev_purchase" action="revPurchaseComplete.php" method="POST">
 			<p class="agreement">
-				<input type="checkbox" name="" id="agree">
-				<label for="agree" class="checkbox">上記の利用規約に同意する</label>
+				<input type="checkbox" id="agree">
+				<label for="agree" id="agree" class="checkbox">上記の利用規約に同意する</label>
 			</p>
 			<div class="select_step">
-			<form action="revPurchaseComplete.php" method="POST">
-				<p><input type="submit" name="next" value="購入を確定する"></p>
-			</form>
+				<p><input type="submit" name="next" id="submit" value="購入を確定する"></p>
 			</div>
 			<div class="norton">
 				<h2><img src="/IW32_Team_Project/img/norton_logo.gif" alt=""></h2>
 				<p>入力した内容はセキュリティソフトウェア（SSL）により保護されております。</p>
 				<p>お客様の情報は全て暗号化され、インターネットで情報が送信される際に読み取られることはありません。</p>
 				<p>For your privacy, our service is protected by SSL coding system. </p>
-				<p>Your information is encrypted during transmission over the Internet and NEVER released to third parties of any kind.</p></div>
+				<p>Your information is encrypted during transmission over the Internet and NEVER released to third parties of any kind.</p>
+			</div>
+			</form>
 		</div>
 		
 	</section>
@@ -130,4 +135,17 @@
 	</footer>
 
 </body>
+	<script type="text/javascript" language="javascript">
+		$(function() {
+			$('#submit').attr('disabled', 'disabled');
+
+			$('#agree').click(function() {
+				if ($(this).prop('checked') == false) {
+					$('#submit').attr('disabled', 'disabled');
+				} else {
+					$('#submit').removeAttr('disabled');
+				}
+			});
+		});
+	</script>
 </html>

@@ -8,20 +8,20 @@
  * 
  * Updated by TAMA on 2016/12/27
  * 	- 会員番号を既存の値に変更　→　ログインチェック削除
+ * Updated by TAMA on 2016/12/28
+ * 	- 戻るボタンへの対応
  */
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/libs/Smarty.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/Conf.php');
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/Seat.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/SeatDetail.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/SpecialDay.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/Price.class.php');
 
-
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/SeatDAO.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/SpecialDayDAO.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/PriceDAO.class.php');
-
-require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/Functions.php');
 
 @session_start();
 
@@ -36,13 +36,6 @@ $tplPath = "rev/revTicketSelect.tpl";
 $schedule_id = $_SESSION["schedule_id"];
 $_SESSION["schedule_id"] = $schedule_id;
 
-/************************************
- * ムービーカテゴリの取得
- *
- *  特別料金設定するときにいるのでいまはいりまてん
- */
-//$movie_category_id = $_SESSION["movie_category_id"];
-
 //バリデーション配列定義
 $validationMsgs = array();
 
@@ -50,7 +43,13 @@ $validationMsgs = array();
 /* 座席番号を持ってくる処理        */
 /* revSeatSelect.tplから値を取得  */
 $seat_position_list = array();
-$seat_position_list = json_decode($_POST["seat_position"], true);
+
+//戻り対応
+if(!empty($_POST["seat_position"])) {
+	$seat_position_list = json_decode($_POST["seat_position"], true);
+} else {
+	$seat_position_list = $_SESSION["seat_position_list"];
+}
 
 if ($seat_position_list == NULL) {
 	//選択された座席がない場合		
@@ -97,10 +96,11 @@ if (empty($validationMsgs)) {
 				//スケジュールIDからの映画上映日と特別日を判定
 				if ($i == $seat_detail->getWeek()) {
 					$ladiesdayflg = true;
-					$_SESSION["ladiesdayflg"] = $ladiesdayflg;
 				}
 			}
 		}
+		$_SESSION["ladiesdayflg"] = $ladiesdayflg;
+		
 		//レイトショーかの判定
 		$movie_category = $seat_detail->getMovieCategoryId();
 

@@ -9,6 +9,9 @@
 *
 *  Updated by HIR0Y0SHI on 2016/12/24
 *   - 当日スケジュールをtplに値を反映
+ * 
+ * Updated by TAMA on 2016/12/28
+ * 	- 戻るボタンへの対応 - session_destroy();
 */
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/libs/Smarty.class.php';
@@ -21,6 +24,7 @@ $smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/template
 $smarty->setCompileDir($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/templates_c/');
 $tplPath = 'scheduleList.tpl';
 
+session_destroy();
 
 try {
     $db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);

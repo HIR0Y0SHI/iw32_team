@@ -11,7 +11,6 @@
  */
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/libs/Smarty.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/Conf.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/Functions.php');
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/Seat.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/SeatDAO.class.php');
@@ -81,8 +80,10 @@ if (!empty($_POST["first_name_kana"])){
 
 //tel
 if (empty($_POST["n_tel"])){
-	$tel = format_phone_number($_POST["tel"]);
-	$input_date["tel"] = $tel;
+	if (!empty($_POST["tel"])){
+		$tel = format_phone_number($_POST["tel"]);
+		$input_date["tel"] = $tel;
+	}		
 } else {
 	if (!ctype_digit($_POST["n_tel"])){
 		$validationMsgs[] = "'電話番号'は半角数字で入力してください。";		
@@ -95,7 +96,9 @@ if (empty($_POST["n_tel"])){
 
 //mail
 if (empty($_POST["n_mail"])){
-	$input_date["mail"] = $_POST["mail"];
+	if (!empty($_POST["mail"])){
+		$input_date["mail"] = $_POST["mail"];
+	}
 } else {
 	if (empty($_POST["n_mail_check"])){
 		$validationMsgs[] = "確認用メールアドレスを入力してください。";		
@@ -110,8 +113,10 @@ if (empty($_POST["n_mail"])){
 
 //cc
 if (empty($_POST["n_cc"]) && empty($_POST["n_cc_name"]) && empty($_POST["n_cc_month"]) && empty($_POST["n_cc_year"]) && empty($_POST["n_cc_security_code"])){
-	$ccno = wordwrap($_POST["cc"], 4, "-", true);
-	$input_date["cc"] = $ccno;
+	if (!empty($_POST["cc"])) {
+		$ccno = wordwrap($_POST["cc"], 4, "-", true);
+		$input_date["cc"] = $ccno;
+	}
 } else {
 	$ccflg = true;
 
@@ -188,8 +193,6 @@ if (empty($validationMsgs)) {
 			$smarty->assign("ccno" , $ccno);
 //			}
 
-		$_SESSION["input_date"] = $input_date;
-		$smarty->assign("input_date",$input_date);
 	} catch (PDOException $ex) {
 		print_r($ex);
 		$smarty->assign("errorMsg", "接続障害が発生しました。再度お試しください。");
@@ -228,7 +231,7 @@ if(!empty($validationMsgs)) {
 	$smarty->assign("ticket_select_list",$ticket_select_list);
 
 	//クレジットカード番号を取得
-	$ccno = $creditcardDAO->findByCreditCardNo($_SESSION["member_id"]);
+	$ccno = $creditcardDAO->findByCreditCardNo(MEMBER_ID);
 	$smarty->assign("ccno" , $ccno);
 
 	//チケット券種取得
@@ -242,6 +245,9 @@ if(!empty($validationMsgs)) {
 	$_SESSION["ticket_price_list"] = $ticket_price_list;
 	$smarty->assign("ticket_price_list", $ticket_price_list);
 }
+
+$_SESSION["input_date"] = $input_date;
+$smarty->assign("input_date",$input_date);
 
 //チケット価格取得
 $ticket_price_list = $_SESSION["ticket_price_list"];

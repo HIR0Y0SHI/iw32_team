@@ -10,19 +10,21 @@
  * 	- 既に予約されている座席（選択不可な席）の対応
  * Updated by HIR0Y0SHI on 2016/12/27
  * 	- schedule_idの受け取りをPOSTからGETに変更
- *  Updated by TAMA on 2016/12/27
+ * Updated by TAMA on 2016/12/27
  * 	- 会員番号を既存の値に変更　→　ログインチェック削除
+ * Updated by TAMA on 2016/12/28
+ * 	- 戻るボタンに対応
  */
 
 @session_start();
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/libs/Smarty.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/Conf.php');
+
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/entity/Seat.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/entity/SeatDetail.class.php');
-
 require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/dao/SeatDAO.class.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/IW32_Team_Project/classes/Functions.php');
+
 $smarty = new Smarty();
 $smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates/");
 $smarty->setCompileDir($_SERVER['DOCUMENT_ROOT']."/IW32_Team_Project/templates_c");
@@ -31,10 +33,15 @@ $tplPath = "rev/revSeatSelect.tpl";
 
 
 ////////////////////////////
-//テストデータ
-//$schedule_id = 8;
-$schedule_id = $_GET["schedule_id"];
-$_SESSION["schedule_id"] = $schedule_id;
+//映画情報取得
+
+if (!empty($_GET["schedule_id"])){
+	$schedule_id = $_GET["schedule_id"];
+	$_SESSION["schedule_id"] = $schedule_id;
+} else {
+	$schedule_id = $_SESSION["schedule_id"];
+}
+
 ////////////////////////////
 
 $seat_detail = new SeatDetail();

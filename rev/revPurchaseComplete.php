@@ -11,14 +11,13 @@
  */
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/libs/Smarty.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/Conf.php');
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/Seat.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/SeatDetail.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/entity/Reservation.class.php');
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/SeatDAO.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/dao/ReservationDAO.class.php');
-
-require_once($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/classes/Functions.php');
 
 @session_start();
 

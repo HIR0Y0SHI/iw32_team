@@ -182,8 +182,9 @@
 		<div class="confirmation">	
 			<div class="select_step">
 				<p><input type="submit" name="next" value="次へ"></p>
-				<p><input type="submit" name="back" value="席を選び直す"></p>
-				<p><input type="submit" name="back" value="スケジュールを選び直す"></p>
+				<p><a href="revSeatSelect.php"><input type="button" name="back" value="チケット券種を選び直す"></a></p>
+				<p><a href="revPrepareSeat.php"><input type="button" name="back" value="席を選び直す"></a></p>
+				<p><a href="../schedule/showScheduleList.php"><input type="button" name="back" value="スケジュールを選び直す"></a></p>
 			</div>
 		
 			<div class="info">

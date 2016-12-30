@@ -336,3 +336,18 @@ input[type=checkbox]:checked + .checkbox:before {
 	font-size: 0.9em;
 	line-height: 1.5em;
 }
+
+/*#submit[disabled] */
+
+#submit[disabled] {
+	background: #CCCCCC;
+	border: 1px solid #CCCCCC;
+}
+
+
+#submit[disabled]:hover {
+	background: #CCCCCC;
+	border: 1px solid #CCCCCC;
+	cursor: auto;
+	color: white;
+}
