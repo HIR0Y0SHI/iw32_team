@@ -1,6 +1,6 @@
 /**
  * 座席予約の際に使用するCSS
- * 
+ *
  * @author TAMA
  * @version 1.0
  * Created: 2016/12/12
@@ -13,7 +13,7 @@
 
 /************************
 * 選択情報
-**********************/	
+**********************/
 
 .status {
 	width: 740px;
@@ -56,7 +56,7 @@
 
 /************************
 * 座席説明
-**********************/	
+**********************/
 
 .status_buy {
 	width: 740px;
@@ -93,6 +93,7 @@
 	background-image: url(../img/icon/seat@32.png);
 	background-position: 160px center;
 }
+
 /*選択された座席*/
 .status_buy ul:nth-child(1) li:nth-child(2) {
 	border-right: 1px solid #888;
@@ -109,5 +110,3 @@
 	background-image: url(../img/icon/seat_reserved@32.png);
 	background-position: 160px center;
 }
-
-

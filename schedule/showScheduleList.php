@@ -24,7 +24,7 @@ $smarty->setTemplateDir($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/template
 $smarty->setCompileDir($_SERVER['DOCUMENT_ROOT'] . '/IW32_Team_Project/templates_c/');
 $tplPath = 'scheduleList.tpl';
 
-session_destroy();
+@session_destroy();
 
 try {
     $db = new PDO(DB_DNS, DB_USERNAME, DB_PASSWORD);
